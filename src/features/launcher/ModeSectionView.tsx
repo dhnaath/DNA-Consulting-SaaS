@@ -1338,7 +1338,7 @@ export function ModeSectionView({
 
   return (
     <LauncherPageProvider pageId={config.id}>
-      <div className="w-full max-w-[1440px] mx-auto py-4 px-2 sm:px-4 space-y-6 animate-in fade-in duration-300">
+      <div className="w-full mx-auto pt-3 sm:pt-4 space-y-4 animate-in fade-in duration-300">
         {/* Title (Matching MBA Page Header Style) */}
         <div className="text-center mb-6">
           <h2 className="text-2xl sm:text-3xl font-bold text-foreground/90 tracking-tight flex items-center justify-center gap-2.5">

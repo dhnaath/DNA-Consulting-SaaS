@@ -34,9 +34,12 @@ import {
 export type ShariaCategory =
   | "all"
   | "sosial"
-  | "bisnis"
+  | "komersial"
+  | "proteksi"
+  | "simpanan"
   | "zakat"
-  | "audit";
+  | "investasi"
+  | "kepatuhan";
 
 export interface ShariaSubMenu {
   id: string;
@@ -47,7 +50,7 @@ export interface ShariaSubMenu {
 export interface ShariaAppItem {
   id: string;
   name: string;
-  category: "sosial" | "bisnis" | "zakat" | "audit";
+  category: "sosial" | "komersial" | "proteksi" | "simpanan" | "zakat" | "investasi" | "kepatuhan";
   categoryLabel: string;
   shortDesc: string;
   to: string;
@@ -62,22 +65,22 @@ export interface ShariaAppItem {
 
 export const SHARIA_APPS: ShariaAppItem[] = [
   // ============================================================================
-  // 1. Akad Sosial (Tabarru' & Ta'awun) - 5 Apps
+  // 1. Sosial (3 Apps)
   // ============================================================================
   {
     id: "tabarru-hibah",
-    name: "Tabarru' & Hibah Manager",
+    name: "Dana Kebajikan — Tabarru' dan Hibah",
     category: "sosial",
-    categoryLabel: "Akad Sosial",
+    categoryLabel: "Sosial",
     shortDesc:
       "Pengelolaan donasi sukarela, akad hibah keluarga, wakaf produktif, dan instrumen kebajikan non-profit demi kemaslahatan umat.",
     to: "/syariah/akad?app=tabarru",
     icon: HeartHandshake,
-    badge: "Akad Sosial",
+    badge: "Sosial",
     accentGradient: "from-emerald-500 to-teal-600",
     accentBorder: "border-emerald-500/30 hover:border-emerald-500/60",
     badgeBg: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30",
-    badgeText: "Akad Sosial",
+    badgeText: "Sosial",
     subMenus: [
       { id: "tabarru-contract", label: "Akad Tabarru'", to: "/syariah/akad?app=tabarru" },
       { id: "hibah-family", label: "Hibah Keluarga", to: "/syariah/akad?app=hibah" },
@@ -87,18 +90,18 @@ export const SHARIA_APPS: ShariaAppItem[] = [
   },
   {
     id: "qardh-kebajikan",
-    name: "Qardh & Pinjaman Kebajikan",
+    name: "Qardh Hasan — Pinjaman Kebajikan",
     category: "sosial",
-    categoryLabel: "Akad Sosial",
+    categoryLabel: "Sosial",
     shortDesc:
       "Sistem pinjaman kebajikan tanpa bunga (0% riba) dengan transparansi pengembalian pokok dan pencatatan ta'awun tolong-menolong.",
     to: "/syariah/akad?app=qardh",
     icon: Coins,
-    badge: "Pinjaman Syariah",
+    badge: "Sosial",
     accentGradient: "from-teal-500 to-cyan-600",
     accentBorder: "border-teal-500/30 hover:border-teal-500/60",
     badgeBg: "bg-teal-500/15 text-teal-600 dark:text-teal-400 border-teal-500/30",
-    badgeText: "Akad Sosial",
+    badgeText: "Sosial",
     subMenus: [
       { id: "qardh-ledger", label: "Buku Piutang Hasan", to: "/syariah/akad?app=qardh" },
       { id: "pelunasan-pokok", label: "Jadwal Pelunasan Pokok", to: "/syariah/akad?app=qardh" },
@@ -107,82 +110,42 @@ export const SHARIA_APPS: ShariaAppItem[] = [
   },
   {
     id: "wakaf-aset-umat",
-    name: "Wakaf Produktif & Aset Umat",
+    name: "Wakaf — Pengelolaan Aset Produktif",
     category: "sosial",
-    categoryLabel: "Akad Sosial",
+    categoryLabel: "Sosial",
     shortDesc:
       "Tata kelola sertifikasi wakaf tanah, wakaf uang produktif (CWLS), pelaporan nazhir profesional, dan distribusi imbal hasil wakaf.",
     to: "/syariah/akad?app=wakaf",
     icon: Building2,
-    badge: "Wakaf & Aset",
+    badge: "Sosial",
     accentGradient: "from-green-500 to-emerald-600",
     accentBorder: "border-green-500/30 hover:border-green-500/60",
     badgeBg: "bg-green-500/15 text-green-600 dark:text-green-400 border-green-500/30",
-    badgeText: "Akad Sosial",
+    badgeText: "Sosial",
     subMenus: [
       { id: "wakaf-uang", label: "Wakaf Uang (CWLS)", to: "/syariah/akad?app=wakaf" },
       { id: "aset-wakaf", label: "Inventaris Tanah Wakaf", to: "/syariah/akad?app=wakaf" },
       { id: "laporan-nazhir", label: "Akuntabilitas Nazhir", to: "/syariah/akad?app=wakaf" },
     ],
   },
-  {
-    id: "takaful-tamin",
-    name: "Takaful & Ta'min (Asuransi Syariah)",
-    category: "sosial",
-    categoryLabel: "Akad Sosial",
-    shortDesc:
-      "Proteksi tolong-menolong berbasis dana tabarru' bersama, pembagian surplus underwriting, dan bebas dari unsur gharar serta maisir.",
-    to: "/syariah/akad?app=takaful",
-    icon: ShieldCheck,
-    badge: "Proteksi Syariah",
-    accentGradient: "from-cyan-500 to-blue-600",
-    accentBorder: "border-cyan-500/30 hover:border-cyan-500/60",
-    badgeBg: "bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 border-cyan-500/30",
-    badgeText: "Akad Sosial",
-    subMenus: [
-      { id: "dana-tabarru", label: "Pool Dana Tabarru'", to: "/syariah/akad?app=takaful" },
-      { id: "surplus-underwriting", label: "Kalkulasi Surplus Underwriting", to: "/syariah/akad?app=takaful" },
-      { id: "klaim-takaful", label: "Klaim Ta'awun", to: "/syariah/akad?app=takaful" },
-    ],
-  },
-  {
-    id: "wadiah-amanah",
-    name: "Wadiah & Amanah Simpanan",
-    category: "sosial",
-    categoryLabel: "Akad Sosial",
-    shortDesc:
-      "Penyimpanan dana dan titipan murni (Wadiah Yad Dhamanah & Amanah) tanpa bunga dengan transparansi jaminan keutuhan titipan.",
-    to: "/syariah/akad?app=wadiah",
-    icon: Shield,
-    badge: "Titipan Amanah",
-    accentGradient: "from-teal-600 to-emerald-700",
-    accentBorder: "border-teal-600/30 hover:border-teal-600/60",
-    badgeBg: "bg-teal-600/15 text-teal-600 dark:text-teal-400 border-teal-600/30",
-    badgeText: "Akad Sosial",
-    subMenus: [
-      { id: "wadiah-dhamanah", label: "Wadiah Yad Dhamanah", to: "/syariah/akad?app=wadiah" },
-      { id: "titipan-fisik", label: "Titipan Fisik & Emas", to: "/syariah/akad?app=wadiah" },
-      { id: "pencatatan-amanah", label: "Buku Titipan", to: "/syariah/akad?app=wadiah" },
-    ],
-  },
 
   // ============================================================================
-  // 2. Akad Bisnis & Komersial (Tijarah & Mu'awadhah) - 5 Apps
+  // 2. Komersial (5 Apps)
   // ============================================================================
   {
     id: "mudharabah-bagi-hasil",
-    name: "Mudharabah (Bagi Hasil Usaha)",
-    category: "bisnis",
-    categoryLabel: "Akad Bisnis",
+    name: "Mudharabah — Bagi Hasil Usaha",
+    category: "komersial",
+    categoryLabel: "Komersial",
     shortDesc:
       "Kemitraan permodalan shahibul maal dan mudharib pengelola usaha dengan nisbah bagi untung-rugi yang adil dan transparan.",
     to: "/syariah/akad?app=mudharabah",
     icon: TrendingUp,
-    badge: "Bagi Hasil",
+    badge: "Komersial",
     accentGradient: "from-amber-500 to-orange-600",
     accentBorder: "border-amber-500/30 hover:border-amber-500/60",
     badgeBg: "bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/30",
-    badgeText: "Akad Bisnis",
+    badgeText: "Komersial",
     subMenus: [
       { id: "nisbah-kalkulator", label: "Kalkulator Nisbah", to: "/syariah/akad?app=mudharabah" },
       { id: "kontrak-mudharabah", label: "Draf Kontrak Shahibul Maal", to: "/syariah/akad?app=mudharabah" },
@@ -191,18 +154,18 @@ export const SHARIA_APPS: ShariaAppItem[] = [
   },
   {
     id: "musyarakah-equity",
-    name: "Musyarakah & Kemitraan Bersama",
-    category: "bisnis",
-    categoryLabel: "Akad Bisnis",
+    name: "Musyarakah — Kemitraan Modal",
+    category: "komersial",
+    categoryLabel: "Komersial",
     shortDesc:
       "Penyertaan modal bersama (syirkah) dengan hak suara proporsional, pembagian dividen berkala, dan evaluasi valuasi usaha.",
     to: "/syariah/akad?app=musyarakah",
     icon: Users,
-    badge: "Equity Syirkah",
+    badge: "Komersial",
     accentGradient: "from-orange-500 to-amber-600",
     accentBorder: "border-orange-500/30 hover:border-orange-500/60",
     badgeBg: "bg-orange-500/15 text-orange-600 dark:text-orange-400 border-orange-500/30",
-    badgeText: "Akad Bisnis",
+    badgeText: "Komersial",
     subMenus: [
       { id: "musyarakah-mutanaqisah", label: "Musyarakah Mutanaqisah (MMQ)", to: "/syariah/akad?app=musyarakah" },
       { id: "syirkah-inan", label: "Syirkah Inan & Mufawadhah", to: "/syariah/akad?app=musyarakah" },
@@ -211,18 +174,18 @@ export const SHARIA_APPS: ShariaAppItem[] = [
   },
   {
     id: "murabahah-costplus",
-    name: "Murabahah & Margin Transparan",
-    category: "bisnis",
-    categoryLabel: "Akad Bisnis",
+    name: "Murabahah — Jual Beli Bermargin",
+    category: "komersial",
+    categoryLabel: "Komersial",
     shortDesc:
       "Jual beli komoditas/barang dengan pengungkapan harga pokok dan margin keuntungan (cost-plus markup) tanpa bunga terselubung.",
     to: "/syariah/akad?app=murabahah",
     icon: Receipt,
-    badge: "Jual Beli",
+    badge: "Komersial",
     accentGradient: "from-blue-500 to-indigo-600",
     accentBorder: "border-blue-500/30 hover:border-blue-500/60",
     badgeBg: "bg-blue-500/15 text-blue-600 dark:text-blue-400 border-blue-500/30",
-    badgeText: "Akad Bisnis",
+    badgeText: "Komersial",
     subMenus: [
       { id: "kalkulasi-margin", label: "Kalkulator Cost-Plus Margin", to: "/syariah/akad?app=murabahah" },
       { id: "skema-cicilan", label: "Jadwal Angsuran Tetap", to: "/syariah/akad?app=murabahah" },
@@ -231,18 +194,18 @@ export const SHARIA_APPS: ShariaAppItem[] = [
   },
   {
     id: "ijarah-sewa-manfaat",
-    name: "Ijarah & Sewa Jasa (IMBT)",
-    category: "bisnis",
-    categoryLabel: "Akad Bisnis",
+    name: "Ijarah — Sewa dan Jasa",
+    category: "komersial",
+    categoryLabel: "Komersial",
     shortDesc:
       "Penyewaan manfaat barang dan jasa tenaga kerja dengan klausul perpindahan kepemilikan di akhir sewa (Ijarah Muntahiya Bittamlik).",
     to: "/syariah/akad?app=ijarah",
     icon: FileCheck,
-    badge: "Sewa & Manfaat",
+    badge: "Komersial",
     accentGradient: "from-indigo-500 to-sky-600",
     accentBorder: "border-indigo-500/30 hover:border-indigo-500/60",
     badgeBg: "bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 border-indigo-500/30",
-    badgeText: "Akad Bisnis",
+    badgeText: "Komersial",
     subMenus: [
       { id: "ijarah-sewa", label: "Kontrak Sewa Manfaat", to: "/syariah/akad?app=ijarah" },
       { id: "imbt-kalkulator", label: "Kalkulator IMBT", to: "/syariah/akad?app=ijarah" },
@@ -251,18 +214,18 @@ export const SHARIA_APPS: ShariaAppItem[] = [
   },
   {
     id: "salam-istishna-pesanan",
-    name: "Salam & Istishna' (Pemesanan)",
-    category: "bisnis",
-    categoryLabel: "Akad Bisnis",
+    name: "Salam dan Istishna — Pembiayaan Pesanan",
+    category: "komersial",
+    categoryLabel: "Komersial",
     shortDesc:
       "Akad pembiayaan pesanan manufaktur bertahap (Istishna') dan jual beli komoditas pertanian dengan pembayaran di muka (Salam).",
     to: "/syariah/akad?app=istishna",
     icon: Package,
-    badge: "Manufaktur & Tani",
+    badge: "Komersial",
     accentGradient: "from-sky-500 to-teal-600",
     accentBorder: "border-sky-500/30 hover:border-sky-500/60",
     badgeBg: "bg-sky-500/15 text-sky-600 dark:text-sky-400 border-sky-500/30",
-    badgeText: "Akad Bisnis",
+    badgeText: "Komersial",
     subMenus: [
       { id: "istishna-termin", label: "Termin Progres Fisik", to: "/syariah/akad?app=istishna" },
       { id: "salam-tani", label: "Kontrak Salam Komoditas", to: "/syariah/akad?app=salam" },
@@ -271,22 +234,70 @@ export const SHARIA_APPS: ShariaAppItem[] = [
   },
 
   // ============================================================================
-  // 3. Zakat & Filantropi - 3 Apps
+  // 3. Proteksi (1 App)
+  // ============================================================================
+  {
+    id: "takaful-tamin",
+    name: "Takaful — Proteksi Syariah",
+    category: "proteksi",
+    categoryLabel: "Proteksi",
+    shortDesc:
+      "Proteksi tolong-menolong berbasis dana tabarru' bersama, pembagian surplus underwriting, dan bebas dari unsur gharar serta maisir.",
+    to: "/syariah/akad?app=takaful",
+    icon: ShieldCheck,
+    badge: "Proteksi",
+    accentGradient: "from-cyan-500 to-blue-600",
+    accentBorder: "border-cyan-500/30 hover:border-cyan-500/60",
+    badgeBg: "bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 border-cyan-500/30",
+    badgeText: "Proteksi",
+    subMenus: [
+      { id: "dana-tabarru", label: "Pool Dana Tabarru'", to: "/syariah/akad?app=takaful" },
+      { id: "surplus-underwriting", label: "Kalkulasi Surplus Underwriting", to: "/syariah/akad?app=takaful" },
+      { id: "klaim-takaful", label: "Klaim Ta'awun", to: "/syariah/akad?app=takaful" },
+    ],
+  },
+
+  // ============================================================================
+  // 4. Simpanan (1 App)
+  // ============================================================================
+  {
+    id: "wadiah-amanah",
+    name: "Wadiah — Simpanan dan Titipan",
+    category: "simpanan",
+    categoryLabel: "Simpanan",
+    shortDesc:
+      "Penyimpanan dana dan titipan murni (Wadiah Yad Dhamanah & Amanah) tanpa bunga dengan transparansi jaminan keutuhan titipan.",
+    to: "/syariah/akad?app=wadiah",
+    icon: Shield,
+    badge: "Simpanan",
+    accentGradient: "from-teal-600 to-emerald-700",
+    accentBorder: "border-teal-600/30 hover:border-teal-600/60",
+    badgeBg: "bg-teal-600/15 text-teal-600 dark:text-teal-400 border-teal-600/30",
+    badgeText: "Simpanan",
+    subMenus: [
+      { id: "wadiah-dhamanah", label: "Wadiah Yad Dhamanah", to: "/syariah/akad?app=wadiah" },
+      { id: "titipan-fisik", label: "Titipan Fisik & Emas", to: "/syariah/akad?app=wadiah" },
+      { id: "pencatatan-amanah", label: "Buku Titipan", to: "/syariah/akad?app=wadiah" },
+    ],
+  },
+
+  // ============================================================================
+  // 5. Zakat (3 Apps)
   // ============================================================================
   {
     id: "zakat-maal-portofolio",
-    name: "Zakat Maal, Emas & Portofolio",
+    name: "Zakat Maal — Aset dan Kekayaan",
     category: "zakat",
-    categoryLabel: "Zakat & Wakaf",
+    categoryLabel: "Zakat",
     shortDesc:
       "Kalkulator nisab emas 85 gram, haul 1 tahun hijriyah, pembersihan dividen, dan alokasi asnaf 8 penerima zakat.",
     to: "/zakat?app=maal",
     icon: Coins,
-    badge: "Zakat Maal",
+    badge: "Zakat",
     accentGradient: "from-yellow-500 to-amber-600",
     accentBorder: "border-yellow-500/30 hover:border-yellow-500/60",
     badgeBg: "bg-yellow-500/15 text-yellow-600 dark:text-yellow-400 border-yellow-500/30",
-    badgeText: "Zakat & Wakaf",
+    badgeText: "Zakat",
     subMenus: [
       { id: "nisab-tracker", label: "Live Tracker Nisab Emas", to: "/zakat?app=maal" },
       { id: "haul-calendar", label: "Kalender Haul 354 Hari", to: "/zakat?app=maal" },
@@ -295,18 +306,18 @@ export const SHARIA_APPS: ShariaAppItem[] = [
   },
   {
     id: "zakat-penghasilan-profesi",
-    name: "Zakat Penghasilan & Profesi",
+    name: "Zakat Penghasilan — Pendapatan dan Profesi",
     category: "zakat",
-    categoryLabel: "Zakat & Wakaf",
+    categoryLabel: "Zakat",
     shortDesc:
       "Kalkulasi zakat 2.5% dari pendapatan bersih bulanan, kompensasi kebutuhan pokok, dan perbandingan analogi zakat pertanian/emas.",
     to: "/zakat?app=profesi",
     icon: Wallet,
-    badge: "Zakat Profesi",
+    badge: "Zakat",
     accentGradient: "from-amber-600 to-orange-700",
     accentBorder: "border-amber-600/30 hover:border-amber-600/60",
     badgeBg: "bg-amber-600/15 text-amber-600 dark:text-amber-400 border-amber-600/30",
-    badgeText: "Zakat & Wakaf",
+    badgeText: "Zakat",
     subMenus: [
       { id: "gaji-bersih", label: "Kalkulator Zakat Bulanan", to: "/zakat?app=profesi" },
       { id: "potongan-pokok", label: "Pengurang Biaya Pokok", to: "/zakat?app=profesi" },
@@ -315,18 +326,18 @@ export const SHARIA_APPS: ShariaAppItem[] = [
   },
   {
     id: "fidyah-kaffarah-fitrah",
-    name: "Fidyah, Kaffarah & Zakat Fitrah",
+    name: "Zakat Fitrah — Fidyah dan Kaffarah",
     category: "zakat",
-    categoryLabel: "Zakat & Wakaf",
+    categoryLabel: "Zakat",
     shortDesc:
       "Kalkulator beras 2.5 kg / 3.5 liter, penghitungan utang puasa fidyah, dan penebus kaffarah sumpah sesuai takaran sha'.",
     to: "/zakat?app=fitrah",
     icon: Scale,
-    badge: "Fitrah & Kaffarah",
+    badge: "Zakat",
     accentGradient: "from-lime-500 to-emerald-600",
     accentBorder: "border-lime-500/30 hover:border-lime-500/60",
     badgeBg: "bg-lime-500/15 text-lime-600 dark:text-lime-400 border-lime-500/30",
-    badgeText: "Zakat & Wakaf",
+    badgeText: "Zakat",
     subMenus: [
       { id: "takaran-fitrah", label: "Konversi Sha' Beras / Rupiah", to: "/zakat?app=fitrah" },
       { id: "fidyah-puasa", label: "Hitung Fidyah Harian", to: "/zakat?app=fidyah" },
@@ -335,22 +346,46 @@ export const SHARIA_APPS: ShariaAppItem[] = [
   },
 
   // ============================================================================
-  // 4. Audit & Screening Muamalah - 3 Apps
+  // 6. Investasi (1 App)
+  // ============================================================================
+  {
+    id: "screening-saham-syariah",
+    name: "Screening Saham Syariah — ISSI dan DES BEI",
+    category: "investasi",
+    categoryLabel: "Investasi",
+    shortDesc:
+      "Verifikasi kriteria OJK: rasio utang berbasis bunga <45%, pendapatan non-halal <10%, dan lini bisnis legal syariah.",
+    to: "/100-komoditas?tab=syariah",
+    icon: ShieldCheck,
+    badge: "Investasi",
+    accentGradient: "from-emerald-600 to-green-700",
+    accentBorder: "border-emerald-600/30 hover:border-emerald-600/60",
+    badgeBg: "bg-emerald-600/15 text-emerald-600 dark:text-emerald-400 border-emerald-600/30",
+    badgeText: "Investasi",
+    subMenus: [
+      { id: "rasio-utang", label: "Financial Ratio Screen (45%)", to: "/100-komoditas?tab=syariah" },
+      { id: "non-halal-rev", label: "Non-Halal Revenue (<10%)", to: "/100-komoditas?tab=syariah" },
+      { id: "daftar-des", label: "Daftar Efek Syariah (DES)", to: "/100-komoditas?tab=syariah" },
+    ],
+  },
+
+  // ============================================================================
+  // 7. Kepatuhan (2 Apps)
   // ============================================================================
   {
     id: "audit-bebas-riba",
-    name: "Audit Bebas Riba (Screening & Cleansing)",
-    category: "audit",
-    categoryLabel: "Audit Muamalah",
+    name: "Audit Riba — Screening dan Cleansing",
+    category: "kepatuhan",
+    categoryLabel: "Kepatuhan",
     shortDesc:
       "Deteksi riba fadhl, riba nasiah, riba jahiliyah, dan kalkulator cleansing bunga konvensional pada rekening dan investasi.",
     to: "/syariah/terlarang?app=riba",
     icon: ShieldAlert,
-    badge: "Anti-Riba",
+    badge: "Kepatuhan",
     accentGradient: "from-rose-500 to-red-600",
     accentBorder: "border-rose-500/30 hover:border-rose-500/60",
     badgeBg: "bg-rose-500/15 text-rose-600 dark:text-rose-400 border-rose-500/30",
-    badgeText: "Audit Muamalah",
+    badgeText: "Kepatuhan",
     subMenus: [
       { id: "cleansing-bunga", label: "Cleansing Dana Bunga", to: "/syariah/terlarang?app=cleansing" },
       { id: "identifikasi-riba", label: "Identifikasi Riba Akad", to: "/syariah/terlarang?app=riba" },
@@ -358,39 +393,19 @@ export const SHARIA_APPS: ShariaAppItem[] = [
     ],
   },
   {
-    id: "screening-saham-syariah",
-    name: "Screening Saham Syariah (ISSI & DES BEI)",
-    category: "audit",
-    categoryLabel: "Audit Muamalah",
-    shortDesc:
-      "Verifikasi kriteria OJK: rasio utang berbasis bunga <45%, pendapatan non-halal <10%, dan lini bisnis legal syariah.",
-    to: "/100-komoditas?tab=syariah",
-    icon: ShieldCheck,
-    badge: "Pasar Saham",
-    accentGradient: "from-emerald-600 to-green-700",
-    accentBorder: "border-emerald-600/30 hover:border-emerald-600/60",
-    badgeBg: "bg-emerald-600/15 text-emerald-600 dark:text-emerald-400 border-emerald-600/30",
-    badgeText: "Audit Muamalah",
-    subMenus: [
-      { id: "rasio-utang", label: "Financial Ratio Screen (45%)", to: "/100-komoditas?tab=syariah" },
-      { id: "non-halal-rev", label: "Non-Halal Revenue (<10%)", to: "/100-komoditas?tab=syariah" },
-      { id: "daftar-des", label: "Daftar Efek Syariah (DES)", to: "/100-komoditas?tab=syariah" },
-    ],
-  },
-  {
     id: "audit-gharar-maysir",
-    name: "Audit Gharar, Maysir & Tadlis",
-    category: "audit",
-    categoryLabel: "Audit Muamalah",
+    name: "Audit Gharar — Maysir dan Tadlis",
+    category: "kepatuhan",
+    categoryLabel: "Kepatuhan",
     shortDesc:
       "Audit ketidakjelasan objek (gharar), spekulasi judi nir-fundamental (maysir), dan rekayasa penipuan kuantitas/harga (tadlis).",
     to: "/syariah/terlarang?app=gharar",
     icon: Scale,
-    badge: "Kepatuhan Akad",
+    badge: "Kepatuhan",
     accentGradient: "from-purple-500 to-indigo-600",
     accentBorder: "border-purple-500/30 hover:border-purple-500/60",
     badgeBg: "bg-purple-500/15 text-purple-600 dark:text-purple-400 border-purple-500/30",
-    badgeText: "Audit Muamalah",
+    badgeText: "Kepatuhan",
     subMenus: [
       { id: "uji-gharar", label: "Cek Kejelasan Objek", to: "/syariah/terlarang?app=gharar" },
       { id: "uji-maysir", label: "Deteksi Spekulasi Maysir", to: "/syariah/terlarang?app=maysir" },
@@ -405,10 +420,13 @@ export const SHARIA_CATEGORY_TABS: {
   count: number;
 }[] = [
   { id: "all", label: "Semua", count: 16 },
-  { id: "sosial", label: "Akad Sosial", count: 5 },
-  { id: "bisnis", label: "Akad Bisnis", count: 5 },
-  { id: "zakat", label: "Zakat & Wakaf", count: 3 },
-  { id: "audit", label: "Audit Muamalah", count: 3 },
+  { id: "sosial", label: "Sosial", count: 3 },
+  { id: "komersial", label: "Komersial", count: 5 },
+  { id: "proteksi", label: "Proteksi", count: 1 },
+  { id: "simpanan", label: "Simpanan", count: 1 },
+  { id: "zakat", label: "Zakat", count: 3 },
+  { id: "investasi", label: "Investasi", count: 1 },
+  { id: "kepatuhan", label: "Kepatuhan", count: 2 },
 ];
 
 export function IslamicPrinciplesShariaValuesPage({
@@ -452,7 +470,7 @@ export function IslamicPrinciplesShariaValuesPage({
       </ShellHeader>
 
       {/* Main Page Container */}
-      <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-3 sm:pt-4 space-y-4">
+      <div className="w-full mx-auto pt-3 sm:pt-4 space-y-4">
         {/* Title */}
         <div className="text-center mb-4">
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground/90 tracking-tight flex items-center justify-center gap-2.5">

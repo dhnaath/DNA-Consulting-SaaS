@@ -69,19 +69,19 @@ export function getGradient(title: string): string {
 export const LAUNCHER_TABS = [
   // 2 Halaman Inti Utama (100 Tools Mini MBA kini dilebur ke Business Operations)
   { id: "valuetreated", label: "Value Treated", icon: Gem, badge: "10 Disiplin" },
-  { id: "commodity", label: "100 Komoditas & Indeks Harga", icon: TrendingUp, badge: "Makro & Nasional" },
+  { id: "commodity", label: "Market Price Monitor", icon: TrendingUp, badge: "Makro & Nasional" },
 
   // 10 Laman Fix Workspace Terintegrasi
   { id: "financial", modeId: "financial", label: "Financial Planning and Wealth Management", icon: Coins, badge: "5 Tahapan", desc: "Perencanaan Finansial, Wealth Spectrum, Valuasi & Suksesi" },
   { id: "mode_business", modeId: "business", label: "Business Administration and Operations Management", icon: Store, badge: BIZ_OPS_TOTAL_BADGE, desc: BIZ_OPS_SUMMARY_DESC },
-  { id: "mode_employment", modeId: "employment", label: "Productivity Workspace and Workflow Systems", icon: Briefcase, badge: "9 Modul", desc: "Semua (9) · Execution (3) · Partners (2) · Control (3) · Ownership (1)" },
+  { id: "mode_employment", modeId: "employment", label: "Productivity Workspace and Workflow Systems", icon: Briefcase, badge: "9 Modul", desc: "Semua (9) · Planning (1) · Workflow (2) · Resources (2) · Coordination (1) · Governance (2) · Ownership (1)" },
   { id: "mode_creative", modeId: "creative", label: "Creative Workspace and Media Production", icon: Palette, badge: "6 Modul", desc: "Semua (6) · Studio (2) · Publishing (1) · Media (2) · Interactive (1)" },
   { id: "mode_research", modeId: "research", label: "Research Foundations and Reference Frameworks", icon: GraduationCap, badge: "6 Modul", desc: "Semua (6) · Frameworks (2) · Reference (2) · Research (2)" },
-  { id: "mode_sharia", modeId: "sharia", label: "Islamic Principles and Sharia Values", icon: Scale, badge: "16 Modul", desc: "Semua (16) · Akad Sosial (5) · Akad Bisnis (5) · Zakat & Wakaf (3) · Audit Muamalah (3)" },
-  { id: "mode_personal", modeId: "personal", label: "Personal Life and Profile Management", icon: Heart, badge: "5 Modul", desc: "Semua (5) · Habits and Mind (2) · Body and Health (2) · Personal Tools (1)" },
-  { id: "mode_family", modeId: "family", label: "Family Records and Household Planning", icon: Home, badge: "6 Modul", desc: "Semua (6) · Family (3) · Household (2) · Vehicles (1)" },
+  { id: "mode_sharia", modeId: "sharia", label: "Islamic Principles and Sharia Values", icon: Scale, badge: "16 Modul", desc: "Semua (16) · Sosial (3) · Komersial (5) · Proteksi (1) · Simpanan (1) · Zakat (3) · Investasi (1) · Kepatuhan (2)" },
+  { id: "mode_personal", modeId: "personal", label: "Personal Life Management", icon: Heart, badge: "5 Modul", desc: "Semua (5) · Pengembangan (1) · Refleksi (1) · Kesehatan (2) · Utilitas (1)" },
+  { id: "mode_family", modeId: "family", label: "Family Records and Household Planning", icon: Home, badge: "6 Modul", desc: "Semua (6) · Keluarga (3) · Rumah Tangga (2) · Kendaraan (1)" },
   { id: "mode_public_affairs", modeId: "public_affairs", label: "Public Relations and Policy Affairs", icon: Landmark, badge: "6 Modul", desc: "Semua (6) · Civic (3) · Policy (2) · Media (1)" },
-  { id: "mode_networks", modeId: "networks", label: "Contact Directory and Social Networks", icon: Users, badge: "6 Modul", desc: "Semua (6) · Directory (2) · Relations (2) · Networks (2)" },
+  { id: "mode_networks", modeId: "networks", label: "Contact Directory and Social Networks", icon: Users, badge: "6 Modul", desc: "Semua (6) · Direktori (2) · Relasi (2) · Jaringan (2)" },
 ];
 
 export function Launcher() {
@@ -93,8 +93,8 @@ export function Launcher() {
           if (!val) return -1;
           const v = val.toLowerCase().trim();
           if (v === "tools" || v === "100-tools" || v === "mini-mba" || v === "mba" || v === "pilar") return LAUNCHER_TABS.findIndex((t) => t.id === "mode_business" || (t as any).modeId === "business");
-          if (v === "valuetreated" || v === "value-treated" || v === "value_treated" || v === "disiplin") return LAUNCHER_TABS.findIndex((t) => t.id === "valuetreated");
-          if (v === "commodity" || v === "100-komoditas" || v === "komoditas" || v === "indeks" || v === "national_indices" || v === "10-indeks") return LAUNCHER_TABS.findIndex((t) => t.id === "commodity");
+          if (v === "valuetreated" || v === "value-treated" || v === "value_treated" || v === "disiplin" || v === "applied-value-framework" || v === "applied-value" || v === "applied_value_framework" || v === "applied") return LAUNCHER_TABS.findIndex((t) => t.id === "valuetreated");
+          if (v === "commodity" || v === "100-komoditas" || v === "komoditas" || v === "indeks" || v === "national_indices" || v === "10-indeks" || v === "market-price-monitor" || v === "market_price_monitor" || v === "price-monitor") return LAUNCHER_TABS.findIndex((t) => t.id === "commodity");
           if (v === "financial" || v === "finance" || v === "financial-planning" || v === "wealth") return LAUNCHER_TABS.findIndex((t) => t.id === "financial" || (t as any).modeId === "financial");
           if (v === "business" || v === "business-administration" || v === "business-operations" || v === "owner") return LAUNCHER_TABS.findIndex((t) => t.id === "mode_business" || (t as any).modeId === "business");
           if (v === "productivity" || v === "work" || v === "work-productivity" || v === "employment") return LAUNCHER_TABS.findIndex((t) => t.id === "mode_employment" || (t as any).modeId === "employment");

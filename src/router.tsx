@@ -1166,7 +1166,7 @@ const milestonesRoute = createRoute({
 
 function WorkProductivityView() {
   return (
-    <AppShell title="Productivity Workspace and Workflow Systems" subtitle="Semua (9) • Execution (3), Partners (2), Control (3), Ownership (1)">
+    <AppShell title="Productivity Workspace and Workflow Systems" subtitle="Semua (9) · Planning (1) · Workflow (2) · Resources (2) · Coordination (1) · Governance (2) · Ownership (1)">
       <WorkProductivityPage />
     </AppShell>
   );
@@ -1187,8 +1187,8 @@ const workRoute = createRoute({
 function PersonalLifeView() {
   return (
     <AppShell
-      title="Personal Life"
-      subtitle="Semua (5) · Habits and Mind (2) · Body and Health (2) · Personal Tools (1)"
+      title="Personal Life Management"
+      subtitle="Semua (5) · Pengembangan (1) · Refleksi (1) · Kesehatan (2) · Utilitas (1)"
     >
       <PersonalLifePage />
     </AppShell>
@@ -1309,7 +1309,7 @@ function IslamicPrinciplesShariaValuesView() {
   return (
     <AppShell
       title="Islamic Principles and Sharia Values"
-      subtitle="Semua (16) · Akad Sosial (5) · Akad Bisnis (5) · Zakat & Wakaf (3) · Audit Muamalah (3)"
+      subtitle="Semua (16) · Sosial (3) · Komersial (5) · Proteksi (1) · Simpanan (1) · Zakat (3) · Investasi (1) · Kepatuhan (2)"
     >
       <IslamicPrinciplesShariaValuesPage />
     </AppShell>
@@ -1366,7 +1366,7 @@ function FamilyRecordsHouseholdView() {
   return (
     <AppShell
       title="Family Records and Household Planning"
-      subtitle="Semua (6) · Family (3) · Household (2) · Vehicles (1)"
+      subtitle="Semua (6) · Keluarga (3) · Rumah Tangga (2) · Kendaraan (1)"
     >
       <FamilyRecordsHouseholdPage />
     </AppShell>
@@ -1400,7 +1400,7 @@ function ContactDirectoryNetworksView() {
   return (
     <AppShell
       title="Contact Directory and Social Networks"
-      subtitle="Semua (6) · Directory (2) · Relations (2) · Networks (2)"
+      subtitle="Semua (6) · Direktori (2) · Relasi (2) · Jaringan (2)"
     >
       <ContactDirectoryNetworksPage />
     </AppShell>

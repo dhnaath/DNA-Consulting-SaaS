@@ -25,7 +25,7 @@ import {
   FileText,
 } from "lucide-react";
 
-export type CreativeCategory = "all" | "studio" | "publishing" | "media" | "interactive";
+export type CreativeCategory = "all" | "design" | "publishing" | "production" | "interactive";
 
 export interface CreativeSubMenu {
   id: string;
@@ -36,7 +36,7 @@ export interface CreativeSubMenu {
 export interface CreativeAppItem {
   id: string;
   name: string;
-  category: "studio" | "publishing" | "media" | "interactive";
+  category: "design" | "publishing" | "production" | "interactive";
   categoryLabel: string;
   shortDesc: string;
   to: string;
@@ -52,9 +52,9 @@ export interface CreativeAppItem {
 export const CREATIVE_APPS: CreativeAppItem[] = [
   {
     id: "design-studio",
-    name: "Design Studio & Visual Assets",
-    category: "studio",
-    categoryLabel: "Studio",
+    name: "Design Studio",
+    category: "design",
+    categoryLabel: "Design",
     shortDesc:
       "Kanvas perancangan grafis visual, inkubasi papan ide kreatif, serta repositori palet warna, tipografi, dan aset branding.",
     to: "/design",
@@ -63,7 +63,7 @@ export const CREATIVE_APPS: CreativeAppItem[] = [
     accentGradient: "from-pink-500 to-rose-600",
     accentBorder: "border-pink-500/30 hover:border-pink-500/60",
     badgeBg: "bg-pink-500/15 text-pink-600 dark:text-pink-400 border-pink-500/30",
-    badgeText: "Studio",
+    badgeText: "Design",
     subMenus: [
       { id: "design-canvas", label: "Design Canvas", to: "/design" },
       { id: "ideas-board", label: "Ideas Board", to: "/ideas" },
@@ -72,9 +72,9 @@ export const CREATIVE_APPS: CreativeAppItem[] = [
   },
   {
     id: "film-video-production",
-    name: "Film, Video & Screenplay Production",
-    category: "media",
-    categoryLabel: "Media",
+    name: "Film & Video Production",
+    category: "production",
+    categoryLabel: "Production",
     shortDesc:
       "Manajemen pra-produksi video, naskah skenario, storyboard sinematik, dan kurasi katalog film referensi.",
     to: "/movies",
@@ -83,7 +83,7 @@ export const CREATIVE_APPS: CreativeAppItem[] = [
     accentGradient: "from-purple-500 to-indigo-600",
     accentBorder: "border-purple-500/30 hover:border-purple-500/60",
     badgeBg: "bg-purple-500/15 text-purple-600 dark:text-purple-400 border-purple-500/30",
-    badgeText: "Media",
+    badgeText: "Production",
     subMenus: [
       { id: "film-catalog", label: "Film Catalog", to: "/movies" },
       { id: "video-projects", label: "Video Projects", to: "/lainnya?app=film-video" },
@@ -92,7 +92,7 @@ export const CREATIVE_APPS: CreativeAppItem[] = [
   },
   {
     id: "writing-editorial",
-    name: "Writing, Publishing & Editorial",
+    name: "Writing & Editorial",
     category: "publishing",
     categoryLabel: "Publishing",
     shortDesc:
@@ -112,9 +112,9 @@ export const CREATIVE_APPS: CreativeAppItem[] = [
   },
   {
     id: "audio-podcast-studio",
-    name: "Audio, Voice & Podcast Studio",
-    category: "studio",
-    categoryLabel: "Studio",
+    name: "Audio & Podcast Studio",
+    category: "production",
+    categoryLabel: "Production",
     shortDesc:
       "Perencanaan episode podcast, produksi rekaman audio & wawancara, serta manajemen trek musik pengiring.",
     to: "/podcasts",
@@ -123,7 +123,7 @@ export const CREATIVE_APPS: CreativeAppItem[] = [
     accentGradient: "from-teal-500 to-emerald-600",
     accentBorder: "border-teal-500/30 hover:border-teal-500/60",
     badgeBg: "bg-teal-500/15 text-teal-600 dark:text-teal-400 border-teal-500/30",
-    badgeText: "Studio",
+    badgeText: "Production",
     subMenus: [
       { id: "podcast-episodes", label: "Podcast Episodes", to: "/podcasts" },
       { id: "music-library", label: "Music Library", to: "/music" },
@@ -132,9 +132,9 @@ export const CREATIVE_APPS: CreativeAppItem[] = [
   },
   {
     id: "photography-gallery",
-    name: "Photography & Asset Gallery",
-    category: "media",
-    categoryLabel: "Media",
+    name: "Photography & Media Library",
+    category: "production",
+    categoryLabel: "Production",
     shortDesc:
       "Manajemen album fotografi, kurasi visual moodboard, dan katalog arsip resolusi tinggi untuk kebutuhan produksi.",
     to: "/photography",
@@ -143,7 +143,7 @@ export const CREATIVE_APPS: CreativeAppItem[] = [
     accentGradient: "from-cyan-500 to-blue-600",
     accentBorder: "border-cyan-500/30 hover:border-cyan-500/60",
     badgeBg: "bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 border-cyan-500/30",
-    badgeText: "Media",
+    badgeText: "Production",
     subMenus: [
       { id: "photo-gallery", label: "Photo Gallery", to: "/photography" },
       { id: "moodboards", label: "Visual Moodboards", to: "/ideas" },
@@ -152,7 +152,7 @@ export const CREATIVE_APPS: CreativeAppItem[] = [
   },
   {
     id: "games-interactive",
-    name: "Games & Interactive Media",
+    name: "Interactive Games",
     category: "interactive",
     categoryLabel: "Interactive",
     shortDesc:
@@ -178,9 +178,9 @@ export const CREATIVE_CATEGORY_TABS: {
   count: number;
 }[] = [
   { id: "all", label: "Semua", count: 6 },
-  { id: "studio", label: "Studio", count: 2 },
+  { id: "design", label: "Design", count: 1 },
   { id: "publishing", label: "Publishing", count: 1 },
-  { id: "media", label: "Media", count: 2 },
+  { id: "production", label: "Production", count: 3 },
   { id: "interactive", label: "Interactive", count: 1 },
 ];
 
@@ -222,7 +222,7 @@ export function CreativeWorkspaceMediaPage({
         />
       </ShellHeader>
 
-      <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-3 sm:pt-4 space-y-4">
+      <div className="w-full mx-auto pt-3 sm:pt-4 space-y-4">
         <div className="text-center mb-4">
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground/90 tracking-tight flex items-center justify-center gap-2.5">
             <Palette className="size-7 text-primary" />

@@ -12,6 +12,7 @@ import {
   History,
   GalleryHorizontal,
   Star,
+  Search,
 } from "lucide-react";
 import { useFavorites } from "@/hooks/useFavorites";
 import { navKonsultan } from "@/config/nav";
@@ -143,6 +144,7 @@ export function AppDock({
   onExpand,
   onRecent,
   onTaskbar,
+  onSearch,
   isQuickCaptureOpen,
   isShortcutOpen,
   isTerminalOpen,
@@ -157,6 +159,7 @@ export function AppDock({
   onExpand?: () => void;
   onRecent?: () => void;
   onTaskbar?: () => void;
+  onSearch?: () => void;
   isQuickCaptureOpen?: boolean;
   isShortcutOpen?: boolean;
   isTerminalOpen?: boolean;
@@ -244,7 +247,7 @@ export function AppDock({
     };
   }, []);
 
-  const dockItems = useMemo(() => {
+  const { homeLauncherItems, mainDockItems } = useMemo(() => {
     const allItems = navKonsultan.flatMap((group) => group.items);
 
     // Base core apps
@@ -322,31 +325,37 @@ export function AppDock({
       },
     ];
 
-    // Assemble the dock items:
-    // 1. Core items (Launcher, Beranda)
-    // 2. Separator garis lurus
-    // 3. Pinned Favorites (5 favorit terpisah dengan garis lurus tanpa emblem bintang)
-    // 4. Separator garis lurus
-    // 5. Utility tools (Recent, Taskbar, Shortcut, Quick Capture, Terminal, Expand)
-    const items: DockItemConfig[] = [...baseCoreApps];
+    const homeLauncherItems: DockItemConfig[] = [
+      { id: "/", label: "Launcher", icon: LayoutDashboard },
+      { id: "/home", label: "Beranda", icon: Home },
+    ];
 
-    const makeSeparator = (id: string): DockItemConfig => ({
-      id,
-      label: "",
-      icon: () => null,
-      isSeparator: true,
-    });
-
-    if (dynamicFavs.length > 0) {
-      items.push(makeSeparator("dock-sep-fav-left"));
-      items.push(...dynamicFavs);
-      items.push(makeSeparator("dock-sep-fav-right"));
-    } else {
-      items.push(makeSeparator("dock-separator"));
+    // Ketika menu yang dipilih terbuka (bukan di launcher /), opsi Search pindah di samping kanan Home
+    if (pathname !== "/") {
+      homeLauncherItems.push({
+        id: "search",
+        label: "Pencarian (Search)",
+        icon: Search,
+        onClick: () => {
+          if (onSearch) onSearch();
+          else window.dispatchEvent(new CustomEvent("aio_open_search"));
+        },
+      });
     }
 
-    items.push(...utilityModals);
-    return items;
+    const mainDockItems: DockItemConfig[] = [];
+    if (dynamicFavs.length > 0) {
+      mainDockItems.push(...dynamicFavs);
+      mainDockItems.push({
+        id: "dock-sep-fav",
+        label: "",
+        icon: () => null,
+        isSeparator: true,
+      });
+    }
+    mainDockItems.push(...utilityModals);
+
+    return { homeLauncherItems, mainDockItems };
   }, [
     pathname,
     favorites,
@@ -356,65 +365,76 @@ export function AppDock({
     onTerminal,
     onRecent,
     onTaskbar,
+    onSearch,
     handleToggleExpand,
   ]);
 
-  if (dockItems.length === 0) return null;
+  if (homeLauncherItems.length === 0 && mainDockItems.length === 0) return null;
+
+  const renderDockIconItem = (item: DockItemConfig) => {
+    if (item.isSeparator) {
+      return (
+        <div
+          key={item.id}
+          className="h-8 w-px bg-border/80 mx-1 shrink-0 self-center opacity-70 relative z-10"
+        />
+      );
+    }
+
+    let isActive =
+      item.isActive !== undefined
+        ? item.isActive
+        : pathname === item.id ||
+          (item.id.startsWith("/") && item.id !== "/" && pathname.startsWith(item.id));
+
+    if (item.id === "recent") {
+      isActive = Boolean(isRecentOpen);
+    } else if (item.id === "taskbar") {
+      isActive = Boolean(isTaskbarOpen);
+    } else if (item.id === "quick-capture") {
+      isActive = Boolean(isQuickCaptureOpen);
+    } else if (item.id === "/shortcut") {
+      isActive = Boolean(isShortcutOpen) || pathname === "/shortcut";
+    } else if (item.id === "/terminal") {
+      isActive = Boolean(isTerminalOpen) || pathname === "/terminal";
+    } else if (item.id === "expand") {
+      isActive = Boolean(isExpandOpen);
+    }
+
+    return (
+      <DockIcon 
+        key={item.id} 
+        item={item} 
+        mouseX={mouseX} 
+        isActive={isActive}
+        onMountElement={item.id === "expand" ? (el) => { expandBtnRef.current = el; } : undefined}
+      />
+    );
+  };
 
   return (
     <>
       <div
-        className="fixed bottom-5 z-50 flex items-center justify-center max-w-[95vw] pointer-events-none transition-[left] duration-300 ease-in-out"
+        className="fixed bottom-5 z-50 flex items-center justify-center gap-2.5 sm:gap-3 max-w-[95vw] pointer-events-none transition-[left] duration-300 ease-in-out"
         style={{
           left: sidebarShift ? "calc(50% + 37.5px)" : "50%",
           transform: "translateX(-50%)",
         }}
+        onMouseMove={(e) => mouseX.set(e.pageX)}
+        onMouseLeave={() => mouseX.set(Infinity)}
       >
+        {/* Pill Bar 1: Home & Launcher (Terpisah Mandiri) */}
         <motion.div
-          onMouseMove={(e) => mouseX.set(e.pageX)}
-          onMouseLeave={() => mouseX.set(Infinity)}
-          className="pointer-events-auto flex items-end gap-2.5 px-3.5 pb-2.5 h-16 rounded-[28px] liquid-glass-dock overflow-visible relative"
+          className="pointer-events-auto flex items-end gap-2 px-3 pb-2.5 h-16 rounded-[28px] liquid-glass-dock overflow-visible relative shadow-lg"
         >
-          {dockItems.map((item) => {
-            if (item.isSeparator) {
-              return (
-                <div
-                  key={item.id}
-                  className="h-8 w-px bg-border/80 mx-1 shrink-0 self-center opacity-70 relative z-10"
-                />
-              );
-            }
+          {homeLauncherItems.map(renderDockIconItem)}
+        </motion.div>
 
-            let isActive =
-              item.isActive !== undefined
-                ? item.isActive
-                : pathname === item.id ||
-                  (item.id.startsWith("/") && item.id !== "/" && pathname.startsWith(item.id));
-
-            if (item.id === "recent") {
-              isActive = Boolean(isRecentOpen);
-            } else if (item.id === "taskbar") {
-              isActive = Boolean(isTaskbarOpen);
-            } else if (item.id === "quick-capture") {
-              isActive = Boolean(isQuickCaptureOpen);
-            } else if (item.id === "/shortcut") {
-              isActive = Boolean(isShortcutOpen) || pathname === "/shortcut";
-            } else if (item.id === "/terminal") {
-              isActive = Boolean(isTerminalOpen) || pathname === "/terminal";
-            } else if (item.id === "expand") {
-              isActive = Boolean(isExpandOpen);
-            }
-
-            return (
-              <DockIcon 
-                key={item.id} 
-                item={item} 
-                mouseX={mouseX} 
-                isActive={isActive}
-                onMountElement={item.id === "expand" ? (el) => { expandBtnRef.current = el; } : undefined}
-              />
-            );
-          })}
+        {/* Pill Bar 2: Pinned Favorites & System Utilities */}
+        <motion.div
+          className="pointer-events-auto flex items-end gap-2.5 px-3.5 pb-2.5 h-16 rounded-[28px] liquid-glass-dock overflow-visible relative shadow-lg"
+        >
+          {mainDockItems.map(renderDockIconItem)}
         </motion.div>
       </div>
 

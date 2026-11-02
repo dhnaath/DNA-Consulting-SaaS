@@ -48,8 +48,8 @@ export const LAUNCHER_PAGE_OPTIONS: LauncherPageOption[] = [
   {
     id: "commodity",
     pageNumber: 2,
-    label: "100 Komoditas & Indeks Harga",
-    shortLabel: "100 Komoditas",
+    label: "Market Price Monitor",
+    shortLabel: "Market Price Monitor",
     badge: "Makro & Nasional",
     icon: TrendingUp,
   },
@@ -104,7 +104,7 @@ export const LAUNCHER_PAGE_OPTIONS: LauncherPageOption[] = [
   {
     id: "mode_personal",
     pageNumber: 9,
-    label: "Personal Life and Profile Management",
+    label: "Personal Life Management",
     shortLabel: "Personal Life",
     badge: "Personal",
     icon: Heart,

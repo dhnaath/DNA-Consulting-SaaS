@@ -34,12 +34,19 @@ import {
   LayoutGrid,
 } from "lucide-react";
 
-export type WorkCategory = "all" | "execution" | "partners" | "control" | "ownership";
+export type WorkCategory =
+  | "all"
+  | "planning"
+  | "workflow"
+  | "resources"
+  | "coordination"
+  | "governance"
+  | "ownership";
 
 export interface WorkAppItem {
   id: string;
   name: string;
-  category: "execution" | "partners" | "control" | "ownership";
+  category: "planning" | "workflow" | "resources" | "coordination" | "governance" | "ownership";
   categoryLabel: string;
   shortDesc: string;
   to: string;
@@ -53,20 +60,20 @@ export interface WorkAppItem {
 }
 
 export const WORK_APPS: WorkAppItem[] = [
-  // 1. Execution (3)
+  // 1. Planning (1)
   {
     id: "milestones",
-    name: "Target & Milestone",
-    category: "execution",
-    categoryLabel: "Execution",
+    name: "Goals & Milestones",
+    category: "planning",
+    categoryLabel: "Planning",
     shortDesc: "Peta jalan sasaran jangka pendek & panjang dengan tahapan checkpoint terukur, bobot progres, dan integrasi task & kanban.",
     to: "/peh/milestones",
     icon: Target,
-    badge: "Milestone",
+    badge: "Planning",
     accentGradient: "from-blue-500 to-indigo-600",
     accentBorder: "border-blue-500/30 hover:border-blue-500/60",
     badgeBg: "bg-blue-500/15 text-blue-600 dark:text-blue-400 border-blue-500/30",
-    badgeText: "Execution",
+    badgeText: "Planning",
     subMenus: [
       { id: "active", label: "Sasaran Aktif", to: "/peh/milestones" },
       { id: "milestones", label: "Tahapan Checkpoint", to: "/milestone-manager" },
@@ -74,19 +81,21 @@ export const WORK_APPS: WorkAppItem[] = [
       { id: "kanban", label: "Kanban Board", to: "/kanban" },
     ],
   },
+
+  // 2. Workflow (2)
   {
     id: "workflows",
-    name: "Alur Kerja & Pipeline",
-    category: "execution",
-    categoryLabel: "Execution",
+    name: "Workflow & Delivery Pipeline",
+    category: "workflow",
+    categoryLabel: "Workflow",
     shortDesc: "Proses bertahap (onboarding, approval, delivery) dengan pemantauan siklus, SLA waktu, timeline, dan deliverable manager.",
     to: "/peh/workflows",
     icon: Workflow,
-    badge: "Pipeline",
+    badge: "Workflow",
     accentGradient: "from-indigo-500 to-violet-600",
     accentBorder: "border-indigo-500/30 hover:border-indigo-500/60",
     badgeBg: "bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 border-indigo-500/30",
-    badgeText: "Execution",
+    badgeText: "Workflow",
     subMenus: [
       { id: "pipelines", label: "Pipeline Aktif", to: "/peh/workflows" },
       { id: "project-mgr", label: "Project Manager", to: "/proyek" },
@@ -96,17 +105,17 @@ export const WORK_APPS: WorkAppItem[] = [
   },
   {
     id: "content-pipeline",
-    name: "Pipeline Produksi Konten",
-    category: "execution",
-    categoryLabel: "Execution",
+    name: "Content Production Pipeline",
+    category: "workflow",
+    categoryLabel: "Workflow",
     shortDesc: "Papan kanban tahapan naskah, perancangan ide kreatif, syuting, editing, matriks prioritas, dan jadwal rilis publikasi.",
     to: "/peh/projects",
     icon: Layers,
-    badge: "Kreatif",
+    badge: "Workflow",
     accentGradient: "from-cyan-500 to-blue-600",
     accentBorder: "border-cyan-500/30 hover:border-cyan-500/60",
     badgeBg: "bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 border-cyan-500/30",
-    badgeText: "Execution",
+    badgeText: "Workflow",
     subMenus: [
       { id: "active", label: "Konten Berjalan", to: "/peh/projects" },
       { id: "eisenhower", label: "Eisenhower Matrix", to: "/eisenhower" },
@@ -115,20 +124,20 @@ export const WORK_APPS: WorkAppItem[] = [
     ],
   },
 
-  // 2. Partners (2)
+  // 3. Resources (2)
   {
     id: "vendors",
-    name: "Vendor & Mitra Layanan",
-    category: "partners",
-    categoryLabel: "Partners",
+    name: "Vendor & Service Management",
+    category: "resources",
+    categoryLabel: "Resources",
     shortDesc: "Direktori komprehensif mitra bisnis, rekam jejak performa vendor, daftar ratecard tarif standar, dan ketersediaan kapasitas.",
     to: "/peh/vendors",
     icon: Building2,
-    badge: "Partners",
+    badge: "Resources",
     accentGradient: "from-amber-500 to-orange-600",
     accentBorder: "border-amber-500/30 hover:border-amber-500/60",
     badgeBg: "bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/30",
-    badgeText: "Partners",
+    badgeText: "Resources",
     subMenus: [
       { id: "vendor-dir", label: "Direktori Vendor", to: "/peh/vendors" },
       { id: "service-rates", label: "Service Rates", to: "/lainnya?app=services-ratecard" },
@@ -138,17 +147,17 @@ export const WORK_APPS: WorkAppItem[] = [
   },
   {
     id: "procurement",
-    name: "Pengadaan & Purchase Orders",
-    category: "partners",
-    categoryLabel: "Partners",
+    name: "Procurement & Purchase Orders",
+    category: "resources",
+    categoryLabel: "Resources",
     shortDesc: "Siklus pengadaan barang & jasa korporasi, registrasi purchase orders (PO), verifikasi anggaran, dan alur persetujuan bertingkat.",
     to: "/peh/procurement",
     icon: ShoppingBag,
-    badge: "Procurement",
+    badge: "Resources",
     accentGradient: "from-orange-500 to-red-600",
     accentBorder: "border-orange-500/30 hover:border-orange-500/60",
     badgeBg: "bg-orange-500/15 text-orange-600 dark:text-orange-400 border-orange-500/30",
-    badgeText: "Partners",
+    badgeText: "Resources",
     subMenus: [
       { id: "po-list", label: "Purchase Orders (PO)", to: "/peh/procurement" },
       { id: "approval-mgr", label: "Approval Manager", to: "/approval-manager" },
@@ -156,20 +165,20 @@ export const WORK_APPS: WorkAppItem[] = [
     ],
   },
 
-  // 3. Control (3)
+  // 4. Coordination (1)
   {
     id: "meetings",
-    name: "Notulensi & Keputusan Rapat",
-    category: "control",
-    categoryLabel: "Control",
+    name: "Meetings & Decision Log",
+    category: "coordination",
+    categoryLabel: "Coordination",
     shortDesc: "Dokumentasi objektif pertemuan, poin kesepakatan final eksekutif, daftar tindakan (action items), dan penanggung jawab PIC.",
     to: "/peh/meetings",
     icon: FileCheck,
-    badge: "Notulensi",
+    badge: "Coordination",
     accentGradient: "from-emerald-500 to-teal-600",
     accentBorder: "border-emerald-500/30 hover:border-emerald-500/60",
     badgeBg: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30",
-    badgeText: "Control",
+    badgeText: "Coordination",
     subMenus: [
       { id: "meeting-list", label: "Daftar Notulensi", to: "/peh/meetings" },
       { id: "meeting-mgr", label: "Meeting Manager", to: "/meeting-manager" },
@@ -177,19 +186,21 @@ export const WORK_APPS: WorkAppItem[] = [
       { id: "collaboration", label: "Kolaborasi Tim", to: "/collaboration" },
     ],
   },
+
+  // 5. Governance (2)
   {
     id: "incidents",
-    name: "Log Masalah & Insiden",
-    category: "control",
-    categoryLabel: "Control",
+    name: "Issues & Incident Management",
+    category: "governance",
+    categoryLabel: "Governance",
     shortDesc: "Pencatatan gangguan operasional, level urgensi & keparahan (SEV), investigasi akar masalah (RCA), dan evaluasi mitigasi.",
     to: "/peh/incidents",
     icon: AlertOctagon,
-    badge: "Insiden",
+    badge: "Governance",
     accentGradient: "from-rose-500 to-pink-600",
     accentBorder: "border-rose-500/30 hover:border-rose-500/60",
     badgeBg: "bg-rose-500/15 text-rose-600 dark:text-rose-400 border-rose-500/30",
-    badgeText: "Control",
+    badgeText: "Governance",
     subMenus: [
       { id: "active-issues", label: "Insiden Terbuka", to: "/peh/incidents" },
       { id: "ticket-desk", label: "Ticket Desk", to: "/lainnya?app=ticket-desk" },
@@ -199,17 +210,17 @@ export const WORK_APPS: WorkAppItem[] = [
   },
   {
     id: "compliance",
-    name: "Kepatuhan & Audit Regulasi",
-    category: "control",
-    categoryLabel: "Control",
+    name: "Compliance & Regulatory Audit",
+    category: "governance",
+    categoryLabel: "Governance",
     shortDesc: "Matriks kepatuhan hukum, audit standar ISO/K3/pajak, radar jatuh tempo izin operasional, dan skor kesiapan inspeksi eksternal.",
     to: "/peh/compliance",
     icon: ShieldCheck,
-    badge: "Regulasi",
+    badge: "Governance",
     accentGradient: "from-teal-500 to-emerald-600",
     accentBorder: "border-teal-500/30 hover:border-teal-500/60",
     badgeBg: "bg-teal-500/15 text-teal-600 dark:text-teal-400 border-teal-500/30",
-    badgeText: "Control",
+    badgeText: "Governance",
     subMenus: [
       { id: "compliance-matrix", label: "Matriks Kepatuhan", to: "/peh/compliance" },
       { id: "readiness-score", label: "Skor Kesiapan Audit", to: "/peh/compliance" },
@@ -217,10 +228,10 @@ export const WORK_APPS: WorkAppItem[] = [
     ],
   },
 
-  // 4. Ownership (1)
+  // 6. Ownership (1)
   {
     id: "cap-table",
-    name: "Struktur Saham & Cap Table",
+    name: "Equity & Cap Table",
     category: "ownership",
     categoryLabel: "Ownership",
     shortDesc: "Tabel kepemilikan modal saham pendiri & investor, pembagian dividen, vesting schedule ekuitas, dan simulasi putaran pendanaan.",
@@ -241,9 +252,11 @@ export const WORK_APPS: WorkAppItem[] = [
 
 export const CATEGORY_TABS: { id: WorkCategory; label: string; count: number }[] = [
   { id: "all", label: "Semua", count: 9 },
-  { id: "execution", label: "Execution", count: 3 },
-  { id: "partners", label: "Partners", count: 2 },
-  { id: "control", label: "Control", count: 3 },
+  { id: "planning", label: "Planning", count: 1 },
+  { id: "workflow", label: "Workflow", count: 2 },
+  { id: "resources", label: "Resources", count: 2 },
+  { id: "coordination", label: "Coordination", count: 1 },
+  { id: "governance", label: "Governance", count: 2 },
   { id: "ownership", label: "Ownership", count: 1 },
 ];
 
@@ -262,7 +275,10 @@ export function WorkProductivityPage({ isEmbedded = false }: { isEmbedded?: bool
         app.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         app.shortDesc.toLowerCase().includes(searchQuery.toLowerCase()) ||
         app.categoryLabel.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        app.badge.toLowerCase().includes(searchQuery.toLowerCase());
+        app.badge.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        app.subMenus.some((sub) =>
+          sub.label.toLowerCase().includes(searchQuery.toLowerCase())
+        );
       return matchCategory && matchSearch;
     });
   }, [selectedCategory, searchQuery]);
@@ -280,7 +296,7 @@ export function WorkProductivityPage({ isEmbedded = false }: { isEmbedded?: bool
       </ShellHeader>
 
       {/* Main Page Container */}
-      <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-3 sm:pt-4 space-y-4">
+      <div className="w-full mx-auto pt-3 sm:pt-4 space-y-4">
         {/* Title (Matching MBA Page Header Style) */}
         <div className="text-center mb-4">
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground/90 tracking-tight flex items-center justify-center gap-2.5">

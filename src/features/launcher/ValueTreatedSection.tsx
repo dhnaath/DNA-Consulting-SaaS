@@ -79,7 +79,7 @@ export function ValueTreatedSection({
       <div className="text-center max-w-3xl mx-auto space-y-1">
         <h3 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight flex items-center justify-center gap-2.5">
           <Gem className="size-7 text-amber-500 shrink-0" />
-          <span>Struktur Silabus Nilai & Kurikulum Terapan</span>
+          <span>Applied Value Framework</span>
         </h3>
         <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
           Pilih salah satu dari <strong>5 Jenjang Pembelajaran</strong>. Ke-10 bidang nilai di bawahnya akan secara otomatis menyesuaikan daftar fitur materinya.

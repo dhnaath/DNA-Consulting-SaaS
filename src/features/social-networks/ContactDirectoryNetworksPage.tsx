@@ -23,7 +23,7 @@ import {
   Star,
 } from "lucide-react";
 
-export type SocialCategory = "all" | "directory" | "relations" | "networks";
+export type SocialCategory = "all" | "direktori" | "relasi" | "jaringan";
 
 export interface SocialSubMenu {
   id: string;
@@ -34,7 +34,7 @@ export interface SocialSubMenu {
 export interface SocialAppItem {
   id: string;
   name: string;
-  category: "directory" | "relations" | "networks";
+  category: "direktori" | "relasi" | "jaringan";
   categoryLabel: string;
   shortDesc: string;
   to: string;
@@ -48,20 +48,21 @@ export interface SocialAppItem {
 }
 
 export const SOCIAL_NETWORKS_APPS: SocialAppItem[] = [
+  // 1. Direktori (2)
   {
     id: "people-manager-identity",
-    name: "People Manager (Single Identity)",
-    category: "directory",
-    categoryLabel: "Directory",
+    name: "People & Identity Directory",
+    category: "direktori",
+    categoryLabel: "Direktori",
     shortDesc:
       "Identity Layer rujukan identitas tunggal seluruh ekosistem: profil person, relasi keluarga, riwayat asosiasi, dan peran organisasi.",
     to: "/people-manager",
     icon: UserCheck,
-    badge: "Identity Layer",
+    badge: "Direktori",
     accentGradient: "from-blue-500 to-indigo-600",
     accentBorder: "border-blue-500/30 hover:border-blue-500/60",
     badgeBg: "bg-blue-500/15 text-blue-600 dark:text-blue-400 border-blue-500/30",
-    badgeText: "Directory",
+    badgeText: "Direktori",
     subMenus: [
       { id: "identity-profiles", label: "Profil Identitas", to: "/people-manager" },
       { id: "roles-mapping", label: "Pemetaan Peran", to: "/people-manager" },
@@ -70,38 +71,40 @@ export const SOCIAL_NETWORKS_APPS: SocialAppItem[] = [
   },
   {
     id: "executive-contacts-book",
-    name: "Direktori Kontak Eksekutif",
-    category: "directory",
-    categoryLabel: "Directory",
+    name: "Executive Contact Directory",
+    category: "direktori",
+    categoryLabel: "Direktori",
     shortDesc:
       "Buku alamat kontak profesional, sinkronisasi nomor telepon, kartu nama digital VCard, dan klasifikasi tag industri mitra bisnis.",
     to: "/peh/contacts",
     icon: PhoneCall,
-    badge: "Contacts",
+    badge: "Direktori",
     accentGradient: "from-teal-500 to-cyan-600",
     accentBorder: "border-teal-500/30 hover:border-teal-500/60",
     badgeBg: "bg-teal-500/15 text-teal-600 dark:text-teal-400 border-teal-500/30",
-    badgeText: "Directory",
+    badgeText: "Direktori",
     subMenus: [
       { id: "all-contacts", label: "Daftar Kontak", to: "/peh/contacts" },
       { id: "vip-partners", label: "Mitra Strategis", to: "/contacts" },
       { id: "import-export", label: "Buku Alamat", to: "/klien" },
     ],
   },
+
+  // 2. Relasi (2)
   {
     id: "interaction-timeline-relations",
-    name: "Relationship Timeline & Interaksi",
-    category: "relations",
-    categoryLabel: "Relations",
+    name: "Relationship History",
+    category: "relasi",
+    categoryLabel: "Relasi",
     shortDesc:
       "Histori lini masa komunikasi terpadu, log catatan panggilan/meeting penting, dan jadwal pengingat tindak lanjut (follow-up) relasi.",
     to: "/interaction-manager",
     icon: MessagesSquare,
-    badge: "CRM Timeline",
+    badge: "Relasi",
     accentGradient: "from-emerald-500 to-teal-600",
     accentBorder: "border-emerald-500/30 hover:border-emerald-500/60",
     badgeBg: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30",
-    badgeText: "Relations",
+    badgeText: "Relasi",
     subMenus: [
       { id: "interaction-log", label: "Log Interaksi", to: "/interaction-manager" },
       { id: "follow-up-schedule", label: "Jadwal Follow-Up", to: "/interaction-manager" },
@@ -110,38 +113,40 @@ export const SOCIAL_NETWORKS_APPS: SocialAppItem[] = [
   },
   {
     id: "circle-groups-communities",
-    name: "Circle Groups & Jaringan Relasi",
-    category: "relations",
-    categoryLabel: "Relations",
+    name: "Groups & Communities",
+    category: "relasi",
+    categoryLabel: "Relasi",
     shortDesc:
       "Klaster lingkaran pertemanan, grup alumni, paguyuban hobi, dan pengelolaan kelompok komunikasi tertutup berbasis minat bersama.",
     to: "/lainnya?app=circle-groups",
     icon: Network,
-    badge: "Circle Groups",
+    badge: "Relasi",
     accentGradient: "from-purple-500 to-violet-600",
     accentBorder: "border-purple-500/30 hover:border-purple-500/60",
     badgeBg: "bg-purple-500/15 text-purple-600 dark:text-purple-400 border-purple-500/30",
-    badgeText: "Relations",
+    badgeText: "Relasi",
     subMenus: [
       { id: "circles-list", label: "Daftar Lingkaran Relasi", to: "/lainnya?app=circle-groups" },
       { id: "alumni-community", label: "Komunitas Alumni", to: "/peh/community-events" },
       { id: "group-projects", label: "Kolaborasi Lingkaran", to: "/collaboration" },
     ],
   },
+
+  // 3. Jaringan (2)
   {
     id: "mentorship-introductions",
-    name: "Mentorship & Introductions Network",
-    category: "networks",
-    categoryLabel: "Networks",
+    name: "Mentorship & Introductions",
+    category: "jaringan",
+    categoryLabel: "Jaringan",
     shortDesc:
       "Pencatatan sesi bimbingan karir/bisnis, jejak rekam perkenalan mitra (warm introductions), dan pelacakan sinergi kemitraan ekosistem.",
     to: "/peh/mentorship",
     icon: Award,
-    badge: "Mentorship",
+    badge: "Jaringan",
     accentGradient: "from-amber-500 to-orange-600",
     accentBorder: "border-amber-500/30 hover:border-amber-500/60",
     badgeBg: "bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/30",
-    badgeText: "Networks",
+    badgeText: "Jaringan",
     subMenus: [
       { id: "mentorship-log", label: "Sesi Mentorship", to: "/peh/mentorship" },
       { id: "warm-intros", label: "Jejaring Perkenalan", to: "/peh/introductions" },
@@ -150,18 +155,18 @@ export const SOCIAL_NETWORKS_APPS: SocialAppItem[] = [
   },
   {
     id: "celebrations-gift-tracker",
-    name: "Kalender Perayaan & Gift Tracker",
-    category: "networks",
-    categoryLabel: "Networks",
+    name: "Celebrations & Gifts",
+    category: "jaringan",
+    categoryLabel: "Jaringan",
     shortDesc:
       "Pengingat hari ulang tahun, perayaan hari jadi mitra, log riwayat bingkisan apresiasi hadiah, dan pengingat kartu ucapan selamat.",
     to: "/lainnya?app=gift-tracker",
     icon: Gift,
-    badge: "Celebrations",
+    badge: "Jaringan",
     accentGradient: "from-rose-500 to-pink-600",
     accentBorder: "border-rose-500/30 hover:border-rose-500/60",
     badgeBg: "bg-rose-500/15 text-rose-600 dark:text-rose-400 border-rose-500/30",
-    badgeText: "Networks",
+    badgeText: "Jaringan",
     subMenus: [
       { id: "gift-tracker", label: "Gift Tracker", to: "/lainnya?app=gift-tracker" },
       { id: "anniversaries", label: "Kalender Hari Jadi", to: "/peh/gifts" },
@@ -176,9 +181,9 @@ export const SOCIAL_CATEGORY_TABS: {
   count: number;
 }[] = [
   { id: "all", label: "Semua", count: 6 },
-  { id: "directory", label: "Directory", count: 2 },
-  { id: "relations", label: "Relations", count: 2 },
-  { id: "networks", label: "Networks", count: 2 },
+  { id: "direktori", label: "Direktori", count: 2 },
+  { id: "relasi", label: "Relasi", count: 2 },
+  { id: "jaringan", label: "Jaringan", count: 2 },
 ];
 
 export function ContactDirectoryNetworksPage({
@@ -219,7 +224,7 @@ export function ContactDirectoryNetworksPage({
         />
       </ShellHeader>
 
-      <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-3 sm:pt-4 space-y-4">
+      <div className="w-full mx-auto pt-3 sm:pt-4 space-y-4">
         <div className="text-center mb-4">
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground/90 tracking-tight flex items-center justify-center gap-2.5">
             <Users className="size-7 text-primary" />

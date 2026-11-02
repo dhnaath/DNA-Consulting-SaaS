@@ -347,7 +347,7 @@ export const STANDALONE_FINANCIAL_APPS: StandaloneFinancialAppDef[] = [
     badge: "Standalone",
     features: [
       { title: "Logam Mulia & Saham", to: "/100-komoditas", icon: Coins },
-      { title: "100 Komoditas", to: "/100-komoditas", icon: Package },
+      { title: "Market Price Monitor", to: "/100-komoditas", icon: Package },
     ],
   },
   {
@@ -1022,7 +1022,7 @@ export const WEALTH_STAGE_MAIN_BOXES: WealthStageMainBoxDef[] = [
         icon: PieChart,
         subFeatures: [
           { title: "Logam Mulia & Saham", to: "/100-komoditas", icon: Coins },
-          { title: "100 Komoditas", to: "/100-komoditas", icon: Package },
+          { title: "Market Price Monitor", to: "/100-komoditas", icon: Package },
         ],
       },
       {

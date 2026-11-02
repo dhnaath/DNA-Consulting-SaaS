@@ -23,7 +23,7 @@ import {
   Users,
 } from "lucide-react";
 
-export type PublicAffairsCategory = "all" | "civic" | "policy" | "media";
+export type PublicAffairsCategory = "all" | "community" | "public-services" | "policy" | "media";
 
 export interface PublicAffairsSubMenu {
   id: string;
@@ -34,7 +34,7 @@ export interface PublicAffairsSubMenu {
 export interface PublicAffairsAppItem {
   id: string;
   name: string;
-  category: "civic" | "policy" | "media";
+  category: "community" | "public-services" | "policy" | "media";
   categoryLabel: string;
   shortDesc: string;
   to: string;
@@ -50,9 +50,9 @@ export interface PublicAffairsAppItem {
 export const PUBLIC_AFFAIRS_APPS: PublicAffairsAppItem[] = [
   {
     id: "komunitas-warga-rt-rw",
-    name: "Komunitas Warga & Tata Usaha RT/RW",
-    category: "civic",
-    categoryLabel: "Civic",
+    name: "Community Management",
+    category: "community",
+    categoryLabel: "Community",
     shortDesc:
       "Manajemen rukun warga RT/RW terpadu: transparansi pencatatan iuran kas warga, publikasi pengumuman digital, dan penerbitan surat pengantar sipil.",
     to: "/komunitas-warga",
@@ -61,7 +61,7 @@ export const PUBLIC_AFFAIRS_APPS: PublicAffairsAppItem[] = [
     accentGradient: "from-blue-500 to-indigo-600",
     accentBorder: "border-blue-500/30 hover:border-blue-500/60",
     badgeBg: "bg-blue-500/15 text-blue-600 dark:text-blue-400 border-blue-500/30",
-    badgeText: "Civic",
+    badgeText: "Community",
     subMenus: [
       { id: "warga-directory", label: "Direktori Warga", to: "/komunitas-warga" },
       { id: "iuran-kas", label: "Transparansi Iuran Kas", to: "/komunitas-warga" },
@@ -70,9 +70,9 @@ export const PUBLIC_AFFAIRS_APPS: PublicAffairsAppItem[] = [
   },
   {
     id: "civic-services-guide",
-    name: "Layanan Publik & Tata Kelola Sipil",
-    category: "civic",
-    categoryLabel: "Civic",
+    name: "Public Services Guide",
+    category: "public-services",
+    categoryLabel: "Public Services",
     shortDesc:
       "Direktori panduan administrasi kependudukan (KTP, KK, Akta), persyaratan legal perizinan sipil, dan repositori kontak kantor dinas pelayanan publik.",
     to: "/lainnya?app=public-services-guide",
@@ -81,7 +81,7 @@ export const PUBLIC_AFFAIRS_APPS: PublicAffairsAppItem[] = [
     accentGradient: "from-teal-500 to-cyan-600",
     accentBorder: "border-teal-500/30 hover:border-teal-500/60",
     badgeBg: "bg-teal-500/15 text-teal-600 dark:text-teal-400 border-teal-500/30",
-    badgeText: "Civic",
+    badgeText: "Public Services",
     subMenus: [
       { id: "panduan-layanan", label: "Panduan Administrasi", to: "/lainnya?app=public-services-guide" },
       { id: "syarat-berkas", label: "Persyaratan Berkas", to: "/documents" },
@@ -90,9 +90,9 @@ export const PUBLIC_AFFAIRS_APPS: PublicAffairsAppItem[] = [
   },
   {
     id: "civic-calendar-agenda",
-    name: "Agenda Kegiatan & Musyawarah Publik",
-    category: "civic",
-    categoryLabel: "Civic",
+    name: "Community Events & Meetings",
+    category: "community",
+    categoryLabel: "Community",
     shortDesc:
       "Kalender agenda gotong royong, jadwal posyandu & ronda malam siskamling, serta risalah notulen musyawarah rencana pembangunan warga.",
     to: "/lainnya?app=civic-calendar",
@@ -101,7 +101,7 @@ export const PUBLIC_AFFAIRS_APPS: PublicAffairsAppItem[] = [
     accentGradient: "from-amber-500 to-orange-600",
     accentBorder: "border-amber-500/30 hover:border-amber-500/60",
     badgeBg: "bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/30",
-    badgeText: "Civic",
+    badgeText: "Community",
     subMenus: [
       { id: "kalender-warga", label: "Kalender Warga", to: "/lainnya?app=civic-calendar" },
       { id: "jadwal-musyawarah", label: "Jadwal Musyawarah", to: "/calendar" },
@@ -110,7 +110,7 @@ export const PUBLIC_AFFAIRS_APPS: PublicAffairsAppItem[] = [
   },
   {
     id: "policy-compliance-audit",
-    name: "Kebijakan Regulasi & Kepatuhan Legal",
+    name: "Regulatory Compliance",
     category: "policy",
     categoryLabel: "Policy",
     shortDesc:
@@ -130,7 +130,7 @@ export const PUBLIC_AFFAIRS_APPS: PublicAffairsAppItem[] = [
   },
   {
     id: "advocacy-public-affairs",
-    name: "Advokasi Publik & Aspirasi Warga",
+    name: "Public Advocacy",
     category: "policy",
     categoryLabel: "Policy",
     shortDesc:
@@ -150,7 +150,7 @@ export const PUBLIC_AFFAIRS_APPS: PublicAffairsAppItem[] = [
   },
   {
     id: "public-relations-media",
-    name: "Komunikasi Publik & Media Relations",
+    name: "Public Relations & Media",
     category: "media",
     categoryLabel: "Media",
     shortDesc:
@@ -176,7 +176,8 @@ export const PUBLIC_AFFAIRS_CATEGORY_TABS: {
   count: number;
 }[] = [
   { id: "all", label: "Semua", count: 6 },
-  { id: "civic", label: "Civic", count: 3 },
+  { id: "community", label: "Community", count: 2 },
+  { id: "public-services", label: "Public Services", count: 1 },
   { id: "policy", label: "Policy", count: 2 },
   { id: "media", label: "Media", count: 1 },
 ];
@@ -219,7 +220,7 @@ export function PublicRelationsPolicyAffairsPage({
         />
       </ShellHeader>
 
-      <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-3 sm:pt-4 space-y-4">
+      <div className="w-full mx-auto pt-3 sm:pt-4 space-y-4">
         <div className="text-center mb-4">
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground/90 tracking-tight flex items-center justify-center gap-2.5">
             <Landmark className="size-7 text-primary" />

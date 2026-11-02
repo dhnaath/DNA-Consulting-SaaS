@@ -39,7 +39,12 @@ import {
   Layers,
 } from "lucide-react";
 
-export type PersonalLifeCategory = "all" | "habits-mind" | "body-health" | "personal-tools";
+export type PersonalLifeCategory =
+  | "all"
+  | "pengembangan"
+  | "refleksi"
+  | "kesehatan"
+  | "utilitas";
 
 export interface PersonalLifeSubMenu {
   id: string;
@@ -50,7 +55,7 @@ export interface PersonalLifeSubMenu {
 export interface PersonalLifeAppItem {
   id: string;
   name: string;
-  category: "habits-mind" | "body-health" | "personal-tools";
+  category: "pengembangan" | "refleksi" | "kesehatan" | "utilitas";
   categoryLabel: string;
   shortDesc: string;
   to: string;
@@ -65,22 +70,22 @@ export interface PersonalLifeAppItem {
 
 export const PERSONAL_LIFE_APPS: PersonalLifeAppItem[] = [
   // ============================================================================
-  // 1. Habits and Mind (2 Apps)
+  // 1. Pengembangan (1 App)
   // ============================================================================
   {
     id: "habits-and-planning",
-    name: "Habits and Planning",
-    category: "habits-mind",
-    categoryLabel: "Habits and Mind",
+    name: "Life Planning",
+    category: "pengembangan",
+    categoryLabel: "Pengembangan",
     shortDesc:
       "Pengembangan kebiasaan positif konsisten, perencanaan sasaran hidup terpadu, proyek mandiri, serta pencatatan impian dan tabungan masa depan.",
     to: "/habit-tracker",
     icon: Flame,
-    badge: "Habits & Planning",
+    badge: "Pengembangan",
     accentGradient: "from-emerald-500 to-teal-600",
     accentBorder: "border-emerald-500/30 hover:border-emerald-500/60",
     badgeBg: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30",
-    badgeText: "Habits and Mind",
+    badgeText: "Pengembangan",
     subMenus: [
       { id: "habit-tracker", label: "Habit Tracker MVP", to: "/habit-tracker" },
       { id: "life-planner", label: "Life Planner Hub", to: "/life/life-planner" },
@@ -88,20 +93,24 @@ export const PERSONAL_LIFE_APPS: PersonalLifeAppItem[] = [
       { id: "wishlist", label: "Wishlist & Tabungan Impian", to: "/life/wishlist" },
     ],
   },
+
+  // ============================================================================
+  // 2. Refleksi (1 App)
+  // ============================================================================
   {
     id: "journaling",
     name: "Journaling",
-    category: "habits-mind",
-    categoryLabel: "Habits and Mind",
+    category: "refleksi",
+    categoryLabel: "Refleksi",
     shortDesc:
       "Ruang refleksi privat harian, jurnal rasa syukur berkala untuk ketenangan batin, serta pemetaan suasana hati (mood map) terstruktur.",
     to: "/journal",
     icon: BookOpen,
-    badge: "Journaling",
+    badge: "Refleksi",
     accentGradient: "from-teal-500 to-cyan-600",
     accentBorder: "border-teal-500/30 hover:border-teal-500/60",
     badgeBg: "bg-teal-500/15 text-teal-600 dark:text-teal-400 border-teal-500/30",
-    badgeText: "Habits and Mind",
+    badgeText: "Refleksi",
     subMenus: [
       { id: "daily-journal", label: "Daily Journal", to: "/journal" },
       { id: "gratitude-journal", label: "Gratitude Journal", to: "/journal?tab=gratitude" },
@@ -110,22 +119,22 @@ export const PERSONAL_LIFE_APPS: PersonalLifeAppItem[] = [
   },
 
   // ============================================================================
-  // 2. Body and Health (2 Apps)
+  // 3. Kesehatan (2 Apps)
   // ============================================================================
   {
     id: "fitness-and-sleep",
-    name: "Fitness and Sleep",
-    category: "body-health",
-    categoryLabel: "Body and Health",
+    name: "Wellness",
+    category: "kesehatan",
+    categoryLabel: "Kesehatan",
     shortDesc:
       "Pusat pencatatan latihan fisik harian, kualitas istirahat malam dan kalkulator tidur, komposisi berat badan tubuh, serta log hidrasi air minum.",
     to: "/health?tab=workouts",
     icon: Dumbbell,
-    badge: "Fitness & Sleep",
+    badge: "Kesehatan",
     accentGradient: "from-blue-500 to-indigo-600",
     accentBorder: "border-blue-500/30 hover:border-blue-500/60",
     badgeBg: "bg-blue-500/15 text-blue-600 dark:text-blue-400 border-blue-500/30",
-    badgeText: "Body and Health",
+    badgeText: "Kesehatan",
     subMenus: [
       { id: "workouts", label: "Workouts", to: "/health?tab=workouts" },
       { id: "sleep-quality", label: "Sleep Quality MVP", to: "/health?tab=sleep" },
@@ -135,18 +144,18 @@ export const PERSONAL_LIFE_APPS: PersonalLifeAppItem[] = [
   },
   {
     id: "health-records",
-    name: "Health Records",
-    category: "body-health",
-    categoryLabel: "Body and Health",
+    name: "Health Management",
+    category: "kesehatan",
+    categoryLabel: "Kesehatan",
     shortDesc:
       "Pusat rekam medis komprehensif: pelacak riwayat kesehatan dokter, tanda vital tubuh, jadwal pengingat minum obat, dan log perawatan kulit.",
     to: "/health",
     icon: HeartPulse,
-    badge: "Health Records",
+    badge: "Kesehatan",
     accentGradient: "from-rose-500 to-pink-600",
     accentBorder: "border-rose-500/30 hover:border-rose-500/60",
     badgeBg: "bg-rose-500/15 text-rose-600 dark:text-rose-400 border-rose-500/30",
-    badgeText: "Body and Health",
+    badgeText: "Kesehatan",
     subMenus: [
       { id: "health-tracker", label: "Health Tracker", to: "/health" },
       { id: "medical-records", label: "Medical Records", to: "/health?tab=medical-records" },
@@ -157,22 +166,22 @@ export const PERSONAL_LIFE_APPS: PersonalLifeAppItem[] = [
   },
 
   // ============================================================================
-  // 3. Personal Tools (1 App)
+  // 4. Utilitas (1 App)
   // ============================================================================
   {
     id: "personal-tools",
-    name: "Personal Tools",
-    category: "personal-tools",
-    categoryLabel: "Personal Tools",
+    name: "Personal Utilities",
+    category: "utilitas",
+    categoryLabel: "Utilitas",
     shortDesc:
       "Brankas manajemen kata sandi terenkripsi dan utilitas alat hitung kalkulator ilmiah serbaguna untuk kebutuhan sehari-hari.",
     to: "/passwords",
     icon: Key,
-    badge: "Personal Tools",
+    badge: "Utilitas",
     accentGradient: "from-amber-500 to-orange-600",
     accentBorder: "border-amber-500/30 hover:border-amber-500/60",
     badgeBg: "bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/30",
-    badgeText: "Personal Tools",
+    badgeText: "Utilitas",
     subMenus: [
       { id: "passwords", label: "Passwords", to: "/passwords" },
       { id: "utilities", label: "Utilities", to: "/kalkulator" },
@@ -186,9 +195,10 @@ export const PERSONAL_LIFE_CATEGORY_TABS: {
   count: number;
 }[] = [
   { id: "all", label: "Semua", count: 5 },
-  { id: "habits-mind", label: "Habits and Mind", count: 2 },
-  { id: "body-health", label: "Body and Health", count: 2 },
-  { id: "personal-tools", label: "Personal Tools", count: 1 },
+  { id: "pengembangan", label: "Pengembangan", count: 1 },
+  { id: "refleksi", label: "Refleksi", count: 1 },
+  { id: "kesehatan", label: "Kesehatan", count: 2 },
+  { id: "utilitas", label: "Utilitas", count: 1 },
 ];
 
 export function PersonalLifePage({ isEmbedded = false }: { isEmbedded?: boolean } = {}) {
@@ -227,12 +237,12 @@ export function PersonalLifePage({ isEmbedded = false }: { isEmbedded?: boolean 
       </ShellHeader>
 
       {/* Main Page Container */}
-      <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-3 sm:pt-4 space-y-4">
+      <div className="w-full mx-auto pt-3 sm:pt-4 space-y-4">
         {/* Title (Matching MBA Page Header Style) */}
         <div className="text-center mb-4">
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground/90 tracking-tight flex items-center justify-center gap-2.5">
             <Heart className="size-7 text-primary" />
-            <span>Personal Life and Profile Management</span>
+            <span>Personal Life Management</span>
           </h1>
         </div>
 

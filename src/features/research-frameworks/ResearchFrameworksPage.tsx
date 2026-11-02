@@ -50,7 +50,7 @@ export interface ResearchAppItem {
 export const RESEARCH_APPS: ResearchAppItem[] = [
   {
     id: "mba-frameworks",
-    name: "100 MBA Frameworks Catalog",
+    name: "MBA Frameworks",
     category: "frameworks",
     categoryLabel: "Frameworks",
     shortDesc:
@@ -71,7 +71,7 @@ export const RESEARCH_APPS: ResearchAppItem[] = [
   },
   {
     id: "business-valuation-mappi",
-    name: "Business Valuation & MAPPI Standards",
+    name: "Business Valuation",
     category: "frameworks",
     categoryLabel: "Frameworks",
     shortDesc:
@@ -91,7 +91,7 @@ export const RESEARCH_APPS: ResearchAppItem[] = [
   },
   {
     id: "research-intelligence",
-    name: "Research & Market Intelligence Manager",
+    name: "Research & Market Intelligence",
     category: "research",
     categoryLabel: "Research",
     shortDesc:
@@ -111,7 +111,7 @@ export const RESEARCH_APPS: ResearchAppItem[] = [
   },
   {
     id: "kurasi-pengetahuan",
-    name: "Kurasi Pengetahuan Bisnis",
+    name: "Business Knowledge",
     category: "reference",
     categoryLabel: "Reference",
     shortDesc:
@@ -132,7 +132,7 @@ export const RESEARCH_APPS: ResearchAppItem[] = [
   },
   {
     id: "wiki-corporate-knowledge",
-    name: "Wiki SOP & Corporate Knowledge Base",
+    name: "SOP & Knowledge Base",
     category: "reference",
     categoryLabel: "Reference",
     shortDesc:
@@ -152,7 +152,7 @@ export const RESEARCH_APPS: ResearchAppItem[] = [
   },
   {
     id: "reading-library",
-    name: "Reading Library & Textbooks",
+    name: "Reading Library",
     category: "research",
     categoryLabel: "Research",
     shortDesc:
@@ -221,7 +221,7 @@ export function ResearchFrameworksPage({
         />
       </ShellHeader>
 
-      <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-3 sm:pt-4 space-y-4">
+      <div className="w-full mx-auto pt-3 sm:pt-4 space-y-4">
         <div className="text-center mb-4">
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground/90 tracking-tight flex items-center justify-center gap-2.5">
             <GraduationCap className="size-7 text-primary" />

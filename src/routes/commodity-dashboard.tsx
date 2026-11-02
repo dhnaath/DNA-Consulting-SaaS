@@ -107,6 +107,19 @@ const CATEGORY_META: Record<string, CategoryMeta> = {
   }
 };
 
+const CATEGORY_GRADIENTS: Record<string, string> = {
+  'Pasar Keuangan & Global': 'from-amber-500 to-orange-600',
+  'Pangan Pokok Lokal': 'from-emerald-500 to-teal-700',
+  'Sembako & HET Kemendag': 'from-blue-500 to-cyan-600',
+  'Energi & Bahan Bakar': 'from-rose-500 to-pink-600',
+  'Pertanian & Properti Rakyat': 'from-lime-600 to-emerald-700',
+  'IHK, Sandang & Material Bangunan': 'from-zinc-500 to-slate-700',
+  'Kesehatan & Obat Generik': 'from-red-500 to-rose-600',
+  'Konsumen & Otomotif': 'from-purple-500 to-violet-700',
+  'Fasilitas Utilitas Publik': 'from-cyan-500 to-blue-700',
+  'Tenaga Kerja & Jasa Konstruksi': 'from-orange-500 to-amber-700',
+};
+
 interface NavigatorCardItem {
   id: string;
   label: string;
@@ -928,42 +941,119 @@ export function CommodityDashboardSection({
       item.jenisBatas === 'Subsidi' ? 'prospek' : 
       item.jenisBatas === 'HET Pemerintah' ? 'berjalan' : 
       item.jenisBatas === 'Spot Global' ? 'aktif' : 'todo';
-      
+
+    const meta = CATEGORY_META[item.kategori] || {
+      icon: Package,
+      color: 'text-primary',
+      bgLight: 'bg-primary/10',
+      desc: 'Kelompok komoditas'
+    };
+    const ItemIcon = meta.icon;
+    const gradientClass = CATEGORY_GRADIENTS[item.kategori] || 'from-indigo-500 to-indigo-700';
+
     return (
       <div 
         key={item.id}
         onClick={() => setSelectedItem(item)}
-        className="bg-card rounded-2xl border border-border/80 p-4 hover:border-primary/60 hover:shadow-2xs transition-all cursor-pointer flex flex-col justify-between group h-full"
+        className="w-full h-full rounded-2xl border border-border bg-card p-4 sm:p-4.5 shadow-xs hover:shadow-md hover:border-primary/50 transition-all flex flex-col justify-between gap-3 group relative cursor-pointer min-w-0"
       >
-        <div>
-          <div className="flex items-start justify-between gap-2 mb-2.5">
-            <span className="font-mono text-[11px] text-muted-foreground px-2 py-0.5 rounded-md bg-muted">
-              #{item.id.toString().padStart(3, '0')}
-            </span>
+        <div className="flex flex-col flex-1">
+          {/* Header Kartu: Icon Bulat Bergradien (Gaya MBACard / Laman Lain) + Judul & Status Pill */}
+          <div className="flex items-start justify-between gap-3 shrink-0 mb-3">
+            <div className="flex items-center gap-3 min-w-0 flex-1">
+              <div
+                className={cn(
+                  "size-11 rounded-full flex items-center justify-center text-white shadow-xs shrink-0 transition-transform group-hover:scale-105",
+                  `bg-linear-to-br ${gradientClass}`
+                )}
+              >
+                <ItemIcon className="size-5 opacity-95 drop-shadow-xs" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <h4 className="font-bold text-sm sm:text-base text-foreground group-hover:text-primary transition-colors truncate">
+                  {item.nama}
+                </h4>
+                <div className="flex items-center gap-1.5 mt-0.5 text-[11px] text-muted-foreground">
+                  <span className="font-mono font-semibold px-1.5 py-0.2 rounded bg-muted/80 text-muted-foreground text-[10px]">
+                    #{item.id.toString().padStart(3, '0')}
+                  </span>
+                  <span>•</span>
+                  <span className="truncate">{item.kategori}</span>
+                </div>
+              </div>
+            </div>
+
             <Pill value={tagColor} label={item.jenisBatas} />
           </div>
-          <h3 className="font-semibold text-foreground text-sm group-hover:text-primary transition-colors line-clamp-1">
-            {item.nama}
-          </h3>
-          <p className="text-xs text-muted-foreground mb-3">{item.kategori}</p>
-          
-          <div className="bg-muted/30 p-2.5 rounded-xl border border-border/70 mb-3">
-            <div className="text-[11px] text-muted-foreground mb-0.5">Harga Terkini</div>
-            <div className="text-base font-bold text-foreground">
-              {formatPrice(item.hargaTerbaru, item.mataUang, item.satuan)}
+
+          {/* Kotak Harga Terkini (Highlight Metric Blok Bersih) */}
+          <div className="bg-muted/40 dark:bg-muted/20 p-3 rounded-xl border border-border/50 mb-3 flex items-center justify-between gap-2">
+            <div>
+              <div className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-0.5">
+                Harga Acuan Terkini
+              </div>
+              <div className="text-base sm:text-lg font-bold text-foreground">
+                {formatPrice(item.hargaTerbaru, item.mataUang, item.satuan)}
+              </div>
             </div>
+            {item.perubahan24h !== 0 && (
+              <div
+                className={cn(
+                  "text-xs font-semibold px-2 py-1 rounded-lg flex items-center gap-1 shrink-0",
+                  item.perubahan24h > 0
+                    ? "bg-rose-500/10 text-rose-600 dark:text-rose-400"
+                    : "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
+                )}
+              >
+                {item.perubahan24h > 0 ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
+                <span>{Math.abs(item.perubahan24h)}%</span>
+              </div>
+            )}
           </div>
-          
+
+          {/* Deskripsi Spesifikasi Singkat */}
           <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed mb-3">
             {item.deskripsiSpesifikasi}
           </p>
-        </div>
-        
-        <div className="pt-3 border-t border-border/70 flex items-center justify-between text-xs mt-auto">
-          <div className="flex items-center gap-1.5 text-muted-foreground truncate mr-2 text-[11px]">
-            <Building2 size={13} className="shrink-0" />
-            <span className="truncate">{item.sumberData.split('/')[0]}</span>
+
+          {/* Grid Mini Pills / Fitur Properti (Gaya Submenu / Pills Kotak di Laman Lain) */}
+          <div className="grid grid-cols-2 gap-1.5 w-full mt-auto pt-1">
+            <div
+              className="inline-flex items-center gap-1.5 py-1.5 px-2.5 rounded-lg bg-muted/60 hover:bg-primary/10 hover:text-primary text-[11px] font-medium text-foreground transition-all border border-border/40 hover:border-primary/30 truncate"
+              title={`Sumber Resmi: ${item.sumberData}`}
+            >
+              <Building2 size={12} className="text-primary shrink-0" />
+              <span className="truncate">{item.sumberData.split('/')[0].split('&')[0].trim()}</span>
+            </div>
+            <div
+              className="inline-flex items-center gap-1.5 py-1.5 px-2.5 rounded-lg bg-muted/60 hover:bg-primary/10 hover:text-primary text-[11px] font-medium text-foreground transition-all border border-border/40 hover:border-primary/30 truncate"
+              title={`Ritme Pembaruan: ${item.updateCadence}`}
+            >
+              <CalendarClock size={12} className="text-primary shrink-0" />
+              <span className="truncate">{item.updateCadence}</span>
+            </div>
+            <div
+              className="inline-flex items-center gap-1.5 py-1.5 px-2.5 rounded-lg bg-muted/60 hover:bg-primary/10 hover:text-primary text-[11px] font-medium text-foreground transition-all border border-border/40 hover:border-primary/30 truncate"
+              title={`Status Regulasi: ${item.statusRegulasi}`}
+            >
+              <ShieldAlert size={12} className="text-amber-500 shrink-0" />
+              <span className="truncate">{item.statusRegulasi.split('(')[0].trim()}</span>
+            </div>
+            <div
+              className="inline-flex items-center gap-1.5 py-1.5 px-2.5 rounded-lg bg-muted/60 hover:bg-primary/10 hover:text-primary text-[11px] font-medium text-foreground transition-all border border-border/40 hover:border-primary/30 truncate"
+              title={`Satuan Ukur: ${item.satuan}`}
+            >
+              <Package size={12} className="text-primary shrink-0" />
+              <span className="truncate">Per {item.satuan}</span>
+            </div>
           </div>
+        </div>
+
+        {/* Footer Aksi / Navigasi Cepat */}
+        <div className="pt-3 border-t border-border/60 flex items-center justify-between text-xs mt-2">
+          <span className="text-[10px] text-muted-foreground font-mono truncate max-w-[120px]">
+            {item.tanggalUpdate || 'Update Terkini'}
+          </span>
           <div className="flex items-center gap-1.5 shrink-0">
             {item.linkSumber && (
               <a
@@ -971,16 +1061,24 @@ export function CommodityDashboardSection({
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
-                className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-muted hover:bg-primary hover:text-primary-foreground text-foreground text-[11px] font-semibold transition-colors"
+                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-muted hover:bg-primary hover:text-primary-foreground text-foreground text-[11px] font-semibold transition-colors"
                 title={`Direct Link Sumber Resmi: ${item.sumberData}`}
               >
                 <span>Direct Link</span>
                 <ExternalLink size={10} />
               </a>
             )}
-            <span className="text-xs font-semibold px-2 py-0.5 rounded-md bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors shrink-0">
-              Rincian
-            </span>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedItem(item);
+              }}
+              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground text-[11px] font-semibold transition-all cursor-pointer"
+            >
+              <span>Rincian</span>
+              <ArrowRight size={10} />
+            </button>
           </div>
         </div>
       </div>
@@ -1343,28 +1441,22 @@ export function CommodityDashboardSection({
         </div>
       )}
 
-      {/* Header Bar 1 Halaman Terpadu */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 sm:p-6 rounded-2xl border border-border bg-card shadow-2xs">
-        <div>
-          <div className="flex items-center gap-2">
-            <span className="p-2 rounded-xl bg-emerald-500/10 text-emerald-500">
-              <TrendingUp className="size-5" />
-            </span>
-            <h2 className="text-xl sm:text-2xl font-bold text-foreground">
-              100 Komoditas, 10 Indeks Pembangunan & Indeks Harga Makro
-            </h2>
-          </div>
-          <p className="text-xs sm:text-sm text-muted-foreground mt-1 max-w-3xl leading-relaxed">
-            Pusat intelijen terpadu harga pasar spot fisik, pagu subsidi pangan & energi pemerintah, bursa efek & syariah BEI, serta 10 indikator makro-sosial dan 8 indeks harga resmi BPS & Bank Indonesia (IHK Inflasi, IHPB, NTP, NTN, IHPR, IBK, IHP, IHKE).
-          </p>
-        </div>
+      {/* Title & Description Header (Bergaya seperti Value Treated) */}
+      <div className="text-center max-w-3xl mx-auto space-y-2">
+        <h3 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight flex items-center justify-center gap-2.5">
+          <TrendingUp className="size-7 text-emerald-500 shrink-0" />
+          <span>Market Price Monitor</span>
+        </h3>
+        <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+          Pusat intelijen terpadu harga pasar spot fisik, pagu subsidi pangan & energi pemerintah, bursa efek & syariah BEI, serta 10 indikator makro-sosial dan 8 indeks harga resmi BPS & Bank Indonesia (IHK Inflasi, IHPB, NTP, NTN, IHPR, IBK, IHP, IHKE).
+        </p>
 
-        <div className="flex items-center gap-2 shrink-0 flex-wrap">
+        <div className="flex items-center justify-center gap-2 pt-1 flex-wrap">
           <button
             type="button"
             onClick={() => setActiveNavigatorTab(activeNavigatorTab === 'both' ? 'commodity_all' : 'both')}
             className={cn(
-              "inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer border shadow-2xs",
+              "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer border shadow-2xs",
               activeNavigatorTab === 'both'
                 ? "bg-primary text-primary-foreground border-primary"
                 : "bg-background hover:bg-accent border-border text-foreground"
@@ -1376,7 +1468,7 @@ export function CommodityDashboardSection({
           </button>
           <button
             onClick={() => setShowJsonSchemaModal(true)}
-            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-background hover:bg-accent border border-border text-foreground transition-colors cursor-pointer shadow-2xs"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-background hover:bg-accent border border-border text-foreground transition-colors cursor-pointer shadow-2xs"
             title="Lihat Struktur Skema JSON"
           >
             <Database size={14} className="text-primary" />
@@ -1384,7 +1476,7 @@ export function CommodityDashboardSection({
           </button>
           <button
             onClick={handleExportCSV}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-primary text-primary-foreground hover:bg-primary/90 transition-colors cursor-pointer shadow-2xs"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-primary text-primary-foreground hover:bg-primary/90 transition-colors cursor-pointer shadow-2xs"
             title="Unduh seluruh data komoditas / indeks ke format CSV"
           >
             <Download size={14} />
@@ -2300,33 +2392,6 @@ export function CommodityDashboardSection({
             </div>
           )}
 
-          {/* Metrik KPI 100 Komoditas */}
-          <div className="grid gap-3.5 grid-cols-2 lg:grid-cols-4">
-            <MetrikCard
-              ikon={<Package className="size-4" />}
-              label="Total Terpantau"
-              nilai={`${stats.total}`}
-              catatan="100 komoditas acuan nasional"
-            />
-            <MetrikCard
-              ikon={<ShieldAlert className="size-4" />}
-              label="Subsidi & HET Gov"
-              nilai={`${stats.subsidiCount + stats.hetCount}`}
-              catatan="Pagu subsidi & regulasi HET"
-            />
-            <MetrikCard
-              ikon={<CalendarClock className="size-4" />}
-              label="Update Harian"
-              nilai={`${stats.harianCount}`}
-              catatan="Data spot & bursa komoditas"
-            />
-            <MetrikCard
-              ikon={<Building2 className="size-4" />}
-              label="Koneksi Sumber"
-              nilai={`${COMMODITY_SOURCES.length}`}
-              catatan="Kanal data instansi resmi"
-            />
-          </div>
 
           {/* Status Strip & Indikator Filter Aktif Komoditas */}
           <div className="flex flex-wrap items-center justify-between gap-3 px-1 py-1">
@@ -2562,7 +2627,7 @@ export function CommodityDashboardSection({
             return (
               <div
                 key={category}
-                className="rounded-2xl border border-border bg-card p-5 sm:p-6 shadow-2xs space-y-4"
+                className="rounded-2xl border border-border bg-card py-4 sm:py-5 px-3 sm:px-4 md:px-4.5 shadow-2xs space-y-4"
               >
                 {/* Header Kotak Kategori */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-border/60">
@@ -2607,7 +2672,7 @@ export function CommodityDashboardSection({
                 </div>
 
                 {/* Grid Kotak-Kotak Kartu Komoditas dalam Kategori */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3.5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3.5 sm:gap-4">
                   {items.map((item) => renderCommodityCard(item))}
                 </div>
               </div>
@@ -2978,10 +3043,10 @@ export function CommodityDashboardSection({
 export function CommodityDashboard() {
   return (
     <AppShell 
-      title="100 Komoditas & 10 Indeks Pembangunan" 
+      title="Market Price Monitor" 
       subtitle="Pusat Intelijen Pasar Spot Komoditas Fisik, HET Pemerintah, Pagu Subsidi & 10 Indikator Kesejahteraan Nasional"
     >
-      <div className="w-full max-w-[1720px] mx-auto p-4 sm:p-6 space-y-6">
+      <div className="w-full max-w-[1920px] mx-auto py-3 sm:py-5 px-1 sm:px-2 md:px-3 space-y-6">
         <CommodityDashboardSection />
       </div>
     </AppShell>

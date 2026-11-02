@@ -23,7 +23,7 @@ import {
   Heart,
 } from "lucide-react";
 
-export type FamilyCategory = "all" | "family" | "household" | "vehicles";
+export type FamilyCategory = "all" | "keluarga" | "rumah-tangga" | "kendaraan";
 
 export interface FamilySubMenu {
   id: string;
@@ -34,7 +34,7 @@ export interface FamilySubMenu {
 export interface FamilyAppItem {
   id: string;
   name: string;
-  category: "family" | "household" | "vehicles";
+  category: "keluarga" | "rumah-tangga" | "kendaraan";
   categoryLabel: string;
   shortDesc: string;
   to: string;
@@ -48,20 +48,21 @@ export interface FamilyAppItem {
 }
 
 export const FAMILY_HOUSEHOLD_APPS: FamilyAppItem[] = [
+  // 1. Keluarga (3)
   {
     id: "family-records-ancestry",
-    name: "Family Records & Ancestry",
-    category: "family",
-    categoryLabel: "Family",
+    name: "Family Heritage & Records",
+    category: "keluarga",
+    categoryLabel: "Keluarga",
     shortDesc:
       "Pusat silsilah garis keturunan keluarga, repositori arsip foto & dokumen bersejarah, kesepakatan tata tertib house rules, dan resep kuliner warisan leluhur.",
     to: "/peh/family-tree",
     icon: GitFork,
-    badge: "Family Tree",
+    badge: "Keluarga",
     accentGradient: "from-rose-500 to-pink-600",
     accentBorder: "border-rose-500/30 hover:border-rose-500/60",
     badgeBg: "bg-rose-500/15 text-rose-600 dark:text-rose-400 border-rose-500/30",
-    badgeText: "Family",
+    badgeText: "Keluarga",
     subMenus: [
       { id: "family-tree", label: "Family Tree", to: "/peh/family-tree" },
       { id: "resep-warisan", label: "Resep Warisan Keluarga", to: "/peh/family-recipes" },
@@ -71,18 +72,18 @@ export const FAMILY_HOUSEHOLD_APPS: FamilyAppItem[] = [
   },
   {
     id: "family-safety-health",
-    name: "Family Safety & Health Hub",
-    category: "family",
-    categoryLabel: "Family",
+    name: "Family Safety & Health",
+    category: "keluarga",
+    categoryLabel: "Keluarga",
     shortDesc:
       "Mitigasi keselamatan & siaga krisis keluarga: rekam profil medis alergi/darah, panduan kesiapsiagaan bencana, dan direktori kontak darurat terpadu.",
     to: "/lainnya?app=emergency-hub",
     icon: ShieldAlert,
-    badge: "Family Safety",
+    badge: "Keluarga",
     accentGradient: "from-red-500 to-rose-600",
     accentBorder: "border-red-500/30 hover:border-red-500/60",
     badgeBg: "bg-red-500/15 text-red-600 dark:text-red-400 border-red-500/30",
-    badgeText: "Family",
+    badgeText: "Keluarga",
     subMenus: [
       { id: "emergency-contacts", label: "Emergency Contacts", to: "/lainnya?app=emergency-hub" },
       { id: "family-health", label: "Profil Medis Keluarga", to: "/peh/family-health" },
@@ -91,38 +92,40 @@ export const FAMILY_HOUSEHOLD_APPS: FamilyAppItem[] = [
   },
   {
     id: "family-budget-life",
-    name: "Family Budget & Shared Life",
-    category: "family",
-    categoryLabel: "Family",
+    name: "Family Finance",
+    category: "keluarga",
+    categoryLabel: "Keluarga",
     shortDesc:
       "Perencanaan anggaran rumah tangga bersama, dana tabungan pendidikan anak, alokasi pengeluaran bulanan, dan evaluasi penghematan rutin.",
     to: "/peh/family-budget",
     icon: Wallet,
-    badge: "Family Life",
+    badge: "Keluarga",
     accentGradient: "from-emerald-500 to-teal-600",
     accentBorder: "border-emerald-500/30 hover:border-emerald-500/60",
     badgeBg: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30",
-    badgeText: "Family",
+    badgeText: "Keluarga",
     subMenus: [
       { id: "family-budget", label: "Anggaran Keluarga", to: "/peh/family-budget" },
       { id: "monthly-expenses", label: "Pengeluaran Bulanan", to: "/peh/budget" },
       { id: "pet-care", label: "Perawatan Hewan Peliharaan", to: "/peh/pet-care" },
     ],
   },
+
+  // 2. Rumah Tangga (2)
   {
     id: "household-care-chores",
-    name: "Household Care & Chores",
-    category: "household",
-    categoryLabel: "Household",
+    name: "Home Care",
+    category: "rumah-tangga",
+    categoryLabel: "Rumah Tangga",
     shortDesc:
       "Jadwal rutin kebersihan hunian, pembagian tugas harian keluarga, dan log pemeliharaan fisik bangunan serta peralatan elektronik rumah.",
     to: "/peh/chores",
     icon: CheckSquare,
-    badge: "Household",
+    badge: "Rumah Tangga",
     accentGradient: "from-amber-500 to-orange-600",
     accentBorder: "border-amber-500/30 hover:border-amber-500/60",
     badgeBg: "bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/30",
-    badgeText: "Household",
+    badgeText: "Rumah Tangga",
     subMenus: [
       { id: "chores-list", label: "Tugas Kebersihan", to: "/peh/chores" },
       { id: "home-maintenance", label: "Perawatan Rumah", to: "/peh/maintenance" },
@@ -131,38 +134,40 @@ export const FAMILY_HOUSEHOLD_APPS: FamilyAppItem[] = [
   },
   {
     id: "kitchen-pantry-management",
-    name: "Kitchen, Pantry & Grocery",
-    category: "household",
-    categoryLabel: "Household",
+    name: "Kitchen & Pantry",
+    category: "rumah-tangga",
+    categoryLabel: "Rumah Tangga",
     shortDesc:
       "Inventarisasi stok bahan makanan dapur, panduan resep masakan harian, serta daftar belanja kebutuhan pokok supermarket otomatis.",
     to: "/peh/pantry",
     icon: Utensils,
-    badge: "Kitchen & Pantry",
+    badge: "Rumah Tangga",
     accentGradient: "from-orange-500 to-amber-600",
     accentBorder: "border-orange-500/30 hover:border-orange-500/60",
     badgeBg: "bg-orange-500/15 text-orange-600 dark:text-orange-400 border-orange-500/30",
-    badgeText: "Household",
+    badgeText: "Rumah Tangga",
     subMenus: [
       { id: "pantry-inventory", label: "Pantry Inventory", to: "/peh/pantry" },
       { id: "recipes-catalog", label: "Katalog Resep Masakan", to: "/recipes" },
       { id: "grocery-list", label: "Daftar Belanja Dapur", to: "/shopping" },
     ],
   },
+
+  // 3. Kendaraan (1)
   {
     id: "vehicle-records-care",
-    name: "Vehicle Records & Fleet Care",
-    category: "vehicles",
-    categoryLabel: "Vehicles",
+    name: "Vehicle Management",
+    category: "kendaraan",
+    categoryLabel: "Kendaraan",
     shortDesc:
       "Pencatatan data legalitas STNK/BPKB kendaraan, histori servis berkala ganti oli, serta pemantauan konsumsi bahan bakar dan jarak tempuh.",
     to: "/peh/vehicles",
     icon: Car,
-    badge: "Vehicles",
+    badge: "Kendaraan",
     accentGradient: "from-blue-500 to-indigo-600",
     accentBorder: "border-blue-500/30 hover:border-blue-500/60",
     badgeBg: "bg-blue-500/15 text-blue-600 dark:text-blue-400 border-blue-500/30",
-    badgeText: "Vehicles",
+    badgeText: "Kendaraan",
     subMenus: [
       { id: "vehicle-identity", label: "Identitas Kendaraan", to: "/peh/vehicles" },
       { id: "mileage-fuel", label: "Kilometer & BBM", to: "/lainnya?app=mileage-fuel" },
@@ -177,9 +182,9 @@ export const FAMILY_CATEGORY_TABS: {
   count: number;
 }[] = [
   { id: "all", label: "Semua", count: 6 },
-  { id: "family", label: "Family", count: 3 },
-  { id: "household", label: "Household", count: 2 },
-  { id: "vehicles", label: "Vehicles", count: 1 },
+  { id: "keluarga", label: "Keluarga", count: 3 },
+  { id: "rumah-tangga", label: "Rumah Tangga", count: 2 },
+  { id: "kendaraan", label: "Kendaraan", count: 1 },
 ];
 
 export function FamilyRecordsHouseholdPage({
@@ -220,7 +225,7 @@ export function FamilyRecordsHouseholdPage({
         />
       </ShellHeader>
 
-      <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-3 sm:pt-4 space-y-4">
+      <div className="w-full mx-auto pt-3 sm:pt-4 space-y-4">
         <div className="text-center mb-4">
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground/90 tracking-tight flex items-center justify-center gap-2.5">
             <Home className="size-7 text-primary" />

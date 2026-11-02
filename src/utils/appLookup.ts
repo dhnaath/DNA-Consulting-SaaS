@@ -100,7 +100,7 @@ const KNOWN_WORKSPACE_APPS: AppMeta[] = [
   {
     id: "milestones",
     to: "/peh/milestones",
-    label: "Target & Milestone",
+    label: "Goals & Milestones",
     icon: Target,
     accentGradient: "from-blue-500 to-indigo-600",
     iconColor: "text-blue-500",
@@ -109,7 +109,7 @@ const KNOWN_WORKSPACE_APPS: AppMeta[] = [
   {
     id: "workflows",
     to: "/peh/workflows",
-    label: "Alur Kerja & Pipeline",
+    label: "Workflow & Delivery Pipeline",
     icon: Workflow,
     accentGradient: "from-indigo-500 to-violet-600",
     iconColor: "text-indigo-500",
@@ -118,7 +118,7 @@ const KNOWN_WORKSPACE_APPS: AppMeta[] = [
   {
     id: "content-pipeline",
     to: "/peh/projects",
-    label: "Pipeline Produksi Konten",
+    label: "Content Production Pipeline",
     icon: Layers,
     accentGradient: "from-cyan-500 to-blue-600",
     iconColor: "text-cyan-500",
@@ -127,7 +127,7 @@ const KNOWN_WORKSPACE_APPS: AppMeta[] = [
   {
     id: "vendors",
     to: "/peh/vendors",
-    label: "Vendor & Mitra Layanan",
+    label: "Vendor & Service Management",
     icon: Building2,
     accentGradient: "from-amber-500 to-orange-600",
     iconColor: "text-amber-500",
@@ -136,7 +136,7 @@ const KNOWN_WORKSPACE_APPS: AppMeta[] = [
   {
     id: "procurement",
     to: "/peh/procurement",
-    label: "Pengadaan & Purchase Orders",
+    label: "Procurement & Purchase Orders",
     icon: ShoppingBag,
     accentGradient: "from-orange-500 to-red-600",
     iconColor: "text-orange-500",
@@ -145,7 +145,7 @@ const KNOWN_WORKSPACE_APPS: AppMeta[] = [
   {
     id: "compliance",
     to: "/peh/compliance",
-    label: "Kepatuhan & Audit Regulasi",
+    label: "Compliance & Regulatory Audit",
     icon: ShieldCheck,
     accentGradient: "from-teal-500 to-emerald-600",
     iconColor: "text-emerald-500",
@@ -154,7 +154,7 @@ const KNOWN_WORKSPACE_APPS: AppMeta[] = [
   {
     id: "incidents",
     to: "/peh/incidents",
-    label: "Log Masalah & Insiden",
+    label: "Issues & Incident Management",
     icon: AlertOctagon,
     accentGradient: "from-rose-500 to-red-600",
     iconColor: "text-rose-500",
@@ -172,7 +172,7 @@ const KNOWN_WORKSPACE_APPS: AppMeta[] = [
   {
     id: "cap-table",
     to: "/peh/cap-table",
-    label: "Cap Table & Kepemilikan Saham",
+    label: "Equity & Cap Table",
     icon: PieChart,
     accentGradient: "from-purple-500 to-indigo-600",
     iconColor: "text-purple-500",
@@ -511,7 +511,7 @@ const KNOWN_WORKSPACE_APPS: AppMeta[] = [
   { id: "advocacy", to: "/peh/advocacy", label: "Aspirasi & Fasum Warga", icon: Megaphone, iconColor: "text-sky-500" },
   { id: "tasks", to: "/peh/tasks", label: "Tugas & Deep Work", icon: CheckSquare, iconColor: "text-blue-500" },
   { id: "knowledge", to: "/peh/knowledge", label: "Pustaka SOP & Playbook", icon: BookOpen, iconColor: "text-indigo-500" },
-  { id: "meetings", to: "/peh/meetings", label: "Notulensi & Keputusan", icon: FileCheck, iconColor: "text-teal-500" },
+  { id: "meetings", to: "/peh/meetings", label: "Meetings & Decision Log", icon: FileCheck, iconColor: "text-teal-500" },
   { id: "ip-licenses", to: "/peh/ip-licenses", label: "Hak Cipta & Lisensi IP", icon: Award, iconColor: "text-purple-500" },
   { id: "investments", to: "/peh/investments", label: "Portofolio Investasi", icon: TrendingUp, iconColor: "text-emerald-500" },
   { id: "real-estate", to: "/peh/real-estate", label: "Aset Properti & Tanah", icon: Building, iconColor: "text-amber-500" },
@@ -527,7 +527,7 @@ const KNOWN_WORKSPACE_APPS: AppMeta[] = [
   { id: "home-leisure", to: "/home-leisure", label: "Home and Leisure", icon: Home },
   { id: "family-community", to: "/family-community", label: "Family and Community", icon: Users },
   { id: "tools100", to: "/tools100", label: "100 MBA Tools", icon: Layers },
-  { id: "commodity", to: "/commodity", label: "100 Komoditas", icon: Package },
+  { id: "commodity", to: "/commodity", label: "Market Price Monitor", icon: Package },
 ];
 
 /**

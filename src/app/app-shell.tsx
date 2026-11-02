@@ -192,20 +192,20 @@ export const APP_MODES: ModeItem[] = [
     id: "employment",
     label: "Productivity Workspace and Workflow Systems",
     badge: "9 Modul",
-    desc: "Semua (9) · Execution (3) · Partners (2) · Control (3) · Ownership (1)",
+    desc: "Semua (9) · Planning (1) · Workflow (2) · Resources (2) · Coordination (1) · Governance (2) · Ownership (1)",
     icon: Briefcase,
     badgeClass: "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20",
     links: [
       { to: "/work-productivity", label: "Productivity Workspace Hub", icon: Briefcase },
-      { to: "/peh/milestones", label: "Target & Milestone", icon: Target },
-      { to: "/peh/workflows", label: "Alur Kerja & Pipeline", icon: CheckCircle2 },
-      { to: "/peh/projects", label: "Pipeline Produksi Konten", icon: FolderKanban },
-      { to: "/peh/vendors", label: "Vendor & Mitra Layanan", icon: Building },
-      { to: "/peh/procurement", label: "Pengadaan & Purchase Orders", icon: DollarSign },
-      { to: "/peh/meetings", label: "Notulensi & Keputusan Rapat", icon: CheckSquare },
-      { to: "/peh/incidents", label: "Log Masalah & Insiden", icon: ShieldAlert },
-      { to: "/peh/compliance", label: "Kepatuhan & Audit Regulasi", icon: ShieldCheck },
-      { to: "/peh/cap-table", label: "Struktur Saham & Cap Table", icon: LayoutGrid },
+      { to: "/peh/milestones", label: "Goals & Milestones", icon: Target },
+      { to: "/peh/workflows", label: "Workflow & Delivery Pipeline", icon: CheckCircle2 },
+      { to: "/peh/projects", label: "Content Production Pipeline", icon: FolderKanban },
+      { to: "/peh/vendors", label: "Vendor & Service Management", icon: Building },
+      { to: "/peh/procurement", label: "Procurement & Purchase Orders", icon: DollarSign },
+      { to: "/peh/meetings", label: "Meetings & Decision Log", icon: CheckSquare },
+      { to: "/peh/incidents", label: "Issues & Incident Management", icon: ShieldAlert },
+      { to: "/peh/compliance", label: "Compliance & Regulatory Audit", icon: ShieldCheck },
+      { to: "/peh/cap-table", label: "Equity & Cap Table", icon: LayoutGrid },
     ],
   },
   {
@@ -246,7 +246,7 @@ export const APP_MODES: ModeItem[] = [
     id: "sharia",
     label: "Islamic Principles and Sharia Values",
     badge: "16 Modul",
-    desc: "Semua (16) · Akad Sosial (5) · Akad Bisnis (5) · Zakat & Wakaf (3) · Audit Muamalah (3)",
+    desc: "Semua (16) · Sosial (3) · Komersial (5) · Proteksi (1) · Simpanan (1) · Zakat (3) · Investasi (1) · Kepatuhan (2)",
     icon: Scale,
     badgeClass: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20",
     links: [
@@ -264,35 +264,35 @@ export const APP_MODES: ModeItem[] = [
   },
   {
     id: "personal",
-    label: "Personal Life and Profile Management",
+    label: "Personal Life Management",
     badge: "5 Modul",
-    desc: "Semua (5) · Habits and Mind (2) · Body and Health (2) · Personal Tools (1)",
+    desc: "Semua (5) · Pengembangan (1) · Refleksi (1) · Kesehatan (2) · Utilitas (1)",
     icon: Heart,
     badgeClass: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20",
     links: [
       { to: "/personal-life", label: "Personal Life Hub", icon: Heart },
-      { to: "/habit-tracker", label: "Habits and Planning", icon: Flame },
-      { to: "/journal", label: "Journaling & Refleksi", icon: BookOpen },
-      { to: "/health?tab=workouts", label: "Fitness and Sleep", icon: Dumbbell },
-      { to: "/health", label: "Health Records", icon: HeartPulse },
-      { to: "/passwords", label: "Personal Tools & Passwords", icon: Key },
+      { to: "/habit-tracker", label: "Life Planning", icon: Flame },
+      { to: "/journal", label: "Journaling", icon: BookOpen },
+      { to: "/health?tab=workouts", label: "Wellness", icon: Dumbbell },
+      { to: "/health", label: "Health Management", icon: HeartPulse },
+      { to: "/passwords", label: "Personal Utilities", icon: Key },
     ],
   },
   {
     id: "family",
     label: "Family Records and Household Planning",
     badge: "6 Modul",
-    desc: "Semua (6) · Family (3) · Household (2) · Vehicles (1)",
+    desc: "Semua (6) · Keluarga (3) · Rumah Tangga (2) · Kendaraan (1)",
     icon: Home,
     badgeClass: "bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20",
     links: [
       { to: "/family-records", label: "Family Records Hub", icon: Home },
-      { to: "/peh/family-tree", label: "Family Records & Ancestry", icon: GitFork },
-      { to: "/lainnya?app=emergency-hub", label: "Family Safety & Health Hub", icon: ShieldAlert },
-      { to: "/peh/family-budget", label: "Family Budget & Shared Life", icon: Wallet },
-      { to: "/lainnya?app=home-chores", label: "Household Care & Maintenance", icon: CheckSquare },
-      { to: "/recipes", label: "Kitchen, Pantry & Shopping", icon: Utensils },
-      { to: "/lainnya?app=vehicle-identity", label: "Vehicles Records & Care", icon: Car },
+      { to: "/peh/family-tree", label: "Family Heritage & Records", icon: GitFork },
+      { to: "/lainnya?app=emergency-hub", label: "Family Safety & Health", icon: ShieldAlert },
+      { to: "/peh/family-budget", label: "Family Finance", icon: Wallet },
+      { to: "/lainnya?app=home-chores", label: "Home Care", icon: CheckSquare },
+      { to: "/recipes", label: "Kitchen & Pantry", icon: Utensils },
+      { to: "/lainnya?app=vehicle-identity", label: "Vehicle Management", icon: Car },
     ],
   },
   {
@@ -316,17 +316,17 @@ export const APP_MODES: ModeItem[] = [
     id: "networks",
     label: "Contact Directory and Social Networks",
     badge: "6 Modul",
-    desc: "Semua (6) · Directory (2) · Relations (2) · Networks (2)",
+    desc: "Semua (6) · Direktori (2) · Relasi (2) · Jaringan (2)",
     icon: Users,
     badgeClass: "bg-violet-500/10 text-violet-600 dark:text-violet-400 border-violet-500/20",
     links: [
       { to: "/social-networks", label: "Contact Directory Hub", icon: Users },
-      { to: "/people-manager", label: "People Manager (Identity Layer)", icon: Users },
-      { to: "/peh/contacts", label: "Direktori Kontak Eksekutif", icon: Key },
-      { to: "/interaction-manager", label: "Relationship Timeline & CRM", icon: MessagesSquare },
-      { to: "/peh/circle-groups", label: "Circle Groups & Komunitas", icon: Users },
-      { to: "/peh/gifts", label: "Celebrations & Hadiah", icon: Star },
-      { to: "/peh/mentorship", label: "Mentorship & Advisory", icon: Compass },
+      { to: "/people-manager", label: "People & Identity Directory", icon: Users },
+      { to: "/peh/contacts", label: "Executive Contact Directory", icon: Key },
+      { to: "/interaction-manager", label: "Relationship History", icon: MessagesSquare },
+      { to: "/peh/circle-groups", label: "Groups & Communities", icon: Users },
+      { to: "/peh/mentorship", label: "Mentorship & Introductions", icon: Compass },
+      { to: "/peh/gifts", label: "Celebrations & Gifts", icon: Star },
     ],
   },
 ];
@@ -1402,29 +1402,9 @@ export function AppShell({
         >
           {children}
         </div>
-        {/* iOS-Style Floating Search Pill above Dock (Active when not in Launcher) */}
-        {pathname !== "/" && (
-          <div
-            className="fixed bottom-[calc(5rem+10pt)] right-0 flex justify-center pb-1 pointer-events-none z-30 animate-in fade-in duration-200 transition-[left] duration-300 ease-in-out"
-            style={{
-              left: isLeftOpen && isLeftSidebar75 ? "75px" : "0px",
-            }}
-          >
-            <button
-              type="button"
-              onClick={() => setIsCommandPaletteOpen(true)}
-              className="pointer-events-auto flex items-center justify-center h-[28.5px] min-w-[88px] gap-1.5 px-4 rounded-full liquid-glass-pill text-xs font-medium text-foreground/85 hover:text-foreground active:scale-95 transition-all duration-150 cursor-pointer group"
-              aria-label="Pencarian Global (Search)"
-            >
-              <AnimatedSearchIcon active={true} className="size-[13px] text-muted-foreground group-hover:text-foreground transition-colors shrink-0 relative z-10" strokeWidth={2.4} />
-              <div className="relative z-10">
-                <TypewriterSearchText active={true} speed={50} startDelay={100} />
-              </div>
-            </button>
-          </div>
-        )}
         <AppDock
           sidebarShift={isLeftOpen && isLeftSidebar75}
+          onSearch={() => setIsCommandPaletteOpen(true)}
           onQuickCapture={() => {
             setIsQuickCaptureOpen((prev) => !prev);
             setIsShortcutOpen(false);

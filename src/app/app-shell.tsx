@@ -115,6 +115,7 @@ import { useCustomNav } from "@/hooks/useCustomNav";
 import { navKonsultan, navAllSidebar, type NavItem, type NavGroup as NavGroupType } from "@/config/nav";
 import { ProgressiveBlur } from "@/components/ProgressiveBlur";
 import { useProgressiveBlurSetting } from "@/hooks/useProgressiveBlurSetting";
+import { useDockStore } from "@/hooks/useDockState";
 import { useLiquidGlassSetting } from "@/hooks/useLiquidGlassSetting";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { getAppMetaByRoute } from "@/utils/appLookup";
@@ -402,6 +403,7 @@ export function AppShell({
   const { enabledMenus } = useMenuSettings();
   const { findItemById, findItemByPath } = useCustomNav();
   const { config: blurConfig, blurLevels } = useProgressiveBlurSetting();
+  const isDockMinimized = useDockStore((s) => s.isMinimized);
   useLiquidGlassSetting();
   useThemeColor();
 
@@ -1301,7 +1303,11 @@ export function AppShell({
               {/* Pill Shape Wadah Utama (600px) tempat elemen aksi, modul, & portal disiapkan */}
               {/* Pill Shape Wadah Utama (600px) tempat elemen aksi, modul, & portal disiapkan */}
               <div
-                className="pointer-events-auto h-[46px] min-h-[46px] w-auto max-w-[calc(100vw-220px)] rounded-full liquid-glass-header-pill bg-white/60 dark:bg-zinc-800/60 backdrop-blur-xl border border-white/40 dark:border-white/10 shadow-xs shrink-0 transition-all flex items-center p-1 gap-1.5 overflow-hidden overscroll-none"
+                className={`pointer-events-auto h-[46px] min-h-[46px] w-auto max-w-[calc(100vw-220px)] rounded-full shrink-0 transition-all duration-300 ease-out flex items-center justify-end ${
+                  hasAppHeader
+                    ? "p-0 bg-transparent border-transparent shadow-none overflow-visible"
+                    : "liquid-glass-header-pill bg-white/60 dark:bg-zinc-800/60 backdrop-blur-xl border border-white/40 dark:border-white/10 shadow-xs p-1 gap-1.5 overflow-hidden overscroll-none"
+                }`}
               >
                 {!actions && !hasAppHeader && !isHome && (
                   <div className="relative z-10 flex items-center gap-1.5 px-3 text-xs font-medium text-foreground truncate max-w-[200px] sm:max-w-[280px] shrink-0">
@@ -1316,7 +1322,7 @@ export function AppShell({
                 )}
                 <div
                   id="app-header-actions-portal"
-                  className="relative z-10 flex items-center gap-1.5 min-w-0 empty:hidden flex-1 overflow-x-auto overflow-y-hidden overscroll-x-none overscroll-none rounded-full no-scrollbar h-full py-0"
+                  className="relative z-10 flex items-center justify-end gap-1.5 min-w-0 empty:hidden w-auto shrink-0 overflow-hidden rounded-full no-scrollbar h-full py-0"
                 />
               </div>
 
@@ -1383,10 +1389,10 @@ export function AppShell({
             {/* Bottom progressive blur: soft dissolve above floating dock and edge */}
             <ProgressiveBlur
               direction="bottom"
-              height={116}
+              height={isDockMinimized ? 56 : 116}
               blurLevels={blurLevels}
               tint={blurConfig.tint ? `linear-gradient(to bottom, transparent 0%, hsl(var(--background) / 0.88) 100%)` : false}
-              className="fixed bottom-0 right-0 z-15 pointer-events-none transition-[left] duration-300 ease-in-out"
+              className="fixed bottom-0 right-0 z-15 pointer-events-none transition-[left,height] duration-300 ease-in-out"
               style={{
                 left: isLeftOpen && isLeftSidebar75 ? "75px" : "0px",
               }}
@@ -1395,7 +1401,7 @@ export function AppShell({
         )}
 
         <div
-          className={`flex-1 flex flex-col min-h-0 overflow-y-auto overflow-x-hidden no-scrollbar relative z-10 ${
+          className={`flex-1 flex flex-col min-h-0 overflow-y-auto overflow-x-hidden no-scrollbar relative ${
             pathname === "/" ? "px-4 pb-[68px] sm:px-6 sm:pb-[68px]" : "px-3 sm:px-6 pb-[80px]"
           }`}
           style={{ paddingTop: headerHeight }}

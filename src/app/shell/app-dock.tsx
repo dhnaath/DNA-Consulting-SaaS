@@ -1,4 +1,4 @@
-import { useRef, useMemo, useState, useEffect } from "react";
+import { useRef, useMemo, useState, useEffect, useCallback } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import {
@@ -15,6 +15,7 @@ import {
   Search,
 } from "lucide-react";
 import { useFavorites } from "@/hooks/useFavorites";
+import { useDockStore } from "@/hooks/useDockState";
 import { navKonsultan } from "@/config/nav";
 import { STANDALONE_APPS } from "@/features/standalone/standaloneAppsData";
 import { getAppMetaByRoute } from "@/utils/appLookup";
@@ -179,6 +180,131 @@ export function AppDock({
 
   const [expandAnchorX, setExpandAnchorX] = useState<number | undefined>(undefined);
   const expandBtnRef = useRef<HTMLElement | null>(null);
+
+  // State & timer auto-minimize ke iPhone home indicator bar (10 detik idle)
+  const IDLE_TIMEOUT_MS = 10000;
+  const { isMinimized, setIsMinimized } = useDockStore();
+  const isHoveringDockRef = useRef(false);
+  const idleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const isAnyModalOpen = Boolean(
+    isQuickCaptureOpen ||
+    isShortcutOpen ||
+    isTerminalOpen ||
+    isExpandOpen ||
+    isRecentOpen ||
+    isTaskbarOpen
+  );
+
+  const resetIdleTimer = useCallback(() => {
+    if (idleTimerRef.current) {
+      clearTimeout(idleTimerRef.current);
+      idleTimerRef.current = null;
+    }
+
+    // Jika kursor sedang di atas dock atau ada modal desktop aktif, jangan minimize
+    if (isHoveringDockRef.current || isAnyModalOpen) {
+      return;
+    }
+
+    idleTimerRef.current = setTimeout(() => {
+      if (!isHoveringDockRef.current && !isAnyModalOpen) {
+        setIsMinimized(true);
+        mouseX.set(Infinity);
+      }
+    }, IDLE_TIMEOUT_MS);
+  }, [isAnyModalOpen, mouseX]);
+
+  // Jalankan timer saat mount
+  useEffect(() => {
+    resetIdleTimer();
+    return () => {
+      if (idleTimerRef.current) {
+        clearTimeout(idleTimerRef.current);
+      }
+    };
+  }, [resetIdleTimer]);
+
+  // Reset timer & pulihkan dock saat navigasi halaman berubah
+  useEffect(() => {
+    setIsMinimized(false);
+    resetIdleTimer();
+  }, [pathname, resetIdleTimer]);
+
+  // Jika ada modal sistem terbuka, pastikan dock tidak terminimize
+  useEffect(() => {
+    if (isAnyModalOpen) {
+      setIsMinimized(false);
+      if (idleTimerRef.current) {
+        clearTimeout(idleTimerRef.current);
+        idleTimerRef.current = null;
+      }
+    } else {
+      resetIdleTimer();
+    }
+  }, [isAnyModalOpen, resetIdleTimer]);
+
+  // Handler interaksi mouse dock
+  const handleMouseEnterDock = () => {
+    isHoveringDockRef.current = true;
+    if (idleTimerRef.current) {
+      clearTimeout(idleTimerRef.current);
+      idleTimerRef.current = null;
+    }
+  };
+
+  const handleMouseLeaveDock = () => {
+    isHoveringDockRef.current = false;
+    mouseX.set(Infinity);
+    resetIdleTimer();
+  };
+
+  // Handler kursor diarahkan ke iPhone Home Bar
+  const handleMouseEnterBar = () => {
+    setIsMinimized(false);
+    isHoveringDockRef.current = true;
+    if (idleTimerRef.current) {
+      clearTimeout(idleTimerRef.current);
+      idleTimerRef.current = null;
+    }
+  };
+
+  const handleRestoreDock = () => {
+    setIsMinimized(false);
+    isHoveringDockRef.current = true;
+    if (idleTimerRef.current) {
+      clearTimeout(idleTimerRef.current);
+      idleTimerRef.current = null;
+    }
+  };
+
+  // Deteksi gestur mouse mendekati garis bawah layar ketika dalam kondisi minimized
+  useEffect(() => {
+    if (!isMinimized) return;
+
+    const handleWindowMouseMove = (e: MouseEvent) => {
+      const bottomThreshold = window.innerHeight - 26;
+      const centerMinX = window.innerWidth * 0.25;
+      const centerMaxX = window.innerWidth * 0.75;
+
+      if (e.clientY >= bottomThreshold && e.clientX >= centerMinX && e.clientX <= centerMaxX) {
+        handleMouseEnterBar();
+      }
+    };
+
+    window.addEventListener("mousemove", handleWindowMouseMove, { passive: true });
+    return () => window.removeEventListener("mousemove", handleWindowMouseMove);
+  }, [isMinimized]);
+
+  // Event kustom untuk membuka/memulihkan dock dari komponen lain
+  useEffect(() => {
+    const handleOpenDock = () => {
+      setIsMinimized(false);
+      resetIdleTimer();
+    };
+    window.addEventListener("aio_open_dock", handleOpenDock);
+    return () => window.removeEventListener("aio_open_dock", handleOpenDock);
+  }, [resetIdleTimer]);
 
   const updateExpandPosition = () => {
     if (expandBtnRef.current) {
@@ -412,19 +538,58 @@ export function AppDock({
     );
   };
 
+  const dockSpring = {
+    type: "spring" as const,
+    stiffness: 350,
+    damping: 26,
+    mass: 0.8,
+  };
+
+  const barSpring = {
+    type: "spring" as const,
+    stiffness: 380,
+    damping: 28,
+    mass: 0.7,
+  };
+
   return (
     <>
       <div
-        className="fixed bottom-5 z-50 flex items-center justify-center gap-2.5 sm:gap-3 max-w-[95vw] pointer-events-none transition-[left] duration-300 ease-in-out"
+        className={`fixed z-50 flex items-center justify-center gap-2.5 sm:gap-3 max-w-[95vw] pointer-events-none transition-all duration-300 ease-out ${
+          isMinimized ? "bottom-2" : "bottom-5"
+        }`}
         style={{
           left: sidebarShift ? "calc(50% + 37.5px)" : "50%",
           transform: "translateX(-50%)",
         }}
-        onMouseMove={(e) => mouseX.set(e.pageX)}
-        onMouseLeave={() => mouseX.set(Infinity)}
+        onMouseMove={(e) => {
+          if (!isMinimized) mouseX.set(e.pageX);
+        }}
+        onMouseLeave={() => {
+          if (!isMinimized) mouseX.set(Infinity);
+        }}
       >
         {/* Pill Bar 1: Home & Launcher (Terpisah Mandiri) */}
         <motion.div
+          initial={false}
+          animate={
+            isMinimized
+              ? {
+                  y: 42,
+                  opacity: 0,
+                  scale: 0.9,
+                  pointerEvents: "none",
+                }
+              : {
+                  y: 0,
+                  opacity: 1,
+                  scale: 1,
+                  pointerEvents: "auto",
+                }
+          }
+          transition={dockSpring}
+          onMouseEnter={handleMouseEnterDock}
+          onMouseLeave={handleMouseLeaveDock}
           className="pointer-events-auto flex items-end gap-2 px-3 pb-2.5 h-16 rounded-[28px] liquid-glass-dock overflow-visible relative shadow-lg"
         >
           {homeLauncherItems.map(renderDockIconItem)}
@@ -432,9 +597,60 @@ export function AppDock({
 
         {/* Pill Bar 2: Pinned Favorites & System Utilities */}
         <motion.div
+          initial={false}
+          animate={
+            isMinimized
+              ? {
+                  y: 42,
+                  opacity: 0,
+                  scale: 0.9,
+                  pointerEvents: "none",
+                }
+              : {
+                  y: 0,
+                  opacity: 1,
+                  scale: 1,
+                  pointerEvents: "auto",
+                }
+          }
+          transition={dockSpring}
+          onMouseEnter={handleMouseEnterDock}
+          onMouseLeave={handleMouseLeaveDock}
           className="pointer-events-auto flex items-end gap-2.5 px-3.5 pb-2.5 h-16 rounded-[28px] liquid-glass-dock overflow-visible relative shadow-lg"
         >
           {mainDockItems.map(renderDockIconItem)}
+        </motion.div>
+
+        {/* iPhone Home Indicator Bar (Garis tipis di bawah yang responsif tema dark/light) */}
+        <motion.div
+          initial={false}
+          animate={
+            isMinimized
+              ? {
+                  y: 0,
+                  opacity: 1,
+                  scaleX: 1,
+                  scaleY: 1,
+                  pointerEvents: "auto",
+                }
+              : {
+                  y: 28,
+                  opacity: 0,
+                  scaleX: 0.5,
+                  scaleY: 0.5,
+                  pointerEvents: "none",
+                }
+          }
+          transition={barSpring}
+          onMouseEnter={handleMouseEnterBar}
+          onClick={handleRestoreDock}
+          onTouchStart={handleMouseEnterBar}
+          className="absolute left-1/2 -translate-x-1/2 bottom-0 py-1.5 px-8 cursor-pointer group flex items-center justify-center z-50 pointer-events-auto"
+          aria-label="Arahkan kursor atau klik untuk membuka Dock"
+          title="Arahkan kursor ke garis untuk membuka Dock"
+        >
+          {/* Garis tipis khas iPhone Home Bar dengan visual liquid-glass beradaptasi dark / light */}
+          <div className="w-36 sm:w-44 h-[5px] rounded-full bg-neutral-900/40 dark:bg-white/45 backdrop-blur-md shadow-xs transition-all duration-300 ease-out group-hover:scale-x-115 group-hover:h-[6px] group-hover:bg-neutral-950/85 dark:group-hover:bg-white/90 group-hover:shadow-[0_0_14px_rgba(0,0,0,0.22)] dark:group-hover:shadow-[0_0_14px_rgba(255,255,255,0.45)] ring-1 ring-black/5 dark:ring-white/10" />
         </motion.div>
       </div>
 

@@ -3,6 +3,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import AutoHeight from "embla-carousel-auto-height";
 import { AppShell } from "../app/app-shell";
 import { useFavorites } from "@/hooks/useFavorites";
+import { useDockStore } from "@/hooks/useDockState";
 import { getLastLauncherPage, setLastLauncherPage } from "@/utils/launcherCategoryMapper";
 import { Tools100Section } from "@/features/launcher/Tools100Section";
 import { ValueTreatedSection } from "@/features/launcher/ValueTreatedSection";
@@ -142,6 +143,7 @@ export function Launcher() {
   const initialPage = getInitialModeIndex();
   const [activeTabIdx, setActiveTabIdx] = useState<number>(initialPage);
   const { favorites, toggleFavorite } = useFavorites();
+  const isDockMinimized = useDockStore((s) => s.isMinimized);
 
   // Mode transisi iOS: 'search' saat diam/idle, 'dots' saat swipe/geser halaman
   const [barMode, setBarMode] = useState<"search" | "dots">("search");
@@ -413,8 +415,12 @@ export function Launcher() {
           </div>
         </div>
 
-        {/* iOS-Style Morphing Page Indicator / Search Pill di atas Dock */}
-        <div className="fixed bottom-[calc(5rem+10pt)] left-0 right-0 flex justify-center pb-1 pointer-events-none z-30 animate-in fade-in duration-200">
+        {/* iOS-Style Morphing Page Indicator / Search Pill di atas Dock & Minimized Bar */}
+        <div
+          className={`fixed left-0 right-0 flex justify-center pb-1 pointer-events-none z-40 transition-all duration-300 ease-out ${
+            isDockMinimized ? "bottom-[28px]" : "bottom-[93px]"
+          }`}
+        >
           {barMode === "search" ? (
             <button
               type="button"

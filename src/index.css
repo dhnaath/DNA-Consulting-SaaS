@@ -1,0 +1,970 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+  }
+
+  /* Dynamic Theme Accent Color Presets */
+  :root[data-theme-color="purple"] {
+    --primary: 262.1 83.3% 57.8%;
+    --ring: 262.1 83.3% 57.8%;
+  }
+  .dark[data-theme-color="purple"] {
+    --primary: 263.4 70% 50.4%;
+    --ring: 263.4 70% 50.4%;
+  }
+
+  :root[data-theme-color="emerald"] {
+    --primary: 142.1 76.2% 36.3%;
+    --ring: 142.1 76.2% 36.3%;
+  }
+  .dark[data-theme-color="emerald"] {
+    --primary: 142.1 70.6% 45.3%;
+    --ring: 142.1 70.6% 45.3%;
+  }
+
+  :root[data-theme-color="rose"] {
+    --primary: 346.8 77.2% 49.8%;
+    --ring: 346.8 77.2% 49.8%;
+  }
+  .dark[data-theme-color="rose"] {
+    --primary: 346.8 89.9% 62.4%;
+    --ring: 346.8 89.9% 62.4%;
+  }
+
+  :root[data-theme-color="amber"] {
+    --primary: 37.7 92.1% 50.2%;
+    --ring: 37.7 92.1% 50.2%;
+  }
+  .dark[data-theme-color="amber"] {
+    --primary: 37.7 92.1% 50.2%;
+    --ring: 37.7 92.1% 50.2%;
+  }
+
+  :root[data-theme-color="teal"] {
+    --primary: 173.4 80.4% 40%;
+    --ring: 173.4 80.4% 40%;
+  }
+  .dark[data-theme-color="teal"] {
+    --primary: 174.7 73.9% 49.6%;
+    --ring: 174.7 73.9% 49.6%;
+  }
+
+  :root[data-theme-color="indigo"] {
+    --primary: 238.7 83.5% 66.7%;
+    --ring: 238.7 83.5% 66.7%;
+  }
+  .dark[data-theme-color="indigo"] {
+    --primary: 234.5 89.5% 73.9%;
+    --ring: 234.5 89.5% 73.9%;
+  }
+
+  :root[data-theme-color="slate"] {
+    --primary: 215.4 16.3% 46.9%;
+    --ring: 215.4 16.3% 46.9%;
+  }
+  .dark[data-theme-color="slate"] {
+    --primary: 215 20.2% 65.1%;
+    --ring: 215 20.2% 65.1%;
+  }
+
+  :root[data-theme-color="blue"] {
+    --primary: 221.2 83.2% 53.3%;
+    --ring: 221.2 83.2% 53.3%;
+  }
+  .dark[data-theme-color="blue"] {
+    --primary: 217.2 91.2% 59.8%;
+    --ring: 224.3 76.3% 48%;
+  }
+}
+
+@theme {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-sidebar: hsl(var(--card));
+  --color-sidebar-foreground: hsl(var(--card-foreground));
+  --color-sidebar-accent: hsl(var(--accent));
+  --color-sidebar-border: hsl(var(--border));
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  max-width: 100vw;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+/* Sembunyikan scrollbar di kanan dan di bawah agar tampilan super clean */
+html {
+  overflow-x: hidden !important;
+  max-width: 100vw;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+#root,
+#mainContent,
+.no-scrollbar,
+.scrollbar-none,
+.scrollbar-hide {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none !important;
+  width: 0px !important;
+  height: 0px !important;
+  background: transparent !important;
+}
+
+* {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+.gradient-primary {
+  background: linear-gradient(135deg, #2563eb 0%, #4f46e5 50%, #7c3aed 100%);
+}
+
+/* Liquid Glass Effect (Dock, Floating Pills & Page Indicator) */
+.liquid-glass-dock,
+.liquid-glass-pill,
+.liquid-glass-header-pill {
+  position: relative;
+  isolation: isolate;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.liquid-glass-dock,
+.liquid-glass-pill {
+  box-shadow: 0px 0px 14px -6px rgba(255, 255, 255, 0.15), 0 8px 16px -4px rgba(0, 0, 0, 0.12);
+}
+
+/* Header pills have an additional 50% shadow reduction */
+.liquid-glass-header-pill {
+  border-radius: 9999px;
+  box-shadow: 0px 0px 8px -4px rgba(255, 255, 255, 0.08), 0 4px 10px -3px rgba(0, 0, 0, 0.06);
+}
+
+.liquid-glass-dock {
+  border-radius: 28px;
+}
+
+.liquid-glass-pill {
+  border-radius: 9999px;
+}
+
+.dark .liquid-glass-dock,
+.dark .liquid-glass-pill {
+  box-shadow: 0px 0px 14px -6px rgba(255, 255, 255, 0.08), 0 10px 18px -5px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark .liquid-glass-header-pill {
+  box-shadow: 0px 0px 8px -4px rgba(255, 255, 255, 0.04), 0 5px 10px -4px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Tint and inner shadow layer */
+.liquid-glass-dock::before,
+.liquid-glass-pill::before,
+.liquid-glass-header-pill::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 4px -6px rgba(255, 255, 255, 0.35);
+  background-color: rgba(255, 255, 255, 0.03);
+  pointer-events: none;
+}
+
+.liquid-glass-header-pill::before {
+  box-shadow: inset 0 0 3px -5px rgba(255, 255, 255, 0.18);
+}
+
+/* Backdrop blur and distortion layer */
+.liquid-glass-dock::after,
+.liquid-glass-pill::after,
+.liquid-glass-header-pill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  filter: url(#glass-distortion);
+  -webkit-filter: url(#glass-distortion);
+  isolation: isolate;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Liquid Glass Mode Toggles (Liquid / Frosted / Solid / OFF)
+   ========================================================================== */
+
+/* OFF MODE: Full 100% solid white fill (light mode) or solid black fill (dark mode), no transparency */
+[data-liquid-glass="off"] .liquid-glass-dock,
+[data-liquid-glass="off"] .liquid-glass-pill,
+[data-liquid-glass="off"] .liquid-glass-header-pill {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.08), 0 2px 6px -1px rgba(0, 0, 0, 0.04) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.dark[data-liquid-glass="off"] .liquid-glass-dock,
+.dark[data-liquid-glass="off"] .liquid-glass-pill,
+.dark[data-liquid-glass="off"] .liquid-glass-header-pill {
+  background: #09090b !important;
+  background-color: #09090b !important;
+  border: 1px solid #27272a !important;
+  box-shadow: 0 6px 20px -2px rgba(0, 0, 0, 0.6), 0 2px 8px -1px rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+[data-liquid-glass="off"] .liquid-glass-dock::before,
+[data-liquid-glass="off"] .liquid-glass-pill::before,
+[data-liquid-glass="off"] .liquid-glass-header-pill::before {
+  display: none !important;
+}
+
+[data-liquid-glass="off"] .liquid-glass-dock::after,
+[data-liquid-glass="off"] .liquid-glass-pill::after,
+[data-liquid-glass="off"] .liquid-glass-header-pill::after {
+  display: none !important;
+}
+
+/* LIQUID MODE: Original full liquid glass effect with refraction & specular gloss */
+[data-liquid-glass="liquid"] .liquid-glass-dock,
+[data-liquid-glass="liquid"] .liquid-glass-pill,
+[data-liquid-glass="liquid"] .liquid-glass-header-pill {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: transparent;
+}
+
+[data-liquid-glass="liquid"] .liquid-glass-dock,
+[data-liquid-glass="liquid"] .liquid-glass-pill {
+  box-shadow: 0px 0px 14px -6px rgba(255, 255, 255, 0.15), 0 8px 16px -4px rgba(0, 0, 0, 0.12);
+}
+
+[data-liquid-glass="liquid"] .liquid-glass-header-pill {
+  box-shadow: 0px 0px 8px -4px rgba(255, 255, 255, 0.08), 0 4px 10px -3px rgba(0, 0, 0, 0.06);
+}
+
+.dark[data-liquid-glass="liquid"] .liquid-glass-dock,
+.dark[data-liquid-glass="liquid"] .liquid-glass-pill {
+  box-shadow: 0px 0px 14px -6px rgba(255, 255, 255, 0.08), 0 10px 18px -5px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark[data-liquid-glass="liquid"] .liquid-glass-header-pill {
+  box-shadow: 0px 0px 8px -4px rgba(255, 255, 255, 0.04), 0 5px 10px -4px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+[data-liquid-glass="liquid"] .liquid-glass-dock::before,
+[data-liquid-glass="liquid"] .liquid-glass-pill::before,
+[data-liquid-glass="liquid"] .liquid-glass-header-pill::before {
+  display: block !important;
+}
+
+[data-liquid-glass="liquid"] .liquid-glass-dock::after,
+[data-liquid-glass="liquid"] .liquid-glass-pill::after,
+[data-liquid-glass="liquid"] .liquid-glass-header-pill::after {
+  display: block !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  filter: url(#glass-distortion) !important;
+  -webkit-filter: url(#glass-distortion) !important;
+}
+
+/* SOLID MODE: Clean solid/subtle border without heavy distortion (as originally created) */
+[data-liquid-glass="solid"] .liquid-glass-dock,
+[data-liquid-glass="solid"] .liquid-glass-pill,
+[data-liquid-glass="solid"] .liquid-glass-header-pill {
+  background-color: hsl(var(--card) / 0.95);
+  border: 1px solid hsl(var(--border));
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.dark[data-liquid-glass="solid"] .liquid-glass-dock,
+.dark[data-liquid-glass="solid"] .liquid-glass-pill,
+.dark[data-liquid-glass="solid"] .liquid-glass-header-pill {
+  background-color: hsl(var(--card) / 0.92);
+  border: 1px solid hsl(var(--border) / 0.8);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+[data-liquid-glass="solid"] .liquid-glass-dock::before,
+[data-liquid-glass="solid"] .liquid-glass-pill::before,
+[data-liquid-glass="solid"] .liquid-glass-header-pill::before {
+  display: none !important;
+}
+
+[data-liquid-glass="solid"] .liquid-glass-dock::after,
+[data-liquid-glass="solid"] .liquid-glass-pill::after,
+[data-liquid-glass="solid"] .liquid-glass-header-pill::after {
+  display: none !important;
+}
+
+/* FROSTED MODE: Clean Apple frosted glass (smooth backdrop-filter without distortion) */
+[data-liquid-glass="frosted"] .liquid-glass-dock,
+[data-liquid-glass="frosted"] .liquid-glass-pill,
+[data-liquid-glass="frosted"] .liquid-glass-header-pill {
+  background-color: hsl(var(--card) / 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.dark[data-liquid-glass="frosted"] .liquid-glass-dock,
+.dark[data-liquid-glass="frosted"] .liquid-glass-pill,
+.dark[data-liquid-glass="frosted"] .liquid-glass-header-pill {
+  background-color: hsl(var(--card) / 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+[data-liquid-glass="frosted"] .liquid-glass-dock::before,
+[data-liquid-glass="frosted"] .liquid-glass-pill::before,
+[data-liquid-glass="frosted"] .liquid-glass-header-pill::before {
+  display: none !important;
+}
+
+[data-liquid-glass="frosted"] .liquid-glass-dock::after,
+[data-liquid-glass="frosted"] .liquid-glass-pill::after,
+[data-liquid-glass="frosted"] .liquid-glass-header-pill::after {
+  display: block !important;
+  filter: none !important;
+  -webkit-filter: none !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+}
+
+
+/* ==========================================================================
+   Liquid Glass Card & Panel Styling (User Specified Specification)
+   ========================================================================== */
+
+/* Liquid Glass Card */
+.liquid-glass-card {
+  position: relative;
+  width: 100%;
+  border-radius: 24px;
+  isolation: isolate;
+  box-shadow: 0px 0px 5px -2px rgba(255, 255, 255, 0.075);
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.25s ease;
+}
+
+.liquid-glass-card-fixed {
+  width: 400px;
+  height: 300px;
+}
+
+/* Tint and inner shadow layer */
+.liquid-glass-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: 28px;
+  box-shadow: inset 0 0 2px -1px rgba(255, 255, 255, 0.175);
+  background-color: rgba(255, 255, 255, 0);
+  pointer-events: none;
+}
+
+/* Backdrop blur and distortion layer */
+.liquid-glass-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 28px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  filter: url(#glass-distortion);
+  -webkit-filter: url(#glass-distortion);
+  isolation: isolate;
+  pointer-events: none;
+}
+
+/* Content styling */
+.card-content {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px 18px;
+  gap: 12px;
+  color: var(--color-foreground);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.03);
+}
+
+.dark .card-content {
+  color: white;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.09);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid #3b82f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.avatar-icon {
+  width: 20px;
+  height: 20px;
+  color: #3b82f6;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-weight: 600;
+  margin: 0;
+}
+
+.user-role {
+  font-size: 12px;
+  opacity: 0.7;
+  margin: 0;
+}
+
+.notification-icon {
+  width: 20px;
+  height: 20px;
+  opacity: 0.65;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.notification-icon:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.card-body {
+  text-align: center;
+  margin-top: 8px;
+}
+
+.card-title {
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+}
+
+.card-description {
+  font-size: 13.5px;
+  opacity: 0.75;
+  margin: 0 0 14px 0;
+}
+
+.glass-button {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: inherit;
+  padding: 7px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.025);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.glass-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-1px);
+}
+
+.glass-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
+}
+
+.card-tip {
+  font-size: 11.5px;
+  text-align: center;
+  opacity: 0.8;
+  margin: 14px 0 0 0;
+}
+
+/* Liquid Glass Top Panel Container */
+.liquid-glass-top-panel {
+  position: relative;
+  isolation: isolate;
+  border: none;
+  border-bottom: none;
+  box-shadow: none;
+  background-color: hsl(var(--primary));
+  background: hsl(var(--primary));
+}
+
+.dark .liquid-glass-top-panel {
+  background-color: hsl(var(--primary));
+  background: hsl(var(--primary));
+  border: none;
+  border-bottom: none;
+  box-shadow: none;
+}
+
+.liquid-glass-top-panel::before {
+  display: none;
+}
+
+.liquid-glass-top-panel::after {
+  display: none;
+}
+
+/* ==========================================================================
+   Liquid Glass Sidebars (Left & Right) - Matching Top Panel Styling
+   ========================================================================== */
+
+.liquid-glass-sidebar-left,
+.liquid-glass-sidebar-right {
+  isolation: isolate;
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+.liquid-glass-sidebar-left {
+  border-right: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 3px 0px 8px -3px rgba(0, 0, 0, 0.06), 0px 0px 6px -2px rgba(255, 255, 255, 0.05);
+}
+
+.liquid-glass-sidebar-right {
+  border-left: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: -3px 0px 8px -3px rgba(0, 0, 0, 0.06), 0px 0px 6px -2px rgba(255, 255, 255, 0.05);
+}
+
+.dark .liquid-glass-sidebar-left,
+.dark .liquid-glass-sidebar-right {
+  background-color: rgba(15, 23, 42, 0.82);
+}
+
+.dark .liquid-glass-sidebar-left {
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 3px 0px 9px -3px rgba(0, 0, 0, 0.14), 0px 0px 6px -2px rgba(255, 255, 255, 0.03);
+}
+
+.dark .liquid-glass-sidebar-right {
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: -3px 0px 9px -3px rgba(0, 0, 0, 0.14), 0px 0px 6px -2px rgba(255, 255, 255, 0.03);
+}
+
+.liquid-glass-sidebar-left::before,
+.liquid-glass-sidebar-right::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  box-shadow: inset 0 0 2px -1px rgba(255, 255, 255, 0.15);
+  pointer-events: none;
+}
+
+.liquid-glass-sidebar-left::after,
+.liquid-glass-sidebar-right::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  filter: url(#glass-distortion);
+  -webkit-filter: url(#glass-distortion);
+  isolation: isolate;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Spesifik Sidebar:
+   - Tab Aktif & Bagian Menu Layout: Kode yang sama seperti Dock dan Header Kiri Kanan
+   - Tab Tidak Aktif & Bagian Atas: Kode yang sama seperti Panel Bar Atas
+   ========================================================================== */
+
+/* Tab Aktif Sidebar - Sama Persis seperti Dock dan Header Kiri Kanan */
+.sidebar-tab-active-glass {
+  position: relative;
+  isolation: isolate;
+  background-color: rgba(255, 255, 255, 0.25);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 1px solid transparent;
+  box-shadow: 0px -2px 10px -4px rgba(255, 255, 255, 0.2), 0 -4px 12px -4px rgba(0, 0, 0, 0.08);
+  color: var(--foreground);
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 20;
+}
+
+.dark .sidebar-tab-active-glass {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid transparent;
+  box-shadow: 0px -2px 10px -4px rgba(255, 255, 255, 0.06), 0 -4px 12px -4px rgba(0, 0, 0, 0.25);
+}
+
+.sidebar-tab-active-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 2px 4px -2px rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+}
+
+.sidebar-tab-active-glass::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  filter: url(#glass-distortion);
+  -webkit-filter: url(#glass-distortion);
+  isolation: isolate;
+  pointer-events: none;
+}
+
+.sidebar-tab-active-glass > * {
+  position: relative;
+  z-index: 10;
+}
+
+/* Bagian Menu yang Ikut ke Dalam Layout Tab Aktif (Sama Persis seperti Dock & Header Kiri Kanan) */
+.sidebar-menu-body-glass {
+  position: relative;
+  isolation: isolate;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0px 0px 14px -6px rgba(255, 255, 255, 0.15), 0 8px 16px -4px rgba(0, 0, 0, 0.12);
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.dark .sidebar-menu-body-glass {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0px 0px 14px -6px rgba(255, 255, 255, 0.08), 0 10px 18px -5px rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.sidebar-menu-body-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 6px -4px rgba(255, 255, 255, 0.35);
+  background-color: rgba(255, 255, 255, 0.03);
+  pointer-events: none;
+}
+
+.sidebar-menu-body-glass::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  filter: url(#glass-distortion);
+  -webkit-filter: url(#glass-distortion);
+  isolation: isolate;
+  pointer-events: none;
+}
+
+.sidebar-menu-body-glass > * {
+  position: relative;
+  z-index: 10;
+}
+
+/* Bagian Atas Sidebar & Tab Tidak Aktif - Sama Persis seperti Panel Bar Atas (liquid-glass-top-panel) */
+.sidebar-top-glass {
+  position: relative;
+  isolation: isolate;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0px 3px 8px -3px rgba(0, 0, 0, 0.12), 0px 0px 6px -2px rgba(255, 255, 255, 0.05);
+  background-color: hsl(var(--primary)) !important;
+  color: white !important;
+}
+
+.dark .sidebar-top-glass {
+  background-color: hsl(var(--primary)) !important;
+  color: white !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0px 3px 9px -3px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar-tab-inactive-glass {
+  position: relative;
+  isolation: isolate;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0px 3px 8px -3px rgba(0, 0, 0, 0.06), 0px 0px 6px -2px rgba(255, 255, 255, 0.05);
+  background-color: rgba(255, 255, 255, 0.75);
+  cursor: pointer;
+  color: var(--muted-foreground);
+  font-weight: 500;
+  z-index: 10;
+}
+
+.sidebar-tab-inactive-glass:hover {
+  color: var(--foreground);
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+.dark .sidebar-tab-inactive-glass {
+  background-color: rgba(15, 23, 42, 0.82);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0px 3px 9px -3px rgba(0, 0, 0, 0.14), 0px 0px 6px -2px rgba(255, 255, 255, 0.03);
+}
+
+.dark .sidebar-tab-inactive-glass:hover {
+  background-color: rgba(15, 23, 42, 0.92);
+}
+
+.sidebar-top-glass::before,
+.sidebar-tab-inactive-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 2px -1px rgba(255, 255, 255, 0.15);
+  pointer-events: none;
+}
+
+.sidebar-top-glass::after,
+.sidebar-tab-inactive-glass::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  filter: url(#glass-distortion);
+  -webkit-filter: url(#glass-distortion);
+  isolation: isolate;
+  pointer-events: none;
+}
+
+.sidebar-top-glass > *,
+.sidebar-tab-inactive-glass > * {
+  position: relative;
+  z-index: 10;
+}
+
+/* Liquid Glass Card */
+.liquid-glass-card {
+  position: relative;
+  isolation: isolate;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 4px 18px -4px rgba(0, 0, 0, 0.06), 0px 0px 21px -8px rgba(255, 255, 255, 0.7);
+}
+
+.dark .liquid-glass-card {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0px 4px 18px -4px rgba(0, 0, 0, 0.25), 0px 0px 21px -8px rgba(255, 255, 255, 0.15);
+}
+
+.liquid-glass-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 14px -4px rgba(255, 255, 255, 0.9), inset 0 1px 1px 0 rgba(255, 255, 255, 0.85);
+  background-color: rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+}
+
+.dark .liquid-glass-card::before {
+  box-shadow: inset 0 0 14px -4px rgba(255, 255, 255, 0.35);
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.liquid-glass-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  filter: url(#glass-distortion);
+  -webkit-filter: url(#glass-distortion);
+  isolation: isolate;
+  pointer-events: none;
+}
+
+.liquid-glass-card > * {
+  position: relative;
+  z-index: 10;
+}
+
+/* ==========================================================================
+   Progressive Blur (Planes & Apple VisionOS Inspired)
+   ========================================================================== */
+
+.progressive-blur-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transform: translateZ(0);
+  will-change: backdrop-filter;
+}
+
+/* ==========================================================================
+   Header Action Pills (Concentric pill geometry seamlessly nested in main bar)
+   ========================================================================== */
+
+#app-header-actions-portal {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  height: 100%;
+  border-radius: 9999px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: none;
+  overscroll-behavior: none;
+}
+
+#app-header-actions-portal .shell-header-portal-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  height: 100%;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+#app-header-actions-portal button,
+#app-header-actions-portal select,
+#app-header-actions-portal input {
+  white-space: nowrap;
+}
+
+#app-header-actions-portal button.bg-primary,
+#app-header-actions-portal button[data-state="active"] {
+  background-color: hsl(var(--primary)) !important;
+  color: hsl(var(--primary-foreground)) !important;
+}
+
+#app-header-actions-portal button.bg-primary *,
+#app-header-actions-portal button[data-state="active"] * {
+  color: hsl(var(--primary-foreground)) !important;
+}
+
+
+
+
+

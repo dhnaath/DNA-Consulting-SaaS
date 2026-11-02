@@ -1,0 +1,914 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function() {
+        if (typeof window !== 'undefined') {
+          if (typeof window.ResizeObserver !== 'undefined') {
+            var NativeRO = window.ResizeObserver;
+            window.ResizeObserver = class ResizeObserver extends NativeRO {
+              constructor(callback) {
+                super(function(entries, observer) {
+                  window.requestAnimationFrame(function() {
+                    try {
+                      callback(entries, observer);
+                    } catch (e) {}
+                  });
+                });
+              }
+            };
+          }
+          var isROError = function(e) {
+            var m = (e && e.message) || (e && e.error && e.error.message) || String(e || '');
+            return m.indexOf('ResizeObserver loop') !== -1;
+          };
+          window.addEventListener('error', function(event) {
+            if (isROError(event)) {
+              event.stopImmediatePropagation();
+              event.preventDefault();
+              return true;
+            }
+          }, true);
+          var origOnError = window.onerror;
+          window.onerror = function(msg, url, line, col, err) {
+            if (isROError(msg) || isROError(err)) return true;
+            if (typeof origOnError === 'function') return origOnError(msg, url, line, col, err);
+            return false;
+          };
+        }
+      })();
+    </script>
+    <title>DNA Consulting SaaS</title>
+    <meta
+      name="description"
+      content="Frontend workspace all-in-one: klien, proyek, tugas, keuangan, dan alat produktivitas."
+    />
+    <meta property="og:title" content="DNA Consulting SaaS" />
+    <meta
+      property="og:description"
+      content="Frontend workspace all-in-one: klien, proyek, tugas, keuangan, dan alat produktivitas."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <style id="sidebar-tabs-style">
+      /* Hilangkan seluruh scrollbar vertikal di kanan dan horizontal di bawah */
+      html, body, #root, #mainContent {
+        overflow-x: hidden !important;
+        max-width: 100vw;
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+      }
+      * {
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+      }
+      ::-webkit-scrollbar,
+      *::-webkit-scrollbar {
+        display: none !important;
+        width: 0px !important;
+        height: 0px !important;
+        background: transparent !important;
+      }
+
+      /* 1. Bar di atas tab pada #sidenavLeft & #sidenavRight menyatu tanpa borderline sama sekali */
+      div#root > div > aside#sidenavLeft > div:nth-of-type(1),
+      div#root > div > aside#sidenavRight > div:nth-of-type(1) {
+        background-color: hsl(var(--primary)) !important;
+        background: hsl(var(--primary)) !important;
+        border: none !important;
+        border-bottom: none !important;
+        color: #ffffff !important;
+        box-shadow: none !important;
+      }
+      div#root > div > aside#sidenavLeft > div:nth-of-type(1)::before,
+      div#root > div > aside#sidenavLeft > div:nth-of-type(1)::after,
+      div#root > div > aside#sidenavRight > div:nth-of-type(1)::before,
+      div#root > div > aside#sidenavRight > div:nth-of-type(1)::after {
+        display: none !important;
+      }
+      div#root > div > aside#sidenavLeft > div:nth-of-type(1) button,
+      div#root > div > aside#sidenavRight > div:nth-of-type(1) button {
+        color: rgba(255, 255, 255, 0.9) !important;
+        border: none !important;
+      }
+      div#root > div > aside#sidenavLeft > div:nth-of-type(1) button:hover,
+      div#root > div > aside#sidenavRight > div:nth-of-type(1) button:hover {
+        color: #ffffff !important;
+        background-color: rgba(255, 255, 255, 0.2) !important;
+      }
+      div#root > div > aside#sidenavRight > div:nth-of-type(1) span {
+        color: #ffffff !important;
+        font-weight: 600 !important;
+      }
+
+      /* 2. Container bar tab pada #sidenavLeft & #sidenavRight menyatu sempurna dengan bar atas tanpa borderline */
+      div#root > div > aside#sidenavLeft > .sidebar-tab-switcher-bar,
+      div#root > div > aside#sidenavRight > .sidebar-tab-switcher-bar,
+      div#root > div > aside#sidenavLeft:not(.w-\[75px\]) > div:nth-of-type(2),
+      div#root > div > aside#sidenavRight > div:nth-of-type(2) {
+        background-color: hsl(var(--primary)) !important;
+        background: hsl(var(--primary)) !important;
+        border: none !important;
+        border-top: none !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+      }
+      div#root > div > aside#sidenavLeft > .sidebar-tab-switcher-bar::before,
+      div#root > div > aside#sidenavLeft > .sidebar-tab-switcher-bar::after,
+      div#root > div > aside#sidenavRight > .sidebar-tab-switcher-bar::before,
+      div#root > div > aside#sidenavRight > .sidebar-tab-switcher-bar::after,
+      div#root > div > aside#sidenavLeft:not(.w-\[75px\]) > div:nth-of-type(2)::before,
+      div#root > div > aside#sidenavLeft:not(.w-\[75px\]) > div:nth-of-type(2)::after,
+      div#root > div > aside#sidenavRight > div:nth-of-type(2)::before,
+      div#root > div > aside#sidenavRight > div:nth-of-type(2)::after {
+        display: none !important;
+      }
+
+      /* 3. Khusus tab yang TIDAK AKTIF: menyatu mulus dengan warna biru tanpa borderline */
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > button.sidebar-tab-inactive-glass,
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > button:not(.sidebar-tab-active-glass),
+      div#root > div > aside#sidenavRight > div:nth-of-type(2) > button.sidebar-tab-inactive-glass,
+      div#root > div > aside#sidenavRight > div:nth-of-type(2) > button:not(.sidebar-tab-active-glass) {
+        background-color: hsl(var(--primary)) !important;
+        background: hsl(var(--primary)) !important;
+        color: rgba(255, 255, 255, 0.82) !important;
+        border: none !important;
+        border-top: none !important;
+        border-bottom: none !important;
+        border-left: none !important;
+        border-right: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+        margin-bottom: 0 !important;
+        opacity: 1 !important;
+      }
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > button.sidebar-tab-inactive-glass::before,
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > button.sidebar-tab-inactive-glass::after,
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > button:not(.sidebar-tab-active-glass)::before,
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > button:not(.sidebar-tab-active-glass)::after,
+      div#root > div > aside#sidenavRight > div:nth-of-type(2) > button.sidebar-tab-inactive-glass::before,
+      div#root > div > aside#sidenavRight > div:nth-of-type(2) > button.sidebar-tab-inactive-glass::after,
+      div#root > div > aside#sidenavRight > div:nth-of-type(2) > button:not(.sidebar-tab-active-glass)::before,
+      div#root > div > aside#sidenavRight > div:nth-of-type(2) > button:not(.sidebar-tab-active-glass)::after {
+        display: none !important;
+      }
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > button.sidebar-tab-inactive-glass:hover,
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > button:not(.sidebar-tab-active-glass):hover,
+      div#root > div > aside#sidenavRight > div:nth-of-type(2) > button.sidebar-tab-inactive-glass:hover,
+      div#root > div > aside#sidenavRight > div:nth-of-type(2) > button:not(.sidebar-tab-active-glass):hover {
+        color: #ffffff !important;
+        background-color: rgba(255, 255, 255, 0.16) !important;
+      }
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > button.sidebar-tab-inactive-glass svg,
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > button:not(.sidebar-tab-active-glass) svg,
+      div#root > div > aside#sidenavRight > div:nth-of-type(2) > button.sidebar-tab-inactive-glass svg,
+      div#root > div > aside#sidenavRight > div:nth-of-type(2) > button:not(.sidebar-tab-active-glass) svg {
+        color: rgba(255, 255, 255, 0.85) !important;
+      }
+      div#root > div > aside#sidenavRight > div:nth-of-type(2) > button.sidebar-tab-inactive-glass span,
+      div#root > div > aside#sidenavRight > div:nth-of-type(2) > button:not(.sidebar-tab-active-glass) span {
+        color: rgba(255, 255, 255, 0.88) !important;
+      }
+      div#root > div > aside#sidenavRight > div:nth-of-type(2) > button.sidebar-tab-inactive-glass .rounded-full,
+      div#root > div > aside#sidenavRight > div:nth-of-type(2) > button:not(.sidebar-tab-active-glass) .rounded-full {
+        background-color: rgba(255, 255, 255, 0.22) !important;
+        color: #ffffff !important;
+      }
+
+      /* 4. Khusus tab yang AKTIF: putih bersih menyatu ke bawah tanpa borderline */
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > button.sidebar-tab-active-glass,
+      div#root > div > aside#sidenavRight > div:nth-of-type(2) > button.sidebar-tab-active-glass {
+        background-color: #ffffff !important;
+        background: #ffffff !important;
+        color: hsl(var(--primary)) !important;
+        font-weight: 700 !important;
+        border: none !important;
+        border-top: none !important;
+        border-bottom: none !important;
+        border-left: none !important;
+        border-right: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+        margin-bottom: -1px !important;
+        padding-bottom: 1px !important;
+        position: relative !important;
+        z-index: 30 !important;
+      }
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > button.sidebar-tab-active-glass::before,
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > button.sidebar-tab-active-glass::after,
+      div#root > div > aside#sidenavRight > div:nth-of-type(2) > button.sidebar-tab-active-glass::before,
+      div#root > div > aside#sidenavRight > div:nth-of-type(2) > button.sidebar-tab-active-glass::after {
+        display: none !important;
+      }
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > button.sidebar-tab-active-glass svg,
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > button.sidebar-tab-active-glass span,
+      div#root > div > aside#sidenavRight > div:nth-of-type(2) > button.sidebar-tab-active-glass svg,
+      div#root > div > aside#sidenavRight > div:nth-of-type(2) > button.sidebar-tab-active-glass span {
+        color: hsl(var(--primary)) !important;
+      }
+      div#root > div > aside#sidenavRight > div:nth-of-type(2) > button.sidebar-tab-active-glass .rounded-full {
+        background-color: hsl(var(--primary) / 0.12) !important;
+        color: hsl(var(--primary)) !important;
+      }
+
+      /* 5. Bagian bawahnya (body menu sidebar): putih menyatu langsung dengan tab aktif tanpa borderline pemisah */
+      div#root > div > aside#sidenavLeft:not([class*="w-[75px]"]):not(.w-\[75px\]) > .sidebar-menu-body-glass,
+      div#root > div > aside#sidenavRight > .sidebar-menu-body-glass,
+      div#root > div > aside#sidenavLeft:not([class*="w-[75px]"]):not(.w-\[75px\]) > div:nth-of-type(3),
+      div#root > div > aside#sidenavRight > div:nth-of-type(3) {
+        background-color: #ffffff !important;
+        background: #ffffff !important;
+        border: none !important;
+        border-top: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+        margin-top: 0 !important;
+      }
+      div#root > div > aside#sidenavLeft:not([class*="w-[75px]"]):not(.w-\[75px\]) > .sidebar-menu-body-glass::before,
+      div#root > div > aside#sidenavLeft:not([class*="w-[75px]"]):not(.w-\[75px\]) > .sidebar-menu-body-glass::after,
+      div#root > div > aside#sidenavRight > .sidebar-menu-body-glass::before,
+      div#root > div > aside#sidenavRight > .sidebar-menu-body-glass::after,
+      div#root > div > aside#sidenavLeft:not([class*="w-[75px]"]):not(.w-\[75px\]) > div:nth-of-type(3)::before,
+      div#root > div > aside#sidenavLeft:not([class*="w-[75px]"]):not(.w-\[75px\]) > div:nth-of-type(3)::after,
+      div#root > div > aside#sidenavRight > div:nth-of-type(3)::before,
+      div#root > div > aside#sidenavRight > div:nth-of-type(3)::after {
+        display: none !important;
+      }
+
+      /* 6. Khusus saat MINIMIZE (75px): Seluruh kotak body sidebar kiri FULL BIRU menyatu dengan header tanpa garis pemisah */
+      div#root > div > aside#sidenavLeft[class*="w-[75px]"],
+      div#root > div > aside#sidenavLeft.w-\[75px\],
+      div#root > div > aside#sidenavLeft[class*="w-[75px]"] > div:nth-of-type(1),
+      div#root > div > aside#sidenavLeft.w-\[75px\] > div:nth-of-type(1),
+      div#root > div > aside#sidenavLeft[class*="w-[75px]"] > .sidebar-top-glass,
+      div#root > div > aside#sidenavLeft.w-\[75px\] > .sidebar-top-glass,
+      div#root > div > aside#sidenavLeft[class*="w-[75px]"] > .sidebar-menu-body-glass,
+      div#root > div > aside#sidenavLeft.w-\[75px\] > .sidebar-menu-body-glass,
+      div#root > div > aside#sidenavLeft[class*="w-[75px]"] > div:nth-of-type(2),
+      div#root > div > aside#sidenavLeft.w-\[75px\] > div:nth-of-type(2) {
+        background-color: hsl(var(--primary)) !important;
+        background: hsl(var(--primary)) !important;
+        border: none !important;
+        border-top: none !important;
+        border-bottom: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+      }
+      div#root > div > aside#sidenavLeft[class*="w-[75px]"] > div:nth-of-type(1)::before,
+      div#root > div > aside#sidenavLeft[class*="w-[75px]"] > div:nth-of-type(1)::after,
+      div#root > div > aside#sidenavLeft[class*="w-[75px]"] > div:nth-of-type(2)::before,
+      div#root > div > aside#sidenavLeft[class*="w-[75px]"] > div:nth-of-type(2)::after,
+      div#root > div > aside#sidenavLeft.w-\[75px\] > div:nth-of-type(1)::before,
+      div#root > div > aside#sidenavLeft.w-\[75px\] > div:nth-of-type(1)::after,
+      div#root > div > aside#sidenavLeft.w-\[75px\] > div:nth-of-type(2)::before,
+      div#root > div > aside#sidenavLeft.w-\[75px\] > div:nth-of-type(2)::after {
+        display: none !important;
+        content: none !important;
+      }
+
+      /* Dukungan Dark Mode tanpa borderline */
+      .dark div#root > div > aside#sidenavLeft > div:nth-of-type(1),
+      .dark div#root > div > aside#sidenavLeft > div:nth-of-type(2),
+      .dark div#root > div > aside#sidenavLeft > div:nth-of-type(2) > button.sidebar-tab-inactive-glass,
+      .dark div#root > div > aside#sidenavLeft > div:nth-of-type(2) > button:not(.sidebar-tab-active-glass),
+      .dark div#root > div > aside#sidenavRight > div:nth-of-type(1),
+      .dark div#root > div > aside#sidenavRight > div:nth-of-type(2),
+      .dark div#root > div > aside#sidenavRight > div:nth-of-type(2) > button.sidebar-tab-inactive-glass,
+      .dark div#root > div > aside#sidenavRight > div:nth-of-type(2) > button:not(.sidebar-tab-active-glass) {
+        background-color: hsl(var(--primary)) !important;
+        background: hsl(var(--primary)) !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+      .dark div#root > div > aside#sidenavLeft > div:nth-of-type(2) > button.sidebar-tab-active-glass,
+      .dark div#root > div > aside#sidenavRight > div:nth-of-type(2) > button.sidebar-tab-active-glass {
+        background-color: #ffffff !important;
+        background: #ffffff !important;
+        color: hsl(var(--primary)) !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+      .dark div#root > div > aside#sidenavLeft:not([class*="w-[75px]"]):not(.w-\[75px\]) > .sidebar-menu-body-glass,
+      .dark div#root > div > aside#sidenavRight > .sidebar-menu-body-glass,
+      .dark div#root > div > aside#sidenavLeft:not([class*="w-[75px]"]):not(.w-\[75px\]) > div:nth-of-type(3),
+      .dark div#root > div > aside#sidenavRight > div:nth-of-type(3) {
+        background-color: #ffffff !important;
+        background: #ffffff !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+
+      .dark div#root > div > aside#sidenavLeft[class*="w-[75px]"],
+      .dark div#root > div > aside#sidenavLeft.w-\[75px\],
+      .dark div#root > div > aside#sidenavLeft[class*="w-[75px]"] > div:nth-of-type(1),
+      .dark div#root > div > aside#sidenavLeft.w-\[75px\] > div:nth-of-type(1),
+      .dark div#root > div > aside#sidenavLeft[class*="w-[75px]"] > .sidebar-top-glass,
+      .dark div#root > div > aside#sidenavLeft.w-\[75px\] > .sidebar-top-glass,
+      .dark div#root > div > aside#sidenavLeft[class*="w-[75px]"] > .sidebar-menu-body-glass,
+      .dark div#root > div > aside#sidenavLeft.w-\[75px\] > .sidebar-menu-body-glass,
+      .dark div#root > div > aside#sidenavLeft[class*="w-[75px]"] > div:nth-of-type(2),
+      .dark div#root > div > aside#sidenavLeft.w-\[75px\] > div:nth-of-type(2) {
+        background-color: hsl(var(--primary)) !important;
+        background: hsl(var(--primary)) !important;
+        border: none !important;
+        border-top: none !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+      }
+
+      /* Penyesuaian elemen pada sidebar kanan (#sidenavRight) body */
+      div#root > div > aside#sidenavRight > div:nth-of-type(3) h3,
+      div#root > div > aside#sidenavRight > div:nth-of-type(3) h4,
+      div#root > div > aside#sidenavRight > div:nth-of-type(3) .text-foreground {
+        color: #0f172a !important;
+      }
+      div#root > div > aside#sidenavRight > div:nth-of-type(3) p,
+      div#root > div > aside#sidenavRight > div:nth-of-type(3) .text-muted-foreground {
+        color: #64748b !important;
+      }
+      div#root > div > aside#sidenavRight > div:nth-of-type(3) button.h-9,
+      div#root > div > aside#sidenavRight > div:nth-of-type(3) a.h-9 {
+        background-color: #f1f5f9 !important;
+        border-color: #e2e8f0 !important;
+        color: #0f172a !important;
+      }
+      div#root > div > aside#sidenavRight > div:nth-of-type(3) button.h-9:hover,
+      div#root > div > aside#sidenavRight > div:nth-of-type(3) a.h-9:hover {
+        background-color: #e2e8f0 !important;
+      }
+      div#root > div > aside#sidenavRight > div:nth-of-type(3) .border-t {
+        border-color: #e2e8f0 !important;
+      }
+      div#root > div > aside#sidenavRight > div:nth-of-type(3) .group.flex.items-center.justify-between.rounded-xl {
+        background-color: #f8fafc !important;
+        border-color: #e2e8f0 !important;
+        color: #0f172a !important;
+      }
+      div#root > div > aside#sidenavRight > div:nth-of-type(3) .group.flex.items-center.justify-between.rounded-xl:hover {
+        background-color: #f1f5f9 !important;
+      }
+      div#root > div > aside#sidenavRight > div:nth-of-type(3) a.rounded-xl {
+        background-color: #f8fafc !important;
+        border-color: #e2e8f0 !important;
+        color: #0f172a !important;
+      }
+      div#root > div > aside#sidenavRight > div:nth-of-type(3) a.rounded-xl:hover {
+        background-color: #f1f5f9 !important;
+      }
+      div#root > div > aside#sidenavRight > div:nth-of-type(3) button.rounded-xl {
+        background-color: #f8fafc !important;
+        border-color: #e2e8f0 !important;
+        color: #0f172a !important;
+      }
+      div#root > div > aside#sidenavRight > div:nth-of-type(3) button.rounded-xl:hover {
+        background-color: #f1f5f9 !important;
+      }
+      div#root > div > aside#sidenavRight > div:nth-of-type(3) kbd {
+        background-color: #e2e8f0 !important;
+        border-color: #cbd5e1 !important;
+        color: #475569 !important;
+      }
+
+      /* 6. Penyesuaian elemen navigasi & shortcut pada latar belakang biru (#sidenavLeft) */
+      /* CSS selector 9: Container grup navigasi utama */
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > div:nth-of-type(2) {
+        color: #ffffff !important;
+      }
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > div:nth-of-type(2) p {
+        color: rgba(255, 255, 255, 0.75) !important;
+        font-weight: 600 !important;
+      }
+
+      /* CSS selector 6: Container pintasan cepat (div:nth-of-type(3)) */
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) {
+        border-top: 1px solid rgba(255, 255, 255, 0.18) !important;
+      }
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) p {
+        color: rgba(255, 255, 255, 0.75) !important;
+        font-weight: 600 !important;
+      }
+
+      /* CSS selector 1 s/d 5 & 7 s/d 8: Link navigasi & pintasan cepat pada latar biru */
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > div:nth-of-type(2) a,
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > a,
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > a {
+        background-color: rgba(255, 255, 255, 0.12) !important;
+        border: 1px solid rgba(255, 255, 255, 0.18) !important;
+        color: rgba(255, 255, 255, 0.92) !important;
+        transition: all 0.15s ease-in-out !important;
+      }
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > div:nth-of-type(2) a svg,
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > a svg,
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > a svg {
+        color: rgba(255, 255, 255, 0.9) !important;
+      }
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > div:nth-of-type(2) a span,
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > a span,
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > a span {
+        color: rgba(255, 255, 255, 0.92) !important;
+      }
+
+      /* Hover state link pada latar biru */
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > div:nth-of-type(2) a:hover,
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > a:hover,
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > a:hover {
+        background-color: rgba(255, 255, 255, 0.22) !important;
+        border-color: rgba(255, 255, 255, 0.35) !important;
+        color: #ffffff !important;
+      }
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > div:nth-of-type(2) a:hover svg,
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > div:nth-of-type(2) a:hover span {
+        color: #ffffff !important;
+      }
+
+      /* Active link (halaman / link yang sedang aktif) pada latar biru */
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > div:nth-of-type(2) a.bg-primary\/15,
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > div:nth-of-type(2) a[aria-current="page"],
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > div:nth-of-type(2) a[data-status="active"] {
+        background-color: #ffffff !important;
+        border-color: #ffffff !important;
+        color: hsl(var(--primary)) !important;
+        font-weight: 700 !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18) !important;
+      }
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > div:nth-of-type(2) a.bg-primary\/15 svg,
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > div:nth-of-type(2) a[aria-current="page"] svg,
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > div:nth-of-type(2) a[data-status="active"] svg {
+        color: hsl(var(--primary)) !important;
+      }
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > div:nth-of-type(2) a.bg-primary\/15 span,
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > div:nth-of-type(2) a[aria-current="page"] span,
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > div:nth-of-type(2) a[data-status="active"] span {
+        color: hsl(var(--primary)) !important;
+        font-weight: 700 !important;
+      }
+
+      /* Card info mode pada bagian atas grup navigasi */
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > div:nth-of-type(2) > div.liquid-glass-card {
+        background-color: rgba(255, 255, 255, 0.15) !important;
+        border-color: rgba(255, 255, 255, 0.25) !important;
+        color: #ffffff !important;
+      }
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > div:nth-of-type(2) > div.liquid-glass-card p,
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > div:nth-of-type(2) > div.liquid-glass-card span {
+        color: rgba(255, 255, 255, 0.9) !important;
+      }
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(1) .size-8.rounded-full,
+      div#root > div > aside#sidenavLeft > div:nth-of-type(2) > div:nth-of-type(2) > div.liquid-glass-card .size-9.rounded-full {
+        background-color: rgba(255, 255, 255, 0.2) !important;
+        border-color: rgba(255, 255, 255, 0.4) !important;
+        color: #ffffff !important;
+      }
+
+      /* ==========================================================================
+         Panel Pengaturan Atas (#top-panel-container):
+         - Background bidang belakang: BIRU menyatu sama seperti sidebar (hsl(var(--primary)))
+         - 4 Kotak di dalamnya: PUTIH SOLID bersih, kontras, dan terpisah rapi
+         ========================================================================== */
+      div#root > div > main#mainContent > header > div#top-panel-container,
+      div#root > div > main#mainContent > header > div#top-panel-container > div:nth-of-type(1),
+      div#root:nth-of-type(1) > div:nth-of-type(1) > main#mainContent:nth-of-type(1) > header:nth-of-type(1) > div#top-panel-container:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) {
+        background-color: hsl(var(--primary)) !important;
+        background: hsl(var(--primary)) !important;
+        border: none !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+        outline: none !important;
+      }
+      div#root > div > main#mainContent > header > div#top-panel-container::before,
+      div#root > div > main#mainContent > header > div#top-panel-container::after,
+      div#root > div > main#mainContent > header > div#top-panel-container *::before,
+      div#root > div > main#mainContent > header > div#top-panel-container *::after {
+        border-bottom: none !important;
+      }
+
+      /* 4 Kotak (Cards) tetap PUTIH SOLID */
+      div#root > div > main#mainContent > header > div#top-panel-container > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div,
+      div#root > div > main#mainContent > header > div#top-panel-container .liquid-glass-card {
+        background-color: #ffffff !important;
+        background: #ffffff !important;
+        border-radius: 1rem !important;
+        border: 1px solid rgba(0, 0, 0, 0.08) !important;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.18), 0 4px 6px -2px rgba(0, 0, 0, 0.06) !important;
+        color: #0f172a !important;
+      }
+
+      div#root > div > main#mainContent > header > div#top-panel-container .liquid-glass-card::before,
+      div#root > div > main#mainContent > header > div#top-panel-container .liquid-glass-card::after {
+        display: none !important;
+      }
+
+      /* 4 Kotak Card Content */
+      div#root > div > main#mainContent > header > div#top-panel-container > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div > div:nth-of-type(1),
+      div#root:nth-of-type(1) > div:nth-of-type(1) > main#mainContent:nth-of-type(1) > header:nth-of-type(1) > div#top-panel-container:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1),
+      div#root:nth-of-type(1) > div:nth-of-type(1) > main#mainContent:nth-of-type(1) > header:nth-of-type(1) > div#top-panel-container:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1),
+      div#root:nth-of-type(1) > div:nth-of-type(1) > main#mainContent:nth-of-type(1) > header:nth-of-type(1) > div#top-panel-container:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(1),
+      div#root:nth-of-type(1) > div:nth-of-type(1) > main#mainContent:nth-of-type(1) > header:nth-of-type(1) > div#top-panel-container:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(4) > div:nth-of-type(1) {
+        background-color: transparent !important;
+        background: transparent !important;
+        color: #0f172a !important;
+        text-shadow: none !important;
+      }
+
+      /* Teks & Komponen di dalam 4 Kotak Putih */
+      div#root > div > main#mainContent > header > div#top-panel-container .user-name,
+      div#root > div > main#mainContent > header > div#top-panel-container .card-title {
+        color: #0f172a !important;
+        text-shadow: none !important;
+      }
+
+      div#root > div > main#mainContent > header > div#top-panel-container .user-role,
+      div#root > div > main#mainContent > header > div#top-panel-container .card-description,
+      div#root > div > main#mainContent > header > div#top-panel-container label {
+        color: #475569 !important;
+        text-shadow: none !important;
+      }
+
+      div#root > div > main#mainContent > header > div#top-panel-container .glass-button {
+        background-color: #f1f5f9 !important;
+        background: #f1f5f9 !important;
+        color: #1e293b !important;
+        border: 1px solid #cbd5e1 !important;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+      }
+      div#root > div > main#mainContent > header > div#top-panel-container .glass-button:hover {
+        background-color: #e2e8f0 !important;
+        color: #0f172a !important;
+        border-color: #94a3b8 !important;
+      }
+
+      div#root > div > main#mainContent > header > div#top-panel-container select,
+      div#root > div > main#mainContent > header > div#top-panel-container input {
+        background-color: #f8fafc !important;
+        color: #0f172a !important;
+        border: 1px solid #cbd5e1 !important;
+      }
+      div#root > div > main#mainContent > header > div#top-panel-container select option {
+        background-color: #ffffff !important;
+        color: #0f172a !important;
+      }
+
+      /* ==========================================================================
+         Header Pill Kanan: Elemen Menu App & Aksi Halaman (CSS Selector 2)
+         - Rapi, serasi dengan floating pills lainnya (tinggi 46px, rounded-full)
+         - Efek frosted glass bersih dengan shadow halus
+         ========================================================================== */
+      div#root:nth-of-type(1) > div:nth-of-type(1) > main#mainContent:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:has(#app-header-actions-portal),
+      div#root > div > main#mainContent > header > div:nth-of-type(1) > div:nth-of-type(2) > div:has(#app-header-actions-portal) {
+        display: inline-flex !important;
+        align-items: center !important;
+        height: 46px !important;
+        min-height: 46px !important;
+        max-height: 46px !important;
+        padding: 4px !important;
+        border-radius: 9999px !important;
+        background: rgba(255, 255, 255, 0.85) !important;
+        background-color: rgba(255, 255, 255, 0.85) !important;
+        backdrop-filter: blur(16px) !important;
+        -webkit-backdrop-filter: blur(16px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.65) !important;
+        box-shadow: 0 4px 14px -3px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+        gap: 6px !important;
+        transition: all 0.2s ease !important;
+        overflow: hidden !important;
+        overscroll-behavior: none !important;
+        overscroll-behavior-x: none !important;
+      }
+
+      .dark div#root:nth-of-type(1) > div:nth-of-type(1) > main#mainContent:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:has(#app-header-actions-portal),
+      .dark div#root > div > main#mainContent > header > div:nth-of-type(1) > div:nth-of-type(2) > div:has(#app-header-actions-portal) {
+        background: rgba(15, 23, 42, 0.82) !important;
+        background-color: rgba(15, 23, 42, 0.82) !important;
+        border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        box-shadow: 0 4px 16px -3px rgba(0, 0, 0, 0.35) !important;
+      }
+
+      /* Container Portal Actions */
+      div#root > div > main#mainContent > header div#app-header-actions-portal {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        height: 100% !important;
+        border-radius: 9999px !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        overscroll-behavior-x: none !important;
+        overscroll-behavior: none !important;
+        -webkit-overflow-scrolling: auto !important;
+      }
+
+      /* ==========================================================================
+         Grup Kontrol / Segmented Bar di dalam Portal Actions (CSS Selector 1)
+         - Langsung layer dipilih (active) dan layer tidak dipilih (inactive), tanpa tumpukan layer wrapper
+         ========================================================================== */
+      div#root:nth-of-type(1) > div:nth-of-type(1) > main#mainContent:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div#app-header-actions-portal:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1),
+      div#root > div > main#mainContent > header div#app-header-actions-portal .shell-header-portal-actions > div > div,
+      div#root > div > main#mainContent > header div#app-header-actions-portal .shell-header-portal-actions > div {
+        display: inline-flex !important;
+        align-items: center !important;
+        border-radius: 9999px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        gap: 3px !important;
+        height: 36px !important;
+        background: transparent !important;
+        background-color: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        box-sizing: border-box !important;
+        overflow: visible !important;
+      }
+
+      .dark div#root:nth-of-type(1) > div:nth-of-type(1) > main#mainContent:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div#app-header-actions-portal:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1),
+      .dark div#root > div > main#mainContent > header div#app-header-actions-portal .shell-header-portal-actions > div > div,
+      .dark div#root > div > main#mainContent > header div#app-header-actions-portal .shell-header-portal-actions > div {
+        background: transparent !important;
+        background-color: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+
+      /* Tombol di dalam Grup Segmented Bar (Layer Tidak Dipilih) */
+      div#root:nth-of-type(1) > div:nth-of-type(1) > main#mainContent:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div#app-header-actions-portal:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) button,
+      div#root > div > main#mainContent > header div#app-header-actions-portal .shell-header-portal-actions button,
+      div#root > div > main#mainContent > header div#app-header-actions-portal .shell-header-portal-actions > div button,
+      div#root > div > main#mainContent > header div#app-header-actions-portal .shell-header-portal-actions > div > div button {
+        border-radius: 9999px !important;
+        height: 36px !important;
+        min-height: 36px !important;
+        max-height: 36px !important;
+        min-width: 36px !important;
+        padding: 0 12px !important;
+        font-size: 12px !important;
+        line-height: 1 !important;
+        font-weight: 500 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        transition: all 0.15s ease !important;
+        border: none !important;
+        cursor: pointer !important;
+        box-sizing: border-box !important;
+        background: transparent !important;
+        color: rgba(100, 116, 139, 0.9) !important;
+        flex-shrink: 0 !important;
+      }
+
+      div#root:nth-of-type(1) > div:nth-of-type(1) > main#mainContent:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div#app-header-actions-portal:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) button:hover,
+      div#root > div > main#mainContent > header div#app-header-actions-portal .shell-header-portal-actions button:hover {
+        background: rgba(0, 0, 0, 0.05) !important;
+        color: #0f172a !important;
+      }
+
+      .dark div#root:nth-of-type(1) > div:nth-of-type(1) > main#mainContent:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div#app-header-actions-portal:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) button,
+      .dark div#root > div > main#mainContent > header div#app-header-actions-portal .shell-header-portal-actions button {
+        color: rgba(148, 163, 184, 0.9) !important;
+      }
+
+      .dark div#root:nth-of-type(1) > div:nth-of-type(1) > main#mainContent:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div#app-header-actions-portal:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) button:hover,
+      .dark div#root > div > main#mainContent > header div#app-header-actions-portal .shell-header-portal-actions button:hover {
+        background: rgba(255, 255, 255, 0.08) !important;
+        color: #ffffff !important;
+      }
+
+      /* Tombol Segmented Aktif (Layer yang Dipilih) Mengikuti Warna Aksen Tema */
+      #app-header-actions-portal button.bg-primary,
+      #app-header-actions-portal button.bg-background,
+      #app-header-actions-portal button[data-state="active"],
+      div#root main#mainContent header #app-header-actions-portal button.bg-primary,
+      div#root main#mainContent header #app-header-actions-portal button.bg-background,
+      div#root main#mainContent header #app-header-actions-portal button[data-state="active"],
+      div#root:nth-of-type(1) > div:nth-of-type(1) > main#mainContent:nth-of-type(1) > header:nth-of-type(1) div#app-header-actions-portal button.bg-primary,
+      div#root:nth-of-type(1) > div:nth-of-type(1) > main#mainContent:nth-of-type(1) > header:nth-of-type(1) div#app-header-actions-portal button.bg-background,
+      div#root:nth-of-type(1) > div:nth-of-type(1) > main#mainContent:nth-of-type(1) > header:nth-of-type(1) div#app-header-actions-portal button[data-state="active"],
+      div#root > div > main#mainContent > header div#app-header-actions-portal .shell-header-portal-actions button.bg-background,
+      div#root > div > main#mainContent > header div#app-header-actions-portal .shell-header-portal-actions button.bg-primary,
+      div#root > div > main#mainContent > header div#app-header-actions-portal .shell-header-portal-actions button[data-state="active"] {
+        background: hsl(var(--primary)) !important;
+        background-color: hsl(var(--primary)) !important;
+        color: hsl(var(--primary-foreground)) !important;
+        font-weight: 600 !important;
+        box-shadow: 0 1px 3px hsl(var(--primary) / 0.35) !important;
+      }
+
+      #app-header-actions-portal button.bg-primary *,
+      #app-header-actions-portal button[data-state="active"] *,
+      #app-header-actions-portal button.bg-background * {
+        color: hsl(var(--primary-foreground)) !important;
+      }
+
+      .dark #app-header-actions-portal button.bg-primary,
+      .dark #app-header-actions-portal button.bg-background,
+      .dark #app-header-actions-portal button[data-state="active"],
+      .dark div#root main#mainContent header #app-header-actions-portal button.bg-primary,
+      .dark div#root main#mainContent header #app-header-actions-portal button.bg-background,
+      .dark div#root main#mainContent header #app-header-actions-portal button[data-state="active"],
+      .dark div#root:nth-of-type(1) > div:nth-of-type(1) > main#mainContent:nth-of-type(1) > header:nth-of-type(1) div#app-header-actions-portal button.bg-primary,
+      .dark div#root:nth-of-type(1) > div:nth-of-type(1) > main#mainContent:nth-of-type(1) > header:nth-of-type(1) div#app-header-actions-portal button.bg-background,
+      .dark div#root:nth-of-type(1) > div:nth-of-type(1) > main#mainContent:nth-of-type(1) > header:nth-of-type(1) div#app-header-actions-portal button[data-state="active"],
+      .dark div#root > div > main#mainContent > header div#app-header-actions-portal .shell-header-portal-actions button.bg-background,
+      .dark div#root > div > main#mainContent > header div#app-header-actions-portal .shell-header-portal-actions button.bg-primary,
+      .dark div#root > div > main#mainContent > header div#app-header-actions-portal .shell-header-portal-actions button[data-state="active"] {
+        background: hsl(var(--primary)) !important;
+        background-color: hsl(var(--primary)) !important;
+        color: hsl(var(--primary-foreground)) !important;
+        font-weight: 600 !important;
+        box-shadow: 0 1px 3px hsl(var(--primary) / 0.45) !important;
+      }
+
+      /* Animasi Kapsul Mengikuti Kursor (layoutId="nav-pill") di Header Portal */
+      div#root > div > main#mainContent > header div#app-header-actions-portal .shell-header-portal-actions [data-nav-pill-group="true"] button[data-nav-pill-btn="true"],
+      div#root > div > main#mainContent > header div#app-header-actions-portal .shell-header-portal-actions [data-nav-pill-group="true"] button[data-nav-pill-btn="true"]:hover,
+      .dark div#root > div > main#mainContent > header div#app-header-actions-portal .shell-header-portal-actions [data-nav-pill-group="true"] button[data-nav-pill-btn="true"],
+      .dark div#root > div > main#mainContent > header div#app-header-actions-portal .shell-header-portal-actions [data-nav-pill-group="true"] button[data-nav-pill-btn="true"]:hover {
+        position: relative !important;
+        background: transparent !important;
+        background-color: transparent !important;
+        box-shadow: none !important;
+        border-radius: 9999px !important;
+        overflow: visible !important;
+        transition: color 0.18s ease !important;
+      }
+
+      div#root > div > main#mainContent > header div#app-header-actions-portal .shell-header-portal-actions [data-nav-pill-group="true"] [data-nav-pill-indicator="true"] {
+        position: absolute !important;
+        inset: 0 !important;
+        z-index: 0 !important;
+        border-radius: 9999px !important;
+        background: hsl(var(--primary)) !important;
+        background-color: hsl(var(--primary)) !important;
+        box-shadow: 0 1px 4px hsl(var(--primary) / 0.35) !important;
+        pointer-events: none !important;
+      }
+
+      .dark div#root > div > main#mainContent > header div#app-header-actions-portal .shell-header-portal-actions [data-nav-pill-group="true"] [data-nav-pill-indicator="true"] {
+        box-shadow: 0 1px 5px hsl(var(--primary) / 0.45) !important;
+      }
+
+      div#root > div > main#mainContent > header div#app-header-actions-portal .shell-header-portal-actions [data-nav-pill-group="true"] button[data-nav-pill-btn="true"][data-pill-highlighted="true"],
+      div#root > div > main#mainContent > header div#app-header-actions-portal .shell-header-portal-actions [data-nav-pill-group="true"] button[data-nav-pill-btn="true"][data-pill-highlighted="true"]:hover,
+      .dark div#root > div > main#mainContent > header div#app-header-actions-portal .shell-header-portal-actions [data-nav-pill-group="true"] button[data-nav-pill-btn="true"][data-pill-highlighted="true"],
+      .dark div#root > div > main#mainContent > header div#app-header-actions-portal .shell-header-portal-actions [data-nav-pill-group="true"] button[data-nav-pill-btn="true"][data-pill-highlighted="true"]:hover {
+        color: hsl(var(--primary-foreground)) !important;
+        font-weight: 600 !important;
+      }
+
+      div#root > div > main#mainContent > header div#app-header-actions-portal .shell-header-portal-actions [data-nav-pill-group="true"] button[data-nav-pill-btn="true"][data-pill-highlighted="true"] > span,
+      .dark div#root > div > main#mainContent > header div#app-header-actions-portal .shell-header-portal-actions [data-nav-pill-group="true"] button[data-nav-pill-btn="true"][data-pill-highlighted="true"] > span {
+        color: hsl(var(--primary-foreground)) !important;
+      }
+
+      div#root > div > main#mainContent > header div#app-header-actions-portal .shell-header-portal-actions [data-nav-pill-group="true"] button[data-nav-pill-btn="true"]:not([data-pill-highlighted="true"])[data-nav-selected="true"] {
+        color: #0f172a !important;
+        font-weight: 600 !important;
+      }
+
+      .dark div#root > div > main#mainContent > header div#app-header-actions-portal .shell-header-portal-actions [data-nav-pill-group="true"] button[data-nav-pill-btn="true"]:not([data-pill-highlighted="true"])[data-nav-selected="true"] {
+        color: #f8fafc !important;
+        font-weight: 600 !important;
+      }
+
+      /* Tombol Aksi Mandiri / Tambahan di dalam Header Portal */
+      div#root > div > main#mainContent > header div#app-header-actions-portal button:not(div > div > div button),
+      div#root > div > main#mainContent > header div#app-header-actions-portal button.commodity-header-icon-btn {
+        border-radius: 9999px !important;
+        width: 36px !important;
+        height: 36px !important;
+        min-width: 36px !important;
+        max-width: 36px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        font-size: 11.5px !important;
+        font-weight: 500 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 0 !important;
+      }
+
+      /* ==========================================================================
+         Penyesuaian Ekstra untuk Elemen Teks/Banner di dalam Header Pill (CSS Selectors 1-7)
+         ========================================================================== */
+      /* CSS Selector 7: Header Pill Container */
+      div#root:nth-of-type(1) > div:nth-of-type(1) > main#mainContent:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:has(#app-header-actions-portal) {
+        height: 46px !important;
+        min-height: 46px !important;
+        max-height: 46px !important;
+        padding: 4px !important;
+        border-radius: 9999px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        overflow: hidden !important;
+        overscroll-behavior: none !important;
+        overscroll-behavior-x: none !important;
+      }
+
+      /* CSS Selector 6: Container pembungkus di dalam portal */
+      div#root:nth-of-type(1) > div:nth-of-type(1) > main#mainContent:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div#app-header-actions-portal:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        height: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      /* CSS Selector 5: Icon box di dalam portal jika ada */
+      div#root:nth-of-type(1) > div:nth-of-type(1) > main#mainContent:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div#app-header-actions-portal:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) {
+        display: none !important;
+      }
+
+      /* CSS Selector 4: Container judul & badge di dalam portal */
+      div#root:nth-of-type(1) > div:nth-of-type(1) > main#mainContent:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div#app-header-actions-portal:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+      }
+
+      /* CSS Selector 1: Judul H1 di dalam portal - dirapikan menjadi title chip ringkas */
+      div#root:nth-of-type(1) > div:nth-of-type(1) > main#mainContent:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div#app-header-actions-portal:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > h1:nth-of-type(1) {
+        font-size: 13px !important;
+        font-weight: 700 !important;
+        line-height: 1 !important;
+        margin: 0 !important;
+        color: inherit !important;
+        white-space: nowrap !important;
+      }
+
+      /* CSS Selector 3: Span badge di samping judul */
+      div#root:nth-of-type(1) > div:nth-of-type(1) > main#mainContent:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div#app-header-actions-portal:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > span:nth-of-type(1) {
+        font-size: 10px !important;
+        padding: 1px 6px !important;
+        border-radius: 9999px !important;
+        line-height: 1.4 !important;
+      }
+
+      /* CSS Selector 2: Paragraf deskripsi panjang di dalam portal - disembunyikan agar tidak merusak pill header */
+      div#root:nth-of-type(1) > div:nth-of-type(1) > main#mainContent:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div#app-header-actions-portal:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > p:nth-of-type(1) {
+        display: none !important;
+      }
+
+      /* ==========================================================================
+         Bilah Tab Menu di Sidebar Kiri (CSS Selectors 1, 2, 3)
+         ========================================================================== */
+      /* CSS Selector 2: Tombol Tab Menu di Sidebar Kiri */
+      div#root:nth-of-type(1) > div:nth-of-type(1) > aside#sidenavLeft:nth-of-type(1) > div:nth-of-type(2) > button:nth-of-type(2) {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 6px !important;
+        font-weight: 600 !important;
+        cursor: pointer !important;
+        position: relative !important;
+        transition: all 0.2s ease !important;
+      }
+
+      /* CSS Selector 1: Label Teks 'Menu' */
+      div#root:nth-of-type(1) > div:nth-of-type(1) > aside#sidenavLeft:nth-of-type(1) > div:nth-of-type(2) > button:nth-of-type(2) > span:nth-of-type(1) {
+        font-weight: 700 !important;
+        letter-spacing: 0.01em !important;
+      }
+
+      /* CSS Selector 3: Ikon Menu di Tab Menu */
+      div#root:nth-of-type(1) > div:nth-of-type(1) > aside#sidenavLeft:nth-of-type(1) > div:nth-of-type(2) > button:nth-of-type(2) > svg:nth-of-type(1) {
+        stroke-width: 2.2px !important;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- SVG Filter (include once in your document) -->
+    <svg width="0" height="0" style="position: absolute; pointer-events: none;" aria-hidden="true">
+      <defs>
+        <filter id="glass-distortion" x="0%" y="0%" width="100%" height="100%">
+          <feTurbulence 
+            type="fractalNoise" 
+            baseFrequency="0.012 0.012"
+            numOctaves="2" 
+            seed="92" 
+            result="noise" 
+          />
+          <feGaussianBlur 
+            in="noise" 
+            stdDeviation="2" 
+            result="blurred" 
+          />
+          <feDisplacementMap 
+            in="SourceGraphic" 
+            in2="blurred" 
+            scale="85"
+            xChannelSelector="R" 
+            yChannelSelector="G" 
+          />
+        </filter>
+      </defs>
+    </svg>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

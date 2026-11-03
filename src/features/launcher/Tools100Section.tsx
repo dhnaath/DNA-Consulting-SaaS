@@ -5,6 +5,7 @@ import { useKembaliButtonClass } from "@/hooks/useKembaliButtonClass";
 import { HeaderNavPills, ShellHeader } from "@/app/shell-header";
 import { CardMoreMenu } from "@/components/common/CardMoreMenu";
 import { MovedCardsGridItems } from "@/components/common/MovedCardsGridItems";
+import { useCardIconColor, resolveIconBg } from "@/hooks/useCardIconColor";
 import {
   LauncherPageProvider,
   adjustCategoryTabsCount,
@@ -833,6 +834,8 @@ export const ToolsFlipCard = ({
 
   const Icon = app.icon;
   const cardGradient = gradient || (app as any).gradient || "bg-linear-to-br from-primary to-indigo-700";
+  const { customColor } = useCardIconColor(app.title, app.to);
+  const iconBg = resolveIconBg(customColor, cardGradient);
 
   if (isCardMovedOut(currentPageId, app.to, app.title)) {
     return null;
@@ -857,7 +860,8 @@ export const ToolsFlipCard = ({
                 className="flex items-center gap-3.5 group/header min-w-0 flex-1 outline-none"
               >
                 <div
-                  className={`h-12 w-12 rounded-full flex items-center justify-center text-white shadow-xs shrink-0 ${cardGradient} group-hover/header:scale-105 transition-transform`}
+                  className={`h-12 w-12 rounded-full flex items-center justify-center text-white shadow-xs shrink-0 ${iconBg.className} group-hover/header:scale-105 transition-all`}
+                  style={iconBg.style}
                 >
                   <Icon className="h-6 w-6 opacity-90 drop-shadow-sm" strokeWidth={1.75} />
                 </div>
@@ -872,6 +876,9 @@ export const ToolsFlipCard = ({
                 title={app.title}
                 isFav={isFav}
                 onToggleFavorite={() => toggleFavorite(app.to)}
+                to={app.to}
+                icon={app.icon}
+                defaultGradient={cardGradient}
                 moveData={{
                   cardKey: makeMovedCardKey(currentPageId, app.to, app.title),
                   originPageId: currentPageId,
@@ -935,8 +942,9 @@ export const ToolsFlipCard = ({
 
         {/* Back Face (Warna icon app + tombol kembali di ujung bawah kanan) */}
         <div
-          className={`absolute inset-0 w-full h-full rounded-2xl ${cardGradient} p-4 shadow-lg border border-white/20 flex flex-col justify-end items-end overflow-hidden [backface-visibility:hidden]`}
+          className={`absolute inset-0 w-full h-full rounded-2xl ${iconBg.className} p-4 shadow-lg border border-white/20 flex flex-col justify-end items-end overflow-hidden [backface-visibility:hidden]`}
           style={{
+            ...iconBg.style,
             transform:
               interactionConfig.axis === "x"
                 ? `rotateX(${180 * interactionConfig.dir}deg)`
@@ -993,6 +1001,8 @@ export const ValueTreatedFlipCard = ({
   };
 
   const Icon = app.icon;
+  const { customColor } = useCardIconColor(app.title, app.to);
+  const iconBg = resolveIconBg(customColor, app.gradient);
   const initialCount = 6;
   const displayFeatures = isExpanded
     ? app.features
@@ -1022,7 +1032,8 @@ export const ValueTreatedFlipCard = ({
                 className="flex items-center gap-3 group/header min-w-0 flex-1 outline-none"
               >
                 <div
-                  className={`h-11 w-11 rounded-full flex items-center justify-center text-white shadow-xs shrink-0 ${app.gradient} group-hover/header:scale-105 transition-transform`}
+                  className={`h-11 w-11 rounded-full flex items-center justify-center text-white shadow-xs shrink-0 ${iconBg.className} group-hover/header:scale-105 transition-all`}
+                  style={iconBg.style}
                 >
                   <Icon className="h-5 w-5 opacity-90 drop-shadow-sm" strokeWidth={1.75} />
                 </div>
@@ -1040,6 +1051,9 @@ export const ValueTreatedFlipCard = ({
                 title={app.title}
                 isFav={isFav}
                 onToggleFavorite={() => toggleFavorite(app.to)}
+                to={app.to}
+                icon={app.icon}
+                defaultGradient={app.gradient}
                 moveData={{
                   cardKey: makeMovedCardKey(currentPageId, app.to, app.title),
                   originPageId: currentPageId,
@@ -1120,8 +1134,9 @@ export const ValueTreatedFlipCard = ({
 
         {/* Back Face (Warna icon app + tombol kembali di ujung bawah kanan) */}
         <div
-          className={`absolute inset-0 w-full h-full rounded-2xl ${app.gradient} p-4 shadow-lg border border-white/20 flex flex-col justify-end items-end overflow-hidden [backface-visibility:hidden]`}
+          className={`absolute inset-0 w-full h-full rounded-2xl ${iconBg.className} p-4 shadow-lg border border-white/20 flex flex-col justify-end items-end overflow-hidden [backface-visibility:hidden]`}
           style={{
+            ...iconBg.style,
             transform:
               interactionConfig.axis === "x"
                 ? `rotateX(${180 * interactionConfig.dir}deg)`

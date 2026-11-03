@@ -69,7 +69,7 @@ export const SHARIA_APPS: ShariaAppItem[] = [
   // ============================================================================
   {
     id: "tabarru-hibah",
-    name: "Dana Kebajikan — Tabarru' dan Hibah",
+    name: "Tabarru' and Hibah",
     category: "sosial",
     categoryLabel: "Sosial",
     shortDesc:
@@ -82,15 +82,15 @@ export const SHARIA_APPS: ShariaAppItem[] = [
     badgeBg: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30",
     badgeText: "Sosial",
     subMenus: [
-      { id: "tabarru-contract", label: "Akad Tabarru'", to: "/syariah/akad?app=tabarru" },
-      { id: "hibah-family", label: "Hibah Keluarga", to: "/syariah/akad?app=hibah" },
-      { id: "infaq-sedekah", label: "Infaq & Sedekah", to: "/zakat?app=infaq" },
-      { id: "qardh-hasan", label: "Qardh Al-Hasan", to: "/syariah/akad?app=qardh" },
+      { id: "tabarru-contract", label: "Tabarru' Contract", to: "/syariah/akad?app=tabarru" },
+      { id: "hibah-family", label: "Family Hibah", to: "/syariah/akad?app=hibah" },
+      { id: "infaq-sedekah", label: "Infaq and Sadaqah", to: "/zakat?app=infaq" },
+      { id: "qardh-hasan", label: "Qardh Hasan", to: "/syariah/akad?app=qardh" },
     ],
   },
   {
     id: "qardh-kebajikan",
-    name: "Qardh Hasan — Pinjaman Kebajikan",
+    name: "Qardh Hasan",
     category: "sosial",
     categoryLabel: "Sosial",
     shortDesc:
@@ -103,14 +103,14 @@ export const SHARIA_APPS: ShariaAppItem[] = [
     badgeBg: "bg-teal-500/15 text-teal-600 dark:text-teal-400 border-teal-500/30",
     badgeText: "Sosial",
     subMenus: [
-      { id: "qardh-ledger", label: "Buku Piutang Hasan", to: "/syariah/akad?app=qardh" },
-      { id: "pelunasan-pokok", label: "Jadwal Pelunasan Pokok", to: "/syariah/akad?app=qardh" },
-      { id: "keringanan-utang", label: "Klausul Keringanan", to: "/syariah/akad?app=qardh" },
+      { id: "qardh-ledger", label: "Qardh Ledger", to: "/syariah/akad?app=qardh" },
+      { id: "pelunasan-pokok", label: "Principal Repayment Schedule", to: "/syariah/akad?app=qardh" },
+      { id: "keringanan-utang", label: "Debt Relief Terms", to: "/syariah/akad?app=qardh" },
     ],
   },
   {
     id: "wakaf-aset-umat",
-    name: "Wakaf — Pengelolaan Aset Produktif",
+    name: "Waqf Management",
     category: "sosial",
     categoryLabel: "Sosial",
     shortDesc:
@@ -123,9 +123,9 @@ export const SHARIA_APPS: ShariaAppItem[] = [
     badgeBg: "bg-green-500/15 text-green-600 dark:text-green-400 border-green-500/30",
     badgeText: "Sosial",
     subMenus: [
-      { id: "wakaf-uang", label: "Wakaf Uang (CWLS)", to: "/syariah/akad?app=wakaf" },
-      { id: "aset-wakaf", label: "Inventaris Tanah Wakaf", to: "/syariah/akad?app=wakaf" },
-      { id: "laporan-nazhir", label: "Akuntabilitas Nazhir", to: "/syariah/akad?app=wakaf" },
+      { id: "wakaf-uang", label: "Cash Waqf", to: "/syariah/akad?app=wakaf" },
+      { id: "aset-wakaf", label: "Waqf Asset Register", to: "/syariah/akad?app=wakaf" },
+      { id: "laporan-nazhir", label: "Nazhir Reporting", to: "/syariah/akad?app=wakaf" },
     ],
   },
 
@@ -134,7 +134,7 @@ export const SHARIA_APPS: ShariaAppItem[] = [
   // ============================================================================
   {
     id: "mudharabah-bagi-hasil",
-    name: "Mudharabah — Bagi Hasil Usaha",
+    name: "Mudharabah",
     category: "komersial",
     categoryLabel: "Komersial",
     shortDesc:
@@ -147,14 +147,14 @@ export const SHARIA_APPS: ShariaAppItem[] = [
     badgeBg: "bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/30",
     badgeText: "Komersial",
     subMenus: [
-      { id: "nisbah-kalkulator", label: "Kalkulator Nisbah", to: "/syariah/akad?app=mudharabah" },
-      { id: "kontrak-mudharabah", label: "Draf Kontrak Shahibul Maal", to: "/syariah/akad?app=mudharabah" },
-      { id: "laporan-laba-rugi", label: "Audit Laba Usaha", to: "/syariah/akad?app=mudharabah" },
+      { id: "nisbah-kalkulator", label: "Profit-Sharing Calculator", to: "/syariah/akad?app=mudharabah" },
+      { id: "kontrak-mudharabah", label: "Mudharabah Contract", to: "/syariah/akad?app=mudharabah" },
+      { id: "laporan-laba-rugi", label: "Profit and Loss Audit", to: "/syariah/akad?app=mudharabah" },
     ],
   },
   {
     id: "musyarakah-equity",
-    name: "Musyarakah — Kemitraan Modal",
+    name: "Musharakah",
     category: "komersial",
     categoryLabel: "Komersial",
     shortDesc:
@@ -167,14 +167,14 @@ export const SHARIA_APPS: ShariaAppItem[] = [
     badgeBg: "bg-orange-500/15 text-orange-600 dark:text-orange-400 border-orange-500/30",
     badgeText: "Komersial",
     subMenus: [
-      { id: "musyarakah-mutanaqisah", label: "Musyarakah Mutanaqisah (MMQ)", to: "/syariah/akad?app=musyarakah" },
-      { id: "syirkah-inan", label: "Syirkah Inan & Mufawadhah", to: "/syariah/akad?app=musyarakah" },
-      { id: "porsi-modal", label: "Porsi Modal & Kepemilikan", to: "/syariah/akad?app=musyarakah" },
+      { id: "musyarakah-mutanaqisah", label: "Diminishing Musharakah", to: "/syariah/akad?app=musyarakah" },
+      { id: "syirkah-inan", label: "Shirkah Contracts", to: "/syariah/akad?app=musyarakah" },
+      { id: "porsi-modal", label: "Capital and Ownership", to: "/syariah/akad?app=musyarakah" },
     ],
   },
   {
     id: "murabahah-costplus",
-    name: "Murabahah — Jual Beli Bermargin",
+    name: "Murabaha",
     category: "komersial",
     categoryLabel: "Komersial",
     shortDesc:
@@ -187,14 +187,14 @@ export const SHARIA_APPS: ShariaAppItem[] = [
     badgeBg: "bg-blue-500/15 text-blue-600 dark:text-blue-400 border-blue-500/30",
     badgeText: "Komersial",
     subMenus: [
-      { id: "kalkulasi-margin", label: "Kalkulator Cost-Plus Margin", to: "/syariah/akad?app=murabahah" },
-      { id: "skema-cicilan", label: "Jadwal Angsuran Tetap", to: "/syariah/akad?app=murabahah" },
-      { id: "verifikasi-komoditas", label: "Verifikasi Kepemilikan Aset", to: "/syariah/akad?app=murabahah" },
+      { id: "kalkulasi-margin", label: "Murabaha Margin Calculator", to: "/syariah/akad?app=murabahah" },
+      { id: "skema-cicilan", label: "Installment Schedule", to: "/syariah/akad?app=murabahah" },
+      { id: "verifikasi-komoditas", label: "Asset Ownership Verification", to: "/syariah/akad?app=murabahah" },
     ],
   },
   {
     id: "ijarah-sewa-manfaat",
-    name: "Ijarah — Sewa dan Jasa",
+    name: "Ijarah",
     category: "komersial",
     categoryLabel: "Komersial",
     shortDesc:
@@ -207,14 +207,14 @@ export const SHARIA_APPS: ShariaAppItem[] = [
     badgeBg: "bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 border-indigo-500/30",
     badgeText: "Komersial",
     subMenus: [
-      { id: "ijarah-sewa", label: "Kontrak Sewa Manfaat", to: "/syariah/akad?app=ijarah" },
-      { id: "imbt-kalkulator", label: "Kalkulator IMBT", to: "/syariah/akad?app=ijarah" },
-      { id: "maintenance-rule", label: "Tanggung Jawab Pemilik Aset", to: "/syariah/akad?app=ijarah" },
+      { id: "ijarah-sewa", label: "Ijarah Contract", to: "/syariah/akad?app=ijarah" },
+      { id: "imbt-kalkulator", label: "IMBT Calculator", to: "/syariah/akad?app=ijarah" },
+      { id: "maintenance-rule", label: "Asset Owner Responsibilities", to: "/syariah/akad?app=ijarah" },
     ],
   },
   {
     id: "salam-istishna-pesanan",
-    name: "Salam dan Istishna — Pembiayaan Pesanan",
+    name: "Salam and Istisna",
     category: "komersial",
     categoryLabel: "Komersial",
     shortDesc:
@@ -227,9 +227,9 @@ export const SHARIA_APPS: ShariaAppItem[] = [
     badgeBg: "bg-sky-500/15 text-sky-600 dark:text-sky-400 border-sky-500/30",
     badgeText: "Komersial",
     subMenus: [
-      { id: "istishna-termin", label: "Termin Progres Fisik", to: "/syariah/akad?app=istishna" },
-      { id: "salam-tani", label: "Kontrak Salam Komoditas", to: "/syariah/akad?app=salam" },
-      { id: "spesifikasi-teknis", label: "Spesifikasi & Standar Mutu", to: "/syariah/akad?app=istishna" },
+      { id: "istishna-termin", label: "Project Payment Milestones", to: "/syariah/akad?app=istishna" },
+      { id: "salam-tani", label: "Salam Commodity Contract", to: "/syariah/akad?app=salam" },
+      { id: "spesifikasi-teknis", label: "Specifications and Quality Standards", to: "/syariah/akad?app=istishna" },
     ],
   },
 
@@ -238,7 +238,7 @@ export const SHARIA_APPS: ShariaAppItem[] = [
   // ============================================================================
   {
     id: "takaful-tamin",
-    name: "Takaful — Proteksi Syariah",
+    name: "Takaful",
     category: "proteksi",
     categoryLabel: "Proteksi",
     shortDesc:
@@ -262,7 +262,7 @@ export const SHARIA_APPS: ShariaAppItem[] = [
   // ============================================================================
   {
     id: "wadiah-amanah",
-    name: "Wadiah — Simpanan dan Titipan",
+    name: "Wadiah",
     category: "simpanan",
     categoryLabel: "Simpanan",
     shortDesc:
@@ -286,7 +286,7 @@ export const SHARIA_APPS: ShariaAppItem[] = [
   // ============================================================================
   {
     id: "zakat-maal-portofolio",
-    name: "Zakat Maal — Aset dan Kekayaan",
+    name: "Zakat on Wealth",
     category: "zakat",
     categoryLabel: "Zakat",
     shortDesc:
@@ -306,7 +306,7 @@ export const SHARIA_APPS: ShariaAppItem[] = [
   },
   {
     id: "zakat-penghasilan-profesi",
-    name: "Zakat Penghasilan — Pendapatan dan Profesi",
+    name: "Income Zakat",
     category: "zakat",
     categoryLabel: "Zakat",
     shortDesc:
@@ -326,7 +326,7 @@ export const SHARIA_APPS: ShariaAppItem[] = [
   },
   {
     id: "fidyah-kaffarah-fitrah",
-    name: "Zakat Fitrah — Fidyah dan Kaffarah",
+    name: "Zakat al-Fitr",
     category: "zakat",
     categoryLabel: "Zakat",
     shortDesc:
@@ -350,7 +350,7 @@ export const SHARIA_APPS: ShariaAppItem[] = [
   // ============================================================================
   {
     id: "screening-saham-syariah",
-    name: "Screening Saham Syariah — ISSI dan DES BEI",
+    name: "Sharia Stock Screening",
     category: "investasi",
     categoryLabel: "Investasi",
     shortDesc:
@@ -374,7 +374,7 @@ export const SHARIA_APPS: ShariaAppItem[] = [
   // ============================================================================
   {
     id: "audit-bebas-riba",
-    name: "Audit Riba — Screening dan Cleansing",
+    name: "Riba Compliance",
     category: "kepatuhan",
     categoryLabel: "Kepatuhan",
     shortDesc:
@@ -394,7 +394,7 @@ export const SHARIA_APPS: ShariaAppItem[] = [
   },
   {
     id: "audit-gharar-maysir",
-    name: "Audit Gharar — Maysir dan Tadlis",
+    name: "Gharar Compliance",
     category: "kepatuhan",
     categoryLabel: "Kepatuhan",
     shortDesc:

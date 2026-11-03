@@ -50,7 +50,7 @@ export interface ResearchAppItem {
 export const RESEARCH_APPS: ResearchAppItem[] = [
   {
     id: "mba-frameworks",
-    name: "MBA Frameworks",
+    name: "Business Frameworks",
     category: "frameworks",
     categoryLabel: "Frameworks",
     shortDesc:
@@ -63,10 +63,10 @@ export const RESEARCH_APPS: ResearchAppItem[] = [
     badgeBg: "bg-blue-500/15 text-blue-600 dark:text-blue-400 border-blue-500/30",
     badgeText: "Frameworks",
     subMenus: [
-      { id: "all-frameworks", label: "Semua 100 Framework", to: "/100-framework" },
-      { id: "bcg-matrix", label: "BCG Growth-Share Matrix", to: "/bcg" },
+      { id: "all-frameworks", label: "Framework Library", to: "/100-framework" },
+      { id: "bcg-matrix", label: "BCG Matrix", to: "/bcg" },
       { id: "porter-forces", label: "Porter's Five Forces", to: "/porter" },
-      { id: "pestel-analysis", label: "PESTEL Macro Analysis", to: "/pestel" },
+      { id: "pestel-analysis", label: "PESTEL Analysis", to: "/pestel" },
     ],
   },
   {
@@ -84,14 +84,14 @@ export const RESEARCH_APPS: ResearchAppItem[] = [
     badgeBg: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30",
     badgeText: "Frameworks",
     subMenus: [
-      { id: "valuasi-dcf", label: "DCF Calculator", to: "/valuasi" },
+      { id: "valuasi-dcf", label: "DCF Valuation", to: "/valuasi" },
       { id: "valuasi-multiples", label: "Market Multiples", to: "/valuasi" },
-      { id: "valuasi-asset", label: "Asset Valuation", to: "/valuasi" },
+      { id: "valuasi-asset", label: "Asset-Based Valuation", to: "/valuasi" },
     ],
   },
   {
     id: "research-intelligence",
-    name: "Research & Market Intelligence",
+    name: "Research Intelligence",
     category: "research",
     categoryLabel: "Research",
     shortDesc:
@@ -104,9 +104,9 @@ export const RESEARCH_APPS: ResearchAppItem[] = [
     badgeBg: "bg-teal-500/15 text-teal-600 dark:text-teal-400 border-teal-500/30",
     badgeText: "Research",
     subMenus: [
-      { id: "research-manager", label: "Research Manager", to: "/research-manager" },
+      { id: "research-manager", label: "Research Workspace", to: "/research-manager" },
       { id: "web-clipper", label: "Web Clipper", to: "/web-clipper" },
-      { id: "research-notes", label: "Field Notes", to: "/notes" },
+      { id: "research-notes", label: "Research Notes", to: "/notes" },
     ],
   },
   {
@@ -124,15 +124,15 @@ export const RESEARCH_APPS: ResearchAppItem[] = [
     badgeBg: "bg-purple-500/15 text-purple-600 dark:text-purple-400 border-purple-500/30",
     badgeText: "Reference",
     subMenus: [
-      { id: "chapter-1-ekonomi", label: "Chapter 1: Ekonomi", to: "/kurasi/ekonomi" },
-      { id: "chapter-2-statistik", label: "Chapter 2: Statistik", to: "/kurasi/statistik" },
-      { id: "chapter-3-manajemen", label: "Chapter 3: Manajemen", to: "/kurasi/manajemen" },
-      { id: "chapter-4-komunikasi", label: "Chapter 4: Komunikasi", to: "/kurasi/komunikasi" },
+      { id: "chapter-1-ekonomi", label: "Economics", to: "/kurasi/ekonomi" },
+      { id: "chapter-2-statistik", label: "Statistics", to: "/kurasi/statistik" },
+      { id: "chapter-3-manajemen", label: "Management", to: "/kurasi/manajemen" },
+      { id: "chapter-4-komunikasi", label: "Communication", to: "/kurasi/komunikasi" },
     ],
   },
   {
     id: "wiki-corporate-knowledge",
-    name: "SOP & Knowledge Base",
+    name: "Knowledge Base",
     category: "reference",
     categoryLabel: "Reference",
     shortDesc:
@@ -145,9 +145,9 @@ export const RESEARCH_APPS: ResearchAppItem[] = [
     badgeBg: "bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/30",
     badgeText: "Reference",
     subMenus: [
-      { id: "wiki-engine", label: "Wiki SOP Engine", to: "/wiki" },
-      { id: "knowledge-base", label: "Knowledge Base", to: "/knowledge-base" },
-      { id: "incoterms", label: "Panduan Incoterms", to: "/incoterms" },
+      { id: "wiki-engine", label: "SOP Library", to: "/wiki" },
+      { id: "knowledge-base", label: "Knowledge Repository", to: "/knowledge-base" },
+      { id: "incoterms", label: "Incoterms Guide", to: "/incoterms" },
     ],
   },
   {
@@ -166,8 +166,8 @@ export const RESEARCH_APPS: ResearchAppItem[] = [
     badgeText: "Research",
     subMenus: [
       { id: "reading-list", label: "Reading List", to: "/reading" },
-      { id: "reading-notes", label: "Book Summaries", to: "/notes" },
-      { id: "bookmarks", label: "Bookmark Hub", to: "/bookmarks" },
+      { id: "reading-notes", label: "Book Notes", to: "/notes" },
+      { id: "bookmarks", label: "Bookmarks", to: "/bookmarks" },
     ],
   },
 ];

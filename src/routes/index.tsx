@@ -71,7 +71,7 @@ export const LAUNCHER_TABS = [
   { id: "mode_creative", modeId: "creative", label: "Creative Workspace and Media Production", icon: Palette, badge: "6 Modul", desc: "Semua (6) · Studio (2) · Publishing (1) · Media (2) · Interactive (1)" },
   { id: "mode_research", modeId: "research", label: "Research Foundations and Reference Frameworks", icon: GraduationCap, badge: "6 Modul", desc: "Semua (6) · Frameworks (2) · Reference (2) · Research (2)" },
   { id: "mode_sharia", modeId: "sharia", label: "Islamic Principles and Sharia Values", icon: Scale, badge: "16 Modul", desc: "Semua (16) · Sosial (3) · Komersial (5) · Proteksi (1) · Simpanan (1) · Zakat (3) · Investasi (1) · Kepatuhan (2)" },
-  { id: "mode_personal", modeId: "personal", label: "Personal Life Management", icon: Heart, badge: "6 Modul", desc: "Semua (6) · Pengembangan (1) · Refleksi (1) · Kesehatan (2) · Utilitas (2)" },
+  { id: "mode_personal", modeId: "personal", label: "Personal Life Management", icon: Heart, badge: "5 Modul", desc: "Semua (5) · Pengembangan (1) · Refleksi (1) · Kesehatan (2) · Utilitas (1)" },
   { id: "mode_family", modeId: "family", label: "Family Records and Household Planning", icon: Home, badge: "6 Modul", desc: "Semua (6) · Keluarga (3) · Rumah Tangga (2) · Kendaraan (1)" },
   { id: "mode_public_affairs", modeId: "public_affairs", label: "Public Affairs and Relations", icon: Landmark, badge: "6 Modul", desc: "Semua (6) · Civic (3) · Policy (2) · Media (1)" },
   { id: "mode_networks", modeId: "networks", label: "Contact Directory and Social Networks", icon: Users, badge: "6 Modul", desc: "Semua (6) · Direktori (2) · Relasi (2) · Jaringan (2)" },

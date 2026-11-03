@@ -306,7 +306,7 @@ export function HealthVitalsView() {
             <Activity size={22} />
           </div>
           <div>
-            <h3 className="font-bold text-base text-foreground">Vitals Tracker</h3>
+            <h3 className="font-bold text-base text-foreground">Vital Signs</h3>
             <p className="text-xs text-muted-foreground mt-0.5">
               Deteksi dini beban vaskular dan kestabilan glukosa puasa untuk menjaga metabolisme energi otak.
             </p>
@@ -584,7 +584,7 @@ export function HealthSkincareView() {
             <Sparkles size={22} />
           </div>
           <div>
-            <h3 className="font-bold text-base text-foreground">Skincare Log</h3>
+            <h3 className="font-bold text-base text-foreground">Skincare Tracker</h3>
             <p className="text-xs text-muted-foreground mt-0.5">
               Jadwal tahapan skincare pagi & malam, inventaris bahan aktif ramah kulit, dan tanggal kadaluarsa produk.
             </p>

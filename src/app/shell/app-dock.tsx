@@ -41,6 +41,7 @@ export interface DockItemConfig {
   isSeparator?: boolean;
   iconColor?: string;
   accentGradient?: string;
+  noColor?: boolean;
 }
 
 function DockIcon({ 
@@ -85,7 +86,9 @@ function DockIcon({
           </span>
         )}
         {isActive && (
-          <span className="text-[10px] text-blue-300 font-semibold">• Aktif</span>
+          <span className="text-[10px] font-semibold text-neutral-300">
+            • Aktif
+          </span>
         )}
       </div>
       <motion.div
@@ -93,19 +96,17 @@ function DockIcon({
         style={{ width, height: width, borderRadius: "9999px" }}
         className={`flex items-center justify-center cursor-pointer transition-colors relative z-20 rounded-full ${
           isActive 
-            ? "gradient-primary bg-primary text-primary-foreground shadow-lg shadow-primary/30 border-white/30 ring-2 ring-primary/40" 
+            ? "bg-neutral-900 text-white dark:bg-neutral-100 dark:text-neutral-950 shadow-md border-neutral-700/60 dark:border-neutral-300 ring-2 ring-neutral-400/30"
             : "bg-card/90 text-muted-foreground shadow-xs hover:bg-accent hover:text-foreground border-border hover:shadow-md"
         } backdrop-blur-md border`}
       >
         <item.icon
-          className={`w-1/2 h-1/2 shrink-0 pointer-events-none ${
-            !isActive && item.iconColor ? item.iconColor : ""
-          }`}
+          className="w-1/2 h-1/2 shrink-0 pointer-events-none"
           strokeWidth={item.strokeWidth || 2}
         />
       </motion.div>
       {isActive && (
-        <div className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-primary ring-2 ring-primary/30 shadow-xs z-20" />
+        <div className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-neutral-800 dark:bg-neutral-200 ring-2 ring-neutral-400/30 dark:ring-neutral-600/30 shadow-xs z-20" />
       )}
     </div>
   );
@@ -471,13 +472,12 @@ export function AppDock({
       });
     }
 
-    // Pill Bar 2: Applied Value & Monitor Price (Makro & Nilai Inti)
+    // Pill Bar 2: Applied Value & Monitor Price (Makro & Nilai Inti) - Gaya selaras dengan seluruh icon dock
     const valueMarketItems: DockItemConfig[] = [
       {
         id: "/value-treated",
         label: "Applied Value",
         icon: Gem,
-        iconColor: "text-amber-500 dark:text-amber-400",
         strokeWidth: 2,
         isActive:
           pathname === "/value-treated" ||
@@ -490,7 +490,6 @@ export function AppDock({
         id: "/100-komoditas",
         label: "Monitor Price",
         icon: TrendingUp,
-        iconColor: "text-emerald-500 dark:text-emerald-400",
         strokeWidth: 2,
         isActive:
           pathname === "/100-komoditas" ||

@@ -5,6 +5,7 @@ import { useFavorites } from "@/hooks/useFavorites";
 import { useKembaliButtonClass } from "@/hooks/useKembaliButtonClass";
 import { CardMoreMenu } from "@/components/common/CardMoreMenu";
 import { MovedCardsGridItems } from "@/components/common/MovedCardsGridItems";
+import { useCardIconColor, resolveIconBg } from "@/hooks/useCardIconColor";
 import {
   LauncherPageProvider,
   makeMovedCardKey,
@@ -1076,6 +1077,8 @@ export const ModeFlipCard = ({
 
   const AppIcon = app.icon;
   const cardGradient = gradient || app.accentColor || getGradient(app.name);
+  const { customColor } = useCardIconColor(app.name, app.to);
+  const iconBg = resolveIconBg(customColor, cardGradient);
 
   if (currentPageId && isCardMovedOut(currentPageId, app.to, app.name)) {
     return null;
@@ -1100,7 +1103,8 @@ export const ModeFlipCard = ({
                 className="flex items-center gap-3 group/header min-w-0 flex-1 outline-none"
               >
                 <div
-                  className={`h-11 w-11 rounded-full flex items-center justify-center text-white shadow-xs shrink-0 ${cardGradient} group-hover/header:scale-105 transition-transform`}
+                  className={`h-11 w-11 rounded-full flex items-center justify-center text-white shadow-xs shrink-0 ${iconBg.className} group-hover/header:scale-105 transition-all`}
+                  style={iconBg.style}
                 >
                   <AppIcon className="h-5 w-5 opacity-90 drop-shadow-sm" strokeWidth={1.75} />
                 </div>
@@ -1120,6 +1124,9 @@ export const ModeFlipCard = ({
                 title={app.name}
                 isFav={isFav}
                 onToggleFavorite={() => toggleFavorite(app.to)}
+                to={app.to}
+                icon={app.icon}
+                defaultGradient={cardGradient}
                 moveData={
                   currentPageId
                     ? {

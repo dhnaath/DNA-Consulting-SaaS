@@ -74,7 +74,7 @@ export const PERSONAL_LIFE_APPS: PersonalLifeAppItem[] = [
   // ============================================================================
   {
     id: "habits-and-planning",
-    name: "Personal Planning",
+    name: "Personal Development",
     category: "pengembangan",
     categoryLabel: "Pengembangan",
     shortDesc:
@@ -90,7 +90,7 @@ export const PERSONAL_LIFE_APPS: PersonalLifeAppItem[] = [
       { id: "habit-tracker", label: "Habit Tracker", to: "/habit-tracker" },
       { id: "life-planner", label: "Life Planner", to: "/life/life-planner" },
       { id: "personal-projects", label: "Personal Projects", to: "/proyek-personal" },
-      { id: "wishlist", label: "Goals and Savings", to: "/life/wishlist" },
+      { id: "wishlist", label: "Wishlist and Savings", to: "/life/wishlist" },
     ],
   },
 
@@ -99,7 +99,7 @@ export const PERSONAL_LIFE_APPS: PersonalLifeAppItem[] = [
   // ============================================================================
   {
     id: "journaling",
-    name: "Journaling",
+    name: "Personal Journaling",
     category: "refleksi",
     categoryLabel: "Refleksi",
     shortDesc:
@@ -119,11 +119,11 @@ export const PERSONAL_LIFE_APPS: PersonalLifeAppItem[] = [
   },
 
   // ============================================================================
-  // 3. Kesehatan (2 Apps)
+  // 3. Kesehatan (2 Apps: Health and Fitness & Health Records)
   // ============================================================================
   {
     id: "fitness-and-sleep",
-    name: "Physical Wellness",
+    name: "Health and Fitness",
     category: "kesehatan",
     categoryLabel: "Kesehatan",
     shortDesc:
@@ -136,15 +136,15 @@ export const PERSONAL_LIFE_APPS: PersonalLifeAppItem[] = [
     badgeBg: "bg-blue-500/15 text-blue-600 dark:text-blue-400 border-blue-500/30",
     badgeText: "Kesehatan",
     subMenus: [
-      { id: "workouts", label: "Workout Log", to: "/health?tab=workouts" },
+      { id: "workouts", label: "Workout Tracker", to: "/health?tab=workouts" },
       { id: "sleep-quality", label: "Sleep Tracker", to: "/health?tab=sleep" },
       { id: "body-metrics", label: "Body Metrics", to: "/health?tab=body-metrics" },
-      { id: "water-intake", label: "Hydration Tracker", to: "/health?tab=water" },
+      { id: "water-intake", label: "Water Tracker", to: "/health?tab=water" },
     ],
   },
   {
     id: "health-records",
-    name: "Health Management",
+    name: "Health Records",
     category: "kesehatan",
     categoryLabel: "Kesehatan",
     shortDesc:
@@ -157,51 +157,34 @@ export const PERSONAL_LIFE_APPS: PersonalLifeAppItem[] = [
     badgeBg: "bg-rose-500/15 text-rose-600 dark:text-rose-400 border-rose-500/30",
     badgeText: "Kesehatan",
     subMenus: [
-      { id: "health-tracker", label: "Health Dashboard", to: "/health" },
+      { id: "health-tracker", label: "Health Overview", to: "/health" },
       { id: "medical-records", label: "Medical Records", to: "/health?tab=medical-records" },
       { id: "vitals-tracker", label: "Vital Signs", to: "/health?tab=vitals" },
-      { id: "med-reminder", label: "Medication Reminders", to: "/lainnya?app=med-reminder" },
-      { id: "skincare-log", label: "Skincare Log", to: "/health?tab=skincare" },
+      { id: "med-reminder", label: "Medication Reminder", to: "/lainnya?app=med-reminder" },
+      { id: "skincare-log", label: "Skincare Tracker", to: "/health?tab=skincare" },
     ],
   },
 
   // ============================================================================
-  // 4. Utilitas (2 Apps: Password Manager & Calculator)
+  // 4. Utilitas (1 App: Personal Tools)
   // ============================================================================
   {
-    id: "password-manager",
-    name: "Password Manager",
+    id: "personal-tools",
+    name: "Personal Tools",
     category: "utilitas",
     categoryLabel: "Utilitas",
     shortDesc:
-      "Brankas manajemen kata sandi terenkripsi dan keamanan akun personal untuk proteksi kredensial digital Anda.",
+      "Brankas manajemen kata sandi terenkripsi dan keamanan akun personal, serta kalkulator utilitas serbaguna untuk kebutuhan komputasi harian.",
     to: "/passwords",
     icon: Key,
-    badge: "Utilitas",
-    accentGradient: "from-amber-500 to-orange-600",
-    accentBorder: "border-amber-500/30 hover:border-amber-500/60",
-    badgeBg: "bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/30",
-    badgeText: "Utilitas",
-    subMenus: [
-      { id: "passwords", label: "Password Vault", to: "/passwords" },
-    ],
-  },
-  {
-    id: "calculator",
-    name: "Calculator",
-    category: "utilitas",
-    categoryLabel: "Utilitas",
-    shortDesc:
-      "Kalkulator ilmiah serbaguna untuk kalkulasi sains, matematika, bisnis, dan rekayasa kebutuhan komputasi harian.",
-    to: "/kalkulator",
-    icon: Calculator,
     badge: "Utilitas",
     accentGradient: "from-cyan-500 to-blue-600",
     accentBorder: "border-cyan-500/30 hover:border-cyan-500/60",
     badgeBg: "bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 border-cyan-500/30",
     badgeText: "Utilitas",
     subMenus: [
-      { id: "utilities", label: "Scientific Calculator", to: "/kalkulator" },
+      { id: "passwords", label: "Password Manager", to: "/passwords" },
+      { id: "utilities", label: "Calculator and Utilities", to: "/kalkulator" },
     ],
   },
 ];
@@ -211,11 +194,11 @@ export const PERSONAL_LIFE_CATEGORY_TABS: {
   label: string;
   count: number;
 }[] = [
-  { id: "all", label: "Semua", count: 6 },
+  { id: "all", label: "Semua", count: 5 },
   { id: "pengembangan", label: "Pengembangan", count: 1 },
   { id: "refleksi", label: "Refleksi", count: 1 },
   { id: "kesehatan", label: "Kesehatan", count: 2 },
-  { id: "utilitas", label: "Utilitas", count: 2 },
+  { id: "utilitas", label: "Utilitas", count: 1 },
 ];
 
 export function PersonalLifePage({ isEmbedded = false }: { isEmbedded?: boolean } = {}) {

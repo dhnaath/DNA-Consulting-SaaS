@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import { ArrowRight, RotateCcw, ChevronDown, Layers } from "lucide-react";
 import { useKembaliButtonClass } from "@/hooks/useKembaliButtonClass";
 import { CardMoreMenu } from "./CardMoreMenu";
+import { useCardIconColor, resolveIconBg } from "@/hooks/useCardIconColor";
 import {
   makeMovedCardKey,
   useCardPageMover,
@@ -133,6 +134,9 @@ export function MBACard({
         : `bg-gradient-to-br ${accentGradient}`
       : getHashGradient(title));
 
+  const { customColor } = useCardIconColor(title, to);
+  const iconBg = resolveIconBg(customColor, cardGradient);
+
   const mainPath = to.split("?")[0];
   const mainSearch = to.includes("?")
     ? Object.fromEntries(new URLSearchParams(to.split("?")[1]))
@@ -179,7 +183,8 @@ export function MBACard({
                 className="flex items-center gap-3.5 group/header min-w-0 flex-1 outline-none"
               >
                 <div
-                  className={`h-12 w-12 rounded-full flex items-center justify-center text-white shadow-xs shrink-0 ${cardGradient} group-hover/header:scale-105 transition-transform`}
+                  className={`h-12 w-12 rounded-full flex items-center justify-center text-white shadow-xs shrink-0 ${iconBg.className} group-hover/header:scale-105 transition-all`}
+                  style={iconBg.style}
                 >
                   <Icon className="h-6 w-6 opacity-90 drop-shadow-sm" strokeWidth={1.75} />
                 </div>
@@ -200,6 +205,9 @@ export function MBACard({
                 isFav={isFav}
                 onToggleFavorite={() => toggleFavorite(to)}
                 moveData={moveData}
+                to={to}
+                icon={Icon}
+                defaultGradient={cardGradient}
               />
             </div>
 
@@ -318,8 +326,9 @@ export function MBACard({
 
         {/* Back Face (Warna icon app + tombol kembali di ujung bawah kanan persis Tools 100 MBA) */}
         <div
-          className={`absolute inset-0 w-full h-full rounded-2xl ${cardGradient} p-4 shadow-lg border border-white/20 flex flex-col justify-end items-end overflow-hidden [backface-visibility:hidden]`}
+          className={`absolute inset-0 w-full h-full rounded-2xl ${iconBg.className} p-4 shadow-lg border border-white/20 flex flex-col justify-end items-end overflow-hidden [backface-visibility:hidden]`}
           style={{
+            ...iconBg.style,
             transform:
               interactionConfig.axis === "x"
                 ? `rotateX(${180 * interactionConfig.dir}deg)`

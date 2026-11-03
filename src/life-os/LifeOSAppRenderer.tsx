@@ -38,7 +38,7 @@ function wrapLifeWithShell(title: string, subtitle: string, Component: React.Com
 
 // Export Wrapped Views
 export const LifeOSPlannerView = wrapLifeWithShell(
-  "Life Planner Hub",
+  "Life Planner",
   "Dasbor eksekutif holistik: sasaran, habit, tugas, keuangan, dan jurnal refleksi harian",
   LifePlannerView
 );
@@ -80,7 +80,7 @@ export const LifeOSHouseholdView = wrapLifeWithShell(
 );
 
 export const LifeOSWishlistView = wrapLifeWithShell(
-  "Wishlist & Tabungan Impian",
+  "Wishlist and Savings",
   "Daftar impian terencana, refleksi mindful spending, celengan akumulasi dana & prioritas",
   WishlistView
 );

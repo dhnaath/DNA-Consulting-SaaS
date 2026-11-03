@@ -749,7 +749,7 @@ export function HealthView() {
             )}
           >
             <Activity size={15} />
-            <span>Vitals Tracker</span>
+            <span>Vital Signs</span>
           </button>
 
           <button
@@ -775,7 +775,7 @@ export function HealthView() {
             )}
           >
             <Moon size={15} />
-            <span>Sleep Quality</span>
+            <span>Sleep Tracker</span>
           </button>
 
           <button
@@ -788,7 +788,7 @@ export function HealthView() {
             )}
           >
             <Sparkles size={15} />
-            <span>Skincare Log</span>
+            <span>Skincare Tracker</span>
           </button>
 
           <button

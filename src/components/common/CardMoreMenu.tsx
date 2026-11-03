@@ -10,6 +10,7 @@ import {
   RotateCcw,
   Search,
   X,
+  Palette,
 } from "lucide-react";
 import {
   LAUNCHER_PAGE_OPTIONS,
@@ -17,6 +18,11 @@ import {
   useCardPageMover,
   type MovedCardFeatureSnapshot,
 } from "@/hooks/useCardPageMover";
+import {
+  useCardIconColor,
+  CARD_COLOR_PRESETS,
+  resolveIconBg,
+} from "@/hooks/useCardIconColor";
 
 export interface CardMoveMenuData {
   cardKey: string;
@@ -31,11 +37,14 @@ export interface CardMoveMenuData {
   features?: MovedCardFeatureSnapshot[];
 }
 
-interface CardMoreMenuProps {
+export interface CardMoreMenuProps {
   title: string;
   isFav: boolean;
   onToggleFavorite: () => void;
   moveData?: CardMoveMenuData;
+  to?: string;
+  icon?: React.ComponentType<{ className?: string; size?: number; strokeWidth?: number }>;
+  defaultGradient?: string;
 }
 
 export function CardMoreMenu({
@@ -43,11 +52,31 @@ export function CardMoreMenu({
   isFav,
   onToggleFavorite,
   moveData,
+  to,
+  icon,
+  defaultGradient,
 }: CardMoreMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isMoveModalOpen, setIsMoveModalOpen] = useState(false);
+  const [isColorModalOpen, setIsColorModalOpen] = useState(false);
   const [pageQuery, setPageQuery] = useState("");
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const cardTo = to || moveData?.to;
+  const CardIcon = icon || moveData?.icon;
+  const cardDefaultGradient = defaultGradient || moveData?.gradient || "bg-linear-to-br from-primary to-indigo-700";
+  const { customColor, hasCustomColor, setColor, resetColor } = useCardIconColor(title, cardTo);
+
+  const [customHexInput, setCustomHexInput] = useState(() =>
+    customColor && !customColor.startsWith("bg-") ? customColor : "#6366f1"
+  );
+
+  // Sync customHexInput when customColor changes
+  useEffect(() => {
+    if (customColor && !customColor.startsWith("bg-")) {
+      setCustomHexInput(customColor);
+    }
+  }, [customColor]);
 
   const {
     movedCards,
@@ -101,6 +130,17 @@ export function CardMoreMenu({
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isMoveModalOpen]);
+
+  useEffect(() => {
+    if (!isColorModalOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsColorModalOpen(false);
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isColorModalOpen]);
 
   const filteredPages = LAUNCHER_PAGE_OPTIONS.filter((p) => {
     if (!pageQuery.trim()) return true;
@@ -194,6 +234,28 @@ export function CardMoreMenu({
             <span className="whitespace-nowrap">
               {isFav ? "Hapus dari Dock Bawah" : "Tambah ke Dock Bawah"}
             </span>
+          </button>
+
+          {/* 2. Ganti Warna Icon */}
+          <div className="h-px bg-border/60 my-0.5 mx-1" />
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setIsOpen(false);
+              setIsColorModalOpen(true);
+            }}
+            className="w-full flex items-center justify-between gap-2 px-2.5 py-2 rounded-lg text-xs font-medium text-foreground hover:bg-muted transition-colors cursor-pointer group/color"
+            title="Ganti warna dan gradien icon kartu ini"
+          >
+            <span className="flex items-center gap-2.5 min-w-0">
+              <Palette className="size-3.5 shrink-0 text-muted-foreground group-hover/color:text-primary transition-colors" />
+              <span className="whitespace-nowrap">Ganti Warna Icon...</span>
+            </span>
+            {hasCustomColor && (
+              <span className="size-2 rounded-full bg-primary shrink-0" title="Warna telah dikustomisasi" />
+            )}
           </button>
 
           {/* 2. Pindahkan Kotak ke Page Laman */}
@@ -440,6 +502,200 @@ export function CardMoreMenu({
                   className="px-3 py-1.5 rounded-lg border border-border hover:bg-muted text-foreground font-medium transition-colors cursor-pointer"
                 >
                   Tutup
+                </button>
+              </div>
+            </div>
+          </div>,
+          document.body
+        )}
+
+      {/* Modal Ganti Warna Icon Kartu (Portaled ke document.body) */}
+      {isColorModalOpen &&
+        typeof document !== "undefined" &&
+        createPortal(
+          <div
+            className="fixed inset-0 z-[130] flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-150"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsColorModalOpen(false);
+            }}
+            onPointerDown={(e) => e.stopPropagation()}
+          >
+            <div
+              className="w-full max-w-md rounded-2xl border border-border bg-card text-card-foreground shadow-2xl overflow-hidden animate-in zoom-in-95 duration-150 flex flex-col max-h-[90vh]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Header Modal */}
+              <div className="flex items-center justify-between px-5 py-4 border-b border-border bg-muted/30">
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div className="size-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                    <Palette className="size-4" />
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="text-sm font-semibold text-foreground truncate">
+                      Ganti Warna Icon
+                    </h3>
+                    <p className="text-[11px] text-muted-foreground truncate">
+                      Kustomisasi icon kartu &ldquo;{title}&rdquo;
+                    </p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setIsColorModalOpen(false)}
+                  className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
+                  title="Tutup"
+                >
+                  <X className="size-4" />
+                </button>
+              </div>
+
+              {/* Body Modal */}
+              <div className="p-5 overflow-y-auto space-y-5 no-scrollbar">
+                {/* 1. Preview Icon Kartu */}
+                <div className="flex flex-col items-center justify-center p-4 rounded-xl bg-muted/40 border border-border/60 gap-2.5">
+                  <div
+                    className={`h-16 w-16 rounded-full flex items-center justify-center text-white shadow-md transition-all ${
+                      resolveIconBg(customColor, cardDefaultGradient).className
+                    }`}
+                    style={resolveIconBg(customColor, cardDefaultGradient).style}
+                  >
+                    {CardIcon ? (
+                      <CardIcon className="h-8 w-8 drop-shadow-sm opacity-95" strokeWidth={1.75} />
+                    ) : (
+                      <Palette className="h-8 w-8 drop-shadow-sm opacity-95" />
+                    )}
+                  </div>
+                  <div className="text-center">
+                    <div className="text-xs font-bold text-foreground truncate max-w-[280px]">
+                      {title}
+                    </div>
+                    <div className="text-[11px] text-muted-foreground mt-0.5">
+                      {hasCustomColor ? (
+                        <span className="text-primary font-medium inline-flex items-center gap-1">
+                          <Check className="size-3" /> Warna Kustom Diterapkan
+                        </span>
+                      ) : (
+                        "Warna Bawaan (Default Sistem)"
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* 2. Palet Gradien & Warna Pilihan */}
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs font-semibold text-foreground">
+                      Pilihan Gradien & Warna Cepat
+                    </span>
+                    <span className="text-[10px] text-muted-foreground">
+                      {CARD_COLOR_PRESETS.length} Pilihan
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-4 gap-2">
+                    {CARD_COLOR_PRESETS.map((preset) => {
+                      const isSelected = customColor === preset.value;
+                      return (
+                        <button
+                          key={preset.id}
+                          type="button"
+                          onClick={() => {
+                            setColor(preset.value);
+                          }}
+                          className={`relative flex flex-col items-center p-2 rounded-xl border transition-all cursor-pointer group ${
+                            isSelected
+                              ? "border-primary bg-primary/5 shadow-xs ring-2 ring-primary/30"
+                              : "border-border/60 hover:border-border hover:bg-muted/50"
+                          }`}
+                          title={preset.name}
+                        >
+                          <div
+                            className="size-8 rounded-full shadow-xs flex items-center justify-center text-white transition-transform group-hover:scale-105 shrink-0"
+                            style={{ background: preset.previewBg }}
+                          >
+                            {isSelected && <Check className="size-4 stroke-[2.5] drop-shadow-sm" />}
+                          </div>
+                          <span className="text-[10px] text-center font-medium text-foreground mt-1.5 truncate max-w-full leading-tight">
+                            {preset.name}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* 3. Pemilih Warna Kustom Sendiri (Color Picker & Hex) */}
+                <div className="pt-2 border-t border-border">
+                  <span className="text-xs font-semibold text-foreground block mb-2">
+                    Warna Kustom Sendiri (Hex Picker)
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <div className="relative flex items-center">
+                      <input
+                        type="color"
+                        value={customHexInput.startsWith("#") ? customHexInput : "#6366f1"}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          setCustomHexInput(val);
+                          setColor(val);
+                        }}
+                        className="size-9 rounded-lg border border-border cursor-pointer p-0.5 bg-card"
+                        title="Klik untuk memilih warna"
+                      />
+                    </div>
+                    <input
+                      type="text"
+                      value={customHexInput}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        setCustomHexInput(val);
+                        if (/^#([0-9A-F]{3}){1,2}$/i.test(val)) {
+                          setColor(val);
+                        }
+                      }}
+                      placeholder="#6366F1"
+                      className="flex-1 px-3 py-1.5 rounded-lg border border-border bg-background text-xs font-mono text-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (/^#([0-9A-F]{3}){1,2}$/i.test(customHexInput)) {
+                          setColor(customHexInput);
+                        }
+                      }}
+                      className="px-3 py-1.5 rounded-lg bg-secondary hover:bg-secondary/80 text-secondary-foreground text-xs font-medium cursor-pointer transition-colors"
+                    >
+                      Terapkan
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Footer Modal */}
+              <div className="flex items-center justify-between px-5 py-3 border-t border-border bg-muted/20">
+                <button
+                  type="button"
+                  onClick={() => {
+                    resetColor();
+                  }}
+                  disabled={!hasCustomColor}
+                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+                    hasCustomColor
+                      ? "text-rose-600 hover:text-rose-700 hover:bg-rose-500/10 cursor-pointer"
+                      : "text-muted-foreground/50 cursor-not-allowed"
+                  }`}
+                  title="Kembalikan ke warna bawaan sistem"
+                >
+                  <RotateCcw className="size-3.5" />
+                  <span>Reset ke Bawaan</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setIsColorModalOpen(false)}
+                  className="px-4 py-1.5 rounded-lg bg-primary text-primary-foreground text-xs font-medium hover:bg-primary/90 transition-colors cursor-pointer"
+                >
+                  Selesai
                 </button>
               </div>
             </div>

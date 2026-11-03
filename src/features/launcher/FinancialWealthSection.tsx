@@ -108,7 +108,7 @@ export const STANDALONE_FINANCIAL_APPS: StandaloneFinancialAppDef[] = [
     badge: "Standalone",
     features: [
       { title: "Audit Kepatuhan", to: "/surety?tab=cat_kepatuhan&sub=audit", icon: Scale },
-      { title: "Regulasi OJK & BI", to: "/surety?tab=cat_kepatuhan&sub=regulasi", icon: ShieldCheck },
+      { title: "OJK and BI Regulations", to: "/surety?tab=cat_kepatuhan&sub=regulasi", icon: ShieldCheck },
     ],
   },
   {
@@ -136,7 +136,7 @@ export const STANDALONE_FINANCIAL_APPS: StandaloneFinancialAppDef[] = [
     badge: "Standalone",
     features: [
       { title: "Asuransi Kesehatan", to: "/surety?tab=cat_asuransi&sub=kesehatan", icon: HeartPulse },
-      { title: "Asuransi Jiwa & Kritis", to: "/surety?tab=cat_asuransi&sub=jiwa", icon: Umbrella },
+      { title: "Life and Critical Illness Insurance", to: "/surety?tab=cat_asuransi&sub=jiwa", icon: Umbrella },
     ],
   },
   {
@@ -150,7 +150,7 @@ export const STANDALONE_FINANCIAL_APPS: StandaloneFinancialAppDef[] = [
     badge: "Standalone",
     features: [
       { title: "Liquid Reserves", to: "/liquid-reserves", icon: Coins },
-      { title: "Dana Darurat (Buffer)", to: "/surety?tab=cat_dana&sub=darurat", icon: Vault },
+      { title: "Emergency Fund", to: "/surety?tab=cat_dana&sub=darurat", icon: Vault },
     ],
   },
   {
@@ -165,7 +165,7 @@ export const STANDALONE_FINANCIAL_APPS: StandaloneFinancialAppDef[] = [
     features: [
       { title: "Dokumen Aset", to: "/surety?tab=cat_proteksi&sub=vault", icon: ShieldCheck },
       { title: "Passwords", to: "/surety?tab=cat_proteksi&sub=passwords", icon: Key },
-      { title: "Garansi dan Bukti Nota", to: "/surety?tab=cat_proteksi", icon: ShieldCheck },
+      { title: "Warranty and Purchase Records", to: "/surety?tab=cat_proteksi", icon: ShieldCheck },
     ],
   },
 
@@ -183,7 +183,7 @@ export const STANDALONE_FINANCIAL_APPS: StandaloneFinancialAppDef[] = [
     badge: "Standalone",
     features: [
       { title: "Kuadran Liabilitas", to: "/liability", icon: CreditCard },
-      { title: "Rasio Utang (DSR)", to: "/flow?tab=cat_liabilitas&sub=rasio", icon: Calculator },
+      { title: "Debt Service Ratio", to: "/flow?tab=cat_liabilitas&sub=rasio", icon: Calculator },
     ],
   },
   {
@@ -224,8 +224,8 @@ export const STANDALONE_FINANCIAL_APPS: StandaloneFinancialAppDef[] = [
     icon: Receipt,
     badge: "Standalone",
     features: [
-      { title: "Pajak Personal (PPh 21)", to: "/pajak?app=pph21", icon: Calculator },
-      { title: "PPN & Pajak Lain", to: "/pajak?app=ppn", icon: Receipt },
+      { title: "Personal Income Tax", to: "/pajak?app=pph21", icon: Calculator },
+      { title: "VAT and Other Taxes", to: "/pajak?app=ppn", icon: Receipt },
     ],
   },
   {
@@ -238,7 +238,7 @@ export const STANDALONE_FINANCIAL_APPS: StandaloneFinancialAppDef[] = [
     icon: Activity,
     badge: "Standalone",
     features: [
-      { title: "Budget 50/30/20", to: "/budget", icon: Wallet },
+      { title: "50/30/20 Budget", to: "/budget", icon: Wallet },
       { title: "Autodebet Rutin", to: "/flow?tab=cat_otomatisasi&sub=autodebet", icon: Activity },
     ],
   },
@@ -256,7 +256,7 @@ export const STANDALONE_FINANCIAL_APPS: StandaloneFinancialAppDef[] = [
     icon: Brain,
     badge: "Standalone",
     features: [
-      { title: "Valuasi Diri & Skill", to: "/build?tab=cat_modal&sub=skill", icon: Brain },
+      { title: "Skills Valuation", to: "/build?tab=cat_modal&sub=skill", icon: Brain },
       { title: "Daya Ungkit Karier", to: "/build?tab=cat_modal&sub=karier", icon: TrendingUp },
     ],
   },
@@ -288,6 +288,7 @@ export const STANDALONE_FINANCIAL_APPS: StandaloneFinancialAppDef[] = [
       { title: "Paper Securities", to: "/paper-securities", icon: ScrollText },
       { title: "Digital Assets", to: "/digital-assets", icon: Binary },
       { title: "Intellectual Property", to: "/intellectual-property", icon: Lightbulb },
+      { title: "Market Price Monitor", to: "/100-komoditas", icon: Package },
     ],
   },
   {
@@ -347,7 +348,6 @@ export const STANDALONE_FINANCIAL_APPS: StandaloneFinancialAppDef[] = [
     badge: "Standalone",
     features: [
       { title: "Logam Mulia & Saham", to: "/100-komoditas", icon: Coins },
-      { title: "Market Price Monitor", to: "/100-komoditas", icon: Package },
     ],
   },
   {
@@ -360,8 +360,8 @@ export const STANDALONE_FINANCIAL_APPS: StandaloneFinancialAppDef[] = [
     icon: Zap,
     badge: "Standalone",
     features: [
-      { title: "Efisiensi Biaya & Fee", to: "/grow?tab=cat_efektif&sub=friction", icon: Zap },
-      { title: "Maksimalisasi Net Yield", to: "/grow?tab=cat_efektif&sub=yield", icon: TrendingUp },
+      { title: "Cost and Fee Efficiency", to: "/grow?tab=cat_efektif&sub=friction", icon: Zap },
+      { title: "Net Yield Optimization", to: "/grow?tab=cat_efektif&sub=yield", icon: TrendingUp },
     ],
   },
   {
@@ -374,7 +374,7 @@ export const STANDALONE_FINANCIAL_APPS: StandaloneFinancialAppDef[] = [
     icon: TrendingUp,
     badge: "Standalone",
     features: [
-      { title: "Bunga Majemuk dan ROI", to: "/investasi?app=bunga-majemuk", icon: Calculator },
+      { title: "Compound Interest and ROI", to: "/investasi?app=bunga-majemuk", icon: Calculator },
       { title: "Simulasi Waktu Majemuk", to: "/investasi?app=roi", icon: TrendingUp },
     ],
   },
@@ -420,7 +420,7 @@ export const STANDALONE_FINANCIAL_APPS: StandaloneFinancialAppDef[] = [
     icon: Building,
     badge: "Standalone",
     features: [
-      { title: "Tata Kelola & Audit Aset", to: "/legacy?tab=cat_tatakelola", icon: Scale },
+      { title: "Asset Governance and Audit", to: "/legacy?tab=cat_tatakelola", icon: Scale },
       { title: "Struktur Kepemilikan", to: "/legacy?tab=cat_tatakelola&sub=struktur", icon: Building },
     ],
   },
@@ -434,9 +434,8 @@ export const STANDALONE_FINANCIAL_APPS: StandaloneFinancialAppDef[] = [
     icon: HeartHandshake,
     badge: "Standalone",
     features: [
-      { title: "Zakat dan Sedekah", to: "/legacy?tab=cat_amal&sub=zakat", icon: Coins },
-      { title: "Catatan Infaq dan Donasi", to: "/lainnya?app=donation-tracker", icon: Coins },
-      { title: "Relawan dan Bakti Sosial", to: "/lainnya?app=volunteer-log", icon: Heart },
+      { title: "Infaq and Donation Records", to: "/lainnya?app=donation-tracker", icon: Coins },
+      { title: "Volunteer and Social Service Log", to: "/lainnya?app=volunteer-log", icon: Heart },
     ],
   },
   {
@@ -449,7 +448,6 @@ export const STANDALONE_FINANCIAL_APPS: StandaloneFinancialAppDef[] = [
     icon: ReceiptText,
     badge: "Standalone",
     features: [
-      { title: "Kredit dan Utang", to: "/kredit", icon: CreditCard },
       { title: "Pelunasan Kewajiban", to: "/legacy?tab=cat_likuidasi&sub=pelunasan", icon: ReceiptText },
     ],
   },
@@ -482,7 +480,7 @@ export const STANDALONE_FINANCIAL_APPS: StandaloneFinancialAppDef[] = [
     badge: "Standalone",
     features: [
       { title: "Kalkulator Dana Tabarru'", to: "/syariah/akad?app=tabarru", icon: Calculator },
-      { title: "Rukun & Fatwa DSN", to: "/syariah/akad?app=tabarru", icon: BookOpen },
+      { title: "Sharia Principles and DSN Fatwas", to: "/syariah/akad?app=tabarru", icon: BookOpen },
     ],
   },
   {
@@ -496,7 +494,7 @@ export const STANDALONE_FINANCIAL_APPS: StandaloneFinancialAppDef[] = [
     badge: "Standalone",
     features: [
       { title: "Simulasi Nisbah Bagi Hasil", to: "/syariah/akad?app=mudharabah", icon: Calculator },
-      { title: "Struktur Modal & Profit", to: "/syariah/akad?app=mudharabah", icon: TrendingUp },
+      { title: "Capital and Profit Structure", to: "/syariah/akad?app=mudharabah", icon: TrendingUp },
     ],
   },
   {
@@ -831,7 +829,7 @@ export const WEALTH_STAGE_MAIN_BOXES: WealthStageMainBoxDef[] = [
         subFeatures: [
           { title: "Dokumen Aset", to: "/surety?tab=cat_proteksi&sub=vault", icon: ShieldCheck },
           { title: "Passwords", to: "/surety?tab=cat_proteksi&sub=passwords", icon: Key },
-          { title: "Garansi & Bukti Nota", to: "/surety?tab=cat_proteksi", icon: ShieldCheck },
+          { title: "Warranty and Purchase Records", to: "/surety?tab=cat_proteksi", icon: ShieldCheck },
         ],
       },
     ],
@@ -897,7 +895,7 @@ export const WEALTH_STAGE_MAIN_BOXES: WealthStageMainBoxDef[] = [
         to: "/flow?tab=cat_pajak",
         icon: Receipt,
         subFeatures: [
-          { title: "Pajak Personal (PPh 21)", to: "/pajak?app=pph21", icon: Calculator },
+          { title: "Personal Income Tax", to: "/pajak?app=pph21", icon: Calculator },
         ],
       },
       {
@@ -907,7 +905,7 @@ export const WEALTH_STAGE_MAIN_BOXES: WealthStageMainBoxDef[] = [
         to: "/flow?tab=cat_otomatisasi",
         icon: Activity,
         subFeatures: [
-          { title: "Budgeting System", to: "/budget", icon: Wallet },
+          { title: "50/30/20 Budget", to: "/budget", icon: Wallet },
         ],
       },
     ],
@@ -963,6 +961,7 @@ export const WEALTH_STAGE_MAIN_BOXES: WealthStageMainBoxDef[] = [
           { title: "Paper Securities", to: "/paper-securities", icon: ScrollText },
           { title: "Digital Assets", to: "/digital-assets", icon: Binary },
           { title: "Intellectual Property", to: "/intellectual-property", icon: Lightbulb },
+          { title: "Market Price Monitor", to: "/100-komoditas", icon: Package },
         ],
       },
       {
@@ -1022,7 +1021,6 @@ export const WEALTH_STAGE_MAIN_BOXES: WealthStageMainBoxDef[] = [
         icon: PieChart,
         subFeatures: [
           { title: "Logam Mulia & Saham", to: "/100-komoditas", icon: Coins },
-          { title: "Market Price Monitor", to: "/100-komoditas", icon: Package },
         ],
       },
       {
@@ -1039,7 +1037,7 @@ export const WEALTH_STAGE_MAIN_BOXES: WealthStageMainBoxDef[] = [
         to: "/grow?tab=cat_bunga",
         icon: TrendingUp,
         subFeatures: [
-          { title: "Bunga Majemuk & ROI", to: "/investasi?app=bunga-majemuk", icon: Calculator },
+          { title: "Compound Interest and ROI", to: "/investasi?app=bunga-majemuk", icon: Calculator },
         ],
       },
       {
@@ -1087,7 +1085,7 @@ export const WEALTH_STAGE_MAIN_BOXES: WealthStageMainBoxDef[] = [
         to: "/legacy?tab=cat_tatakelola",
         icon: Building,
         subFeatures: [
-          { title: "Good Governance", to: "/legacy?tab=cat_tatakelola", icon: Scale },
+          { title: "Asset Governance and Audit", to: "/legacy?tab=cat_tatakelola", icon: Scale },
           { title: "Struktur Kepemilikan", to: "/legacy?tab=cat_tatakelola&sub=struktur", icon: Building },
         ],
       },
@@ -1098,9 +1096,8 @@ export const WEALTH_STAGE_MAIN_BOXES: WealthStageMainBoxDef[] = [
         to: "/legacy?tab=cat_amal",
         icon: HeartHandshake,
         subFeatures: [
-          { title: "Zakat & Sedekah", to: "/legacy?tab=cat_amal&sub=zakat", icon: Coins },
-          { title: "Infaq & Donasi", to: "/lainnya?app=donation-tracker", icon: Coins },
-          { title: "Relawan Sosial", to: "/lainnya?app=volunteer-log", icon: Heart },
+          { title: "Infaq and Donation Records", to: "/lainnya?app=donation-tracker", icon: Coins },
+          { title: "Volunteer and Social Service Log", to: "/lainnya?app=volunteer-log", icon: Heart },
         ],
       },
       {
@@ -1110,7 +1107,7 @@ export const WEALTH_STAGE_MAIN_BOXES: WealthStageMainBoxDef[] = [
         to: "/legacy?tab=cat_likuidasi",
         icon: ReceiptText,
         subFeatures: [
-          { title: "Kredit & Utang", to: "/kredit", icon: CreditCard },
+          { title: "Pelunasan Kewajiban", to: "/legacy?tab=cat_likuidasi&sub=pelunasan", icon: ReceiptText },
         ],
       },
       {

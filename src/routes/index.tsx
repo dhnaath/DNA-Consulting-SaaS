@@ -6,9 +6,7 @@ import { useFavorites } from "@/hooks/useFavorites";
 import { useDockStore } from "@/hooks/useDockState";
 import { getLastLauncherPage, setLastLauncherPage } from "@/utils/launcherCategoryMapper";
 import { Tools100Section } from "@/features/launcher/Tools100Section";
-import { ValueTreatedSection } from "@/features/launcher/ValueTreatedSection";
 import { FinancialWealthSection } from "@/features/launcher/FinancialWealthSection";
-import { CommodityDashboardSection } from "./commodity-dashboard";
 import { EmptyModePage } from "@/features/launcher/EmptyModePage";
 import { ModeSectionView } from "@/features/launcher/ModeSectionView";
 import {
@@ -22,11 +20,9 @@ import { MovedCardsSection } from "@/components/common/MovedCardsGridItems";
 import { getRaw, setRaw } from "../core/rawStorage";
 import {
   Layers,
-  Gem,
   Scale,
   Coins,
   LayoutGrid,
-  TrendingUp,
   BarChart3,
   User,
   Users,
@@ -68,11 +64,7 @@ export function getGradient(title: string): string {
 }
 
 export const LAUNCHER_TABS = [
-  // 2 Halaman Inti Utama (100 Tools Mini MBA kini dilebur ke Business Operations)
-  { id: "valuetreated", label: "Value Treated", icon: Gem, badge: "10 Disiplin" },
-  { id: "commodity", label: "Market Price Monitor", icon: TrendingUp, badge: "Makro & Nasional" },
-
-  // 10 Laman Fix Workspace Terintegrasi
+  // 10 Laman Workspace Terintegrasi (Applied Value & Market Price Monitor kini mandiri via Dock)
   { id: "financial", modeId: "financial", label: "Financial Planning and Wealth Management", icon: Coins, badge: "5 Tahapan", desc: "Perencanaan Finansial, Wealth Spectrum, Valuasi & Suksesi" },
   { id: "mode_business", modeId: "business", label: "Business Administration and Operations Management", icon: Store, badge: BIZ_OPS_TOTAL_BADGE, desc: BIZ_OPS_SUMMARY_DESC },
   { id: "mode_employment", modeId: "employment", label: "Productivity Workspace and Workflow Systems", icon: Briefcase, badge: "9 Modul", desc: "Semua (9) · Planning (1) · Workflow (2) · Resources (2) · Coordination (1) · Governance (2) · Ownership (1)" },
@@ -94,8 +86,14 @@ export function Launcher() {
           if (!val) return -1;
           const v = val.toLowerCase().trim();
           if (v === "tools" || v === "100-tools" || v === "mini-mba" || v === "mba" || v === "pilar") return LAUNCHER_TABS.findIndex((t) => t.id === "mode_business" || (t as any).modeId === "business");
-          if (v === "valuetreated" || v === "value-treated" || v === "value_treated" || v === "disiplin" || v === "applied-value-framework" || v === "applied-value" || v === "applied_value_framework" || v === "applied") return LAUNCHER_TABS.findIndex((t) => t.id === "valuetreated");
-          if (v === "commodity" || v === "100-komoditas" || v === "komoditas" || v === "indeks" || v === "national_indices" || v === "10-indeks" || v === "market-price-monitor" || v === "market_price_monitor" || v === "price-monitor") return LAUNCHER_TABS.findIndex((t) => t.id === "commodity");
+          if (v === "valuetreated" || v === "value-treated" || v === "value_treated" || v === "disiplin" || v === "applied-value-framework" || v === "applied-value" || v === "applied_value_framework" || v === "applied") {
+            window.location.replace("/value-treated");
+            return 0;
+          }
+          if (v === "commodity" || v === "100-komoditas" || v === "komoditas" || v === "indeks" || v === "national_indices" || v === "10-indeks" || v === "market-price-monitor" || v === "market_price_monitor" || v === "price-monitor") {
+            window.location.replace("/100-komoditas");
+            return 0;
+          }
           if (v === "financial" || v === "finance" || v === "financial-planning" || v === "wealth") return LAUNCHER_TABS.findIndex((t) => t.id === "financial" || (t as any).modeId === "financial");
           if (v === "business" || v === "business-administration" || v === "business-operations" || v === "owner") return LAUNCHER_TABS.findIndex((t) => t.id === "mode_business" || (t as any).modeId === "business");
           if (v === "productivity" || v === "work" || v === "work-productivity" || v === "employment") return LAUNCHER_TABS.findIndex((t) => t.id === "mode_employment" || (t as any).modeId === "employment");
@@ -360,7 +358,7 @@ export function Launcher() {
   return (
     <AppShell
       title="All in One Workspace"
-      subtitle="Workspace Eksekutif Terintegrasi: Bisnis, Finansial, Manajemen, Komoditas & 10 Mode Kehidupan"
+      subtitle="Workspace Eksekutif Terintegrasi: Bisnis, Finansial, Manajemen & 10 Mode Kehidupan"
     >
       <div className="w-full max-w-[1500px] mx-auto px-4 sm:px-6 py-2 space-y-2 pb-2">
         {/* Swipe Carousel Area */}
@@ -383,17 +381,6 @@ export function Launcher() {
                           toggleFavorite={toggleFavorite}
                           getGradient={getGradient}
                         />
-                      ) : tab.id === "valuetreated" ? (
-                        <ValueTreatedSection
-                          favorites={favorites}
-                          toggleFavorite={toggleFavorite}
-                          getGradient={getGradient}
-                        />
-                      ) : tab.id === "commodity" ? (
-                        <>
-                          <CommodityDashboardSection isEmbedded={true} />
-                          <MovedCardsSection pageId="commodity" className="mt-4" />
-                        </>
                       ) : tab.id === "financial" ? (
                         <FinancialWealthSection
                           favorites={favorites}

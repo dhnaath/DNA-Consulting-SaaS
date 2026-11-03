@@ -2078,6 +2078,7 @@ function DynamicAppView() {
   if (pathname === "/zakat") return <ZakatAppView />;
 
   // 2. Value Treated & Finance
+  if (pathname === "/value-treated" || pathname === "/applied-value") return <ValueTreatedPage />;
   if (pathname === "/pajak") return <TaxAppView />;
   if (pathname === "/investasi") return <InvestmentAppView />;
   if (pathname === "/valuasi") return <ValuationView />;

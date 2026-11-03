@@ -1765,7 +1765,7 @@ export const STANDALONE_APPS: Record<string, StandaloneAppConfig> = {
     subtitle: "Linimasa riwayat obrolan tatap muka atau panggilan penting beserta komitmen yang disepakati.",
     section: "people",
     categoryGroup: "People and Relationships",
-    subCategoryTitle: "Relationship History",
+    subCategoryTitle: "Relationship Management",
     icon: History,
     badge: "Interaction History",
     colorScheme: "from-purple-600 to-indigo-700",

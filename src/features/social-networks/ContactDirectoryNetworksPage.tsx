@@ -51,7 +51,7 @@ export const SOCIAL_NETWORKS_APPS: SocialAppItem[] = [
   // 1. Direktori (2)
   {
     id: "people-manager-identity",
-    name: "People & Identity Directory",
+    name: "People Directory",
     category: "direktori",
     categoryLabel: "Direktori",
     shortDesc:
@@ -64,14 +64,14 @@ export const SOCIAL_NETWORKS_APPS: SocialAppItem[] = [
     badgeBg: "bg-blue-500/15 text-blue-600 dark:text-blue-400 border-blue-500/30",
     badgeText: "Direktori",
     subMenus: [
-      { id: "identity-profiles", label: "Profil Identitas", to: "/people-manager" },
-      { id: "roles-mapping", label: "Pemetaan Peran", to: "/people-manager" },
-      { id: "org-members", label: "Keanggotaan Organisasi", to: "/people-manager" },
+      { id: "identity-profiles", label: "Identity Profiles", to: "/people-manager" },
+      { id: "roles-mapping", label: "Role Mapping", to: "/people-manager" },
+      { id: "org-members", label: "Organization Membership", to: "/people-manager" },
     ],
   },
   {
     id: "executive-contacts-book",
-    name: "Executive Contact Directory",
+    name: "Contact Directory",
     category: "direktori",
     categoryLabel: "Direktori",
     shortDesc:
@@ -84,16 +84,16 @@ export const SOCIAL_NETWORKS_APPS: SocialAppItem[] = [
     badgeBg: "bg-teal-500/15 text-teal-600 dark:text-teal-400 border-teal-500/30",
     badgeText: "Direktori",
     subMenus: [
-      { id: "all-contacts", label: "Daftar Kontak", to: "/peh/contacts" },
-      { id: "vip-partners", label: "Mitra Strategis", to: "/contacts" },
-      { id: "import-export", label: "Buku Alamat", to: "/klien" },
+      { id: "all-contacts", label: "Contact List", to: "/peh/contacts" },
+      { id: "vip-partners", label: "Strategic Partners", to: "/contacts" },
+      { id: "import-export", label: "Address Book", to: "/klien" },
     ],
   },
 
   // 2. Relasi (2)
   {
     id: "interaction-timeline-relations",
-    name: "Relationship History",
+    name: "Relationship Management",
     category: "relasi",
     categoryLabel: "Relasi",
     shortDesc:
@@ -106,14 +106,14 @@ export const SOCIAL_NETWORKS_APPS: SocialAppItem[] = [
     badgeBg: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30",
     badgeText: "Relasi",
     subMenus: [
-      { id: "interaction-log", label: "Log Interaksi", to: "/interaction-manager" },
-      { id: "follow-up-schedule", label: "Jadwal Follow-Up", to: "/interaction-manager" },
-      { id: "meeting-history", label: "Histori Diskusi", to: "/meeting-manager" },
+      { id: "interaction-log", label: "Interaction Log", to: "/interaction-manager" },
+      { id: "follow-up-schedule", label: "Follow-Up Schedule", to: "/interaction-manager" },
+      { id: "meeting-history", label: "Discussion History", to: "/meeting-manager" },
     ],
   },
   {
     id: "circle-groups-communities",
-    name: "Groups & Communities",
+    name: "Groups and Communities",
     category: "relasi",
     categoryLabel: "Relasi",
     shortDesc:
@@ -126,16 +126,16 @@ export const SOCIAL_NETWORKS_APPS: SocialAppItem[] = [
     badgeBg: "bg-purple-500/15 text-purple-600 dark:text-purple-400 border-purple-500/30",
     badgeText: "Relasi",
     subMenus: [
-      { id: "circles-list", label: "Daftar Lingkaran Relasi", to: "/lainnya?app=circle-groups" },
-      { id: "alumni-community", label: "Komunitas Alumni", to: "/peh/community-events" },
-      { id: "group-projects", label: "Kolaborasi Lingkaran", to: "/collaboration" },
+      { id: "circles-list", label: "Relationship Groups", to: "/lainnya?app=circle-groups" },
+      { id: "alumni-community", label: "Alumni Communities", to: "/peh/community-events" },
+      { id: "group-projects", label: "Group Collaboration", to: "/collaboration" },
     ],
   },
 
   // 3. Jaringan (2)
   {
     id: "mentorship-introductions",
-    name: "Mentorship & Introductions",
+    name: "Professional Networking",
     category: "jaringan",
     categoryLabel: "Jaringan",
     shortDesc:
@@ -148,14 +148,14 @@ export const SOCIAL_NETWORKS_APPS: SocialAppItem[] = [
     badgeBg: "bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/30",
     badgeText: "Jaringan",
     subMenus: [
-      { id: "mentorship-log", label: "Sesi Mentorship", to: "/peh/mentorship" },
-      { id: "warm-intros", label: "Jejaring Perkenalan", to: "/peh/introductions" },
-      { id: "advisory-board", label: "Dewan Penasihat", to: "/klien" },
+      { id: "mentorship-log", label: "Mentorship Sessions", to: "/peh/mentorship" },
+      { id: "warm-intros", label: "Professional Introductions", to: "/peh/introductions" },
+      { id: "advisory-board", label: "Advisory Board", to: "/klien" },
     ],
   },
   {
     id: "celebrations-gift-tracker",
-    name: "Celebrations & Gifts",
+    name: "Celebrations and Gifts",
     category: "jaringan",
     categoryLabel: "Jaringan",
     shortDesc:
@@ -168,9 +168,9 @@ export const SOCIAL_NETWORKS_APPS: SocialAppItem[] = [
     badgeBg: "bg-rose-500/15 text-rose-600 dark:text-rose-400 border-rose-500/30",
     badgeText: "Jaringan",
     subMenus: [
-      { id: "gift-tracker", label: "Gift Tracker", to: "/lainnya?app=gift-tracker" },
-      { id: "anniversaries", label: "Kalender Hari Jadi", to: "/peh/gifts" },
-      { id: "greeting-cards", label: "Kartu Ucapan Relasi", to: "/notes" },
+      { id: "gift-tracker", label: "Gift History", to: "/lainnya?app=gift-tracker" },
+      { id: "anniversaries", label: "Anniversary Calendar", to: "/peh/gifts" },
+      { id: "greeting-cards", label: "Greeting Cards", to: "/notes" },
     ],
   },
 ];

@@ -13,6 +13,8 @@ import {
   GalleryHorizontal,
   Star,
   Search,
+  Gem,
+  TrendingUp,
 } from "lucide-react";
 import { useFavorites } from "@/hooks/useFavorites";
 import { useDockStore } from "@/hooks/useDockState";
@@ -373,7 +375,7 @@ export function AppDock({
     };
   }, []);
 
-  const { homeLauncherItems, mainDockItems } = useMemo(() => {
+  const { homeLauncherItems, valueMarketItems, mainDockItems } = useMemo(() => {
     const allItems = navKonsultan.flatMap((group) => group.items);
 
     // Base core apps
@@ -469,6 +471,37 @@ export function AppDock({
       });
     }
 
+    // Pill Bar 2: Applied Value & Monitor Price (Makro & Nilai Inti)
+    const valueMarketItems: DockItemConfig[] = [
+      {
+        id: "/value-treated",
+        label: "Applied Value",
+        icon: Gem,
+        iconColor: "text-amber-500 dark:text-amber-400",
+        strokeWidth: 2,
+        isActive:
+          pathname === "/value-treated" ||
+          (pathname === "/" &&
+            typeof window !== "undefined" &&
+            (window.location.search.includes("valuetreated") ||
+              window.location.search.includes("applied"))),
+      },
+      {
+        id: "/100-komoditas",
+        label: "Monitor Price",
+        icon: TrendingUp,
+        iconColor: "text-emerald-500 dark:text-emerald-400",
+        strokeWidth: 2,
+        isActive:
+          pathname === "/100-komoditas" ||
+          pathname === "/commodity-dashboard" ||
+          (pathname === "/" &&
+            typeof window !== "undefined" &&
+            (window.location.search.includes("commodity") ||
+              window.location.search.includes("100-komoditas"))),
+      },
+    ];
+
     const mainDockItems: DockItemConfig[] = [];
     if (dynamicFavs.length > 0) {
       mainDockItems.push(...dynamicFavs);
@@ -481,7 +514,7 @@ export function AppDock({
     }
     mainDockItems.push(...utilityModals);
 
-    return { homeLauncherItems, mainDockItems };
+    return { homeLauncherItems, valueMarketItems, mainDockItems };
   }, [
     pathname,
     favorites,
@@ -495,7 +528,7 @@ export function AppDock({
     handleToggleExpand,
   ]);
 
-  if (homeLauncherItems.length === 0 && mainDockItems.length === 0) return null;
+  if (homeLauncherItems.length === 0 && valueMarketItems.length === 0 && mainDockItems.length === 0) return null;
 
   const renderDockIconItem = (item: DockItemConfig) => {
     if (item.isSeparator) {
@@ -595,7 +628,33 @@ export function AppDock({
           {homeLauncherItems.map(renderDockIconItem)}
         </motion.div>
 
-        {/* Pill Bar 2: Pinned Favorites & System Utilities */}
+        {/* Pill Bar 2: Applied Value & Monitor Price (Terpisah Mandiri) */}
+        <motion.div
+          initial={false}
+          animate={
+            isMinimized
+              ? {
+                  y: 42,
+                  opacity: 0,
+                  scale: 0.9,
+                  pointerEvents: "none",
+                }
+              : {
+                  y: 0,
+                  opacity: 1,
+                  scale: 1,
+                  pointerEvents: "auto",
+                }
+          }
+          transition={dockSpring}
+          onMouseEnter={handleMouseEnterDock}
+          onMouseLeave={handleMouseLeaveDock}
+          className="pointer-events-auto flex items-end gap-2 px-3 pb-2.5 h-16 rounded-[28px] liquid-glass-dock overflow-visible relative shadow-lg"
+        >
+          {valueMarketItems.map(renderDockIconItem)}
+        </motion.div>
+
+        {/* Pill Bar 3: Pinned Favorites & System Utilities */}
         <motion.div
           initial={false}
           animate={

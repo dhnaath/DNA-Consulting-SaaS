@@ -17,6 +17,8 @@ import {
   CURRICULUM_DISCIPLINES,
 } from "@/features/curated/curriculumData";
 import { getCurriculumCategoryGroups } from "@/features/curated/curriculumCategories";
+import { AppShell } from "@/app/app-shell";
+import { HeaderNavPills, ShellHeader } from "@/app/shell-header";
 
 export function ValueTreatedPage() {
   const [activeJenjangId, setActiveJenjangId] = useState<number>(2);
@@ -89,7 +91,24 @@ export function ValueTreatedPage() {
   }, [currentJenjang]);
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-8 font-sans">
+    <AppShell
+      title="Applied Value Framework"
+      subtitle="Pusat Kurasi Nilai Terapan Komprehensif Melintasi 10 Bidang Value & 5 Jenjang SKS"
+    >
+      <ShellHeader>
+        <HeaderNavPills
+          items={JENJANG_LEVELS.map((jenjang) => ({
+            id: jenjang.id,
+            label: jenjang.name,
+            count: jenjang.count,
+            title: `${jenjang.name} (${jenjang.count} Fitur)`,
+          }))}
+          activeId={activeJenjangId}
+          onSelect={(id) => setActiveJenjangId(id as number)}
+        />
+      </ShellHeader>
+
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-8 font-sans">
       {/* Header Banner */}
       <div className="relative overflow-hidden rounded-3xl border border-amber-500/30 bg-gradient-to-br from-amber-500/10 via-card to-background p-6 sm:p-10 shadow-lg">
         <div className="absolute top-0 right-0 -mt-10 -mr-10 size-60 rounded-full bg-amber-500/10 blur-3xl pointer-events-none" />
@@ -492,5 +511,6 @@ export function ValueTreatedPage() {
         </div>
       </div>
     </div>
-  );
+  </AppShell>
+);
 }

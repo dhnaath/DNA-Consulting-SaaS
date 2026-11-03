@@ -74,11 +74,11 @@ export const PERSONAL_LIFE_APPS: PersonalLifeAppItem[] = [
   // ============================================================================
   {
     id: "habits-and-planning",
-    name: "Life Planning",
+    name: "Personal Planning",
     category: "pengembangan",
     categoryLabel: "Pengembangan",
     shortDesc:
-      "Pengembangan kebiasaan positif konsisten, perencanaan sasaran hidup terpadu, proyek mandiri, serta pencatatan impian dan tabungan masa depan.",
+      "Pengembangan kebiasaan positif konsisten, perencanaan sasaran hidup terpadu, proyek mandiri, serta pencatatan sasaran dan tabungan masa depan.",
     to: "/habit-tracker",
     icon: Flame,
     badge: "Pengembangan",
@@ -87,10 +87,10 @@ export const PERSONAL_LIFE_APPS: PersonalLifeAppItem[] = [
     badgeBg: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30",
     badgeText: "Pengembangan",
     subMenus: [
-      { id: "habit-tracker", label: "Habit Tracker MVP", to: "/habit-tracker" },
-      { id: "life-planner", label: "Life Planner Hub", to: "/life/life-planner" },
+      { id: "habit-tracker", label: "Habit Tracker", to: "/habit-tracker" },
+      { id: "life-planner", label: "Life Planner", to: "/life/life-planner" },
       { id: "personal-projects", label: "Personal Projects", to: "/proyek-personal" },
-      { id: "wishlist", label: "Wishlist & Tabungan Impian", to: "/life/wishlist" },
+      { id: "wishlist", label: "Goals and Savings", to: "/life/wishlist" },
     ],
   },
 
@@ -114,7 +114,7 @@ export const PERSONAL_LIFE_APPS: PersonalLifeAppItem[] = [
     subMenus: [
       { id: "daily-journal", label: "Daily Journal", to: "/journal" },
       { id: "gratitude-journal", label: "Gratitude Journal", to: "/journal?tab=gratitude" },
-      { id: "mood-tracker", label: "Mood Tracker MVP", to: "/journal?tab=mood" },
+      { id: "mood-tracker", label: "Mood Tracker", to: "/journal?tab=mood" },
     ],
   },
 
@@ -123,7 +123,7 @@ export const PERSONAL_LIFE_APPS: PersonalLifeAppItem[] = [
   // ============================================================================
   {
     id: "fitness-and-sleep",
-    name: "Wellness",
+    name: "Physical Wellness",
     category: "kesehatan",
     categoryLabel: "Kesehatan",
     shortDesc:
@@ -136,10 +136,10 @@ export const PERSONAL_LIFE_APPS: PersonalLifeAppItem[] = [
     badgeBg: "bg-blue-500/15 text-blue-600 dark:text-blue-400 border-blue-500/30",
     badgeText: "Kesehatan",
     subMenus: [
-      { id: "workouts", label: "Workouts", to: "/health?tab=workouts" },
-      { id: "sleep-quality", label: "Sleep Quality MVP", to: "/health?tab=sleep" },
+      { id: "workouts", label: "Workout Log", to: "/health?tab=workouts" },
+      { id: "sleep-quality", label: "Sleep Tracker", to: "/health?tab=sleep" },
       { id: "body-metrics", label: "Body Metrics", to: "/health?tab=body-metrics" },
-      { id: "water-intake", label: "Water Intake", to: "/health?tab=water" },
+      { id: "water-intake", label: "Hydration Tracker", to: "/health?tab=water" },
     ],
   },
   {
@@ -157,24 +157,24 @@ export const PERSONAL_LIFE_APPS: PersonalLifeAppItem[] = [
     badgeBg: "bg-rose-500/15 text-rose-600 dark:text-rose-400 border-rose-500/30",
     badgeText: "Kesehatan",
     subMenus: [
-      { id: "health-tracker", label: "Health Tracker", to: "/health" },
+      { id: "health-tracker", label: "Health Dashboard", to: "/health" },
       { id: "medical-records", label: "Medical Records", to: "/health?tab=medical-records" },
-      { id: "vitals-tracker", label: "Vitals Tracker", to: "/health?tab=vitals" },
-      { id: "med-reminder", label: "Med Reminder", to: "/lainnya?app=med-reminder" },
+      { id: "vitals-tracker", label: "Vital Signs", to: "/health?tab=vitals" },
+      { id: "med-reminder", label: "Medication Reminders", to: "/lainnya?app=med-reminder" },
       { id: "skincare-log", label: "Skincare Log", to: "/health?tab=skincare" },
     ],
   },
 
   // ============================================================================
-  // 4. Utilitas (1 App)
+  // 4. Utilitas (2 Apps: Password Manager & Calculator)
   // ============================================================================
   {
-    id: "personal-tools",
-    name: "Personal Utilities",
+    id: "password-manager",
+    name: "Password Manager",
     category: "utilitas",
     categoryLabel: "Utilitas",
     shortDesc:
-      "Brankas manajemen kata sandi terenkripsi dan utilitas alat hitung kalkulator ilmiah serbaguna untuk kebutuhan sehari-hari.",
+      "Brankas manajemen kata sandi terenkripsi dan keamanan akun personal untuk proteksi kredensial digital Anda.",
     to: "/passwords",
     icon: Key,
     badge: "Utilitas",
@@ -183,8 +183,25 @@ export const PERSONAL_LIFE_APPS: PersonalLifeAppItem[] = [
     badgeBg: "bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/30",
     badgeText: "Utilitas",
     subMenus: [
-      { id: "passwords", label: "Passwords", to: "/passwords" },
-      { id: "utilities", label: "Utilities", to: "/kalkulator" },
+      { id: "passwords", label: "Password Vault", to: "/passwords" },
+    ],
+  },
+  {
+    id: "calculator",
+    name: "Calculator",
+    category: "utilitas",
+    categoryLabel: "Utilitas",
+    shortDesc:
+      "Kalkulator ilmiah serbaguna untuk kalkulasi sains, matematika, bisnis, dan rekayasa kebutuhan komputasi harian.",
+    to: "/kalkulator",
+    icon: Calculator,
+    badge: "Utilitas",
+    accentGradient: "from-cyan-500 to-blue-600",
+    accentBorder: "border-cyan-500/30 hover:border-cyan-500/60",
+    badgeBg: "bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 border-cyan-500/30",
+    badgeText: "Utilitas",
+    subMenus: [
+      { id: "utilities", label: "Scientific Calculator", to: "/kalkulator" },
     ],
   },
 ];
@@ -194,11 +211,11 @@ export const PERSONAL_LIFE_CATEGORY_TABS: {
   label: string;
   count: number;
 }[] = [
-  { id: "all", label: "Semua", count: 5 },
+  { id: "all", label: "Semua", count: 6 },
   { id: "pengembangan", label: "Pengembangan", count: 1 },
   { id: "refleksi", label: "Refleksi", count: 1 },
   { id: "kesehatan", label: "Kesehatan", count: 2 },
-  { id: "utilitas", label: "Utilitas", count: 1 },
+  { id: "utilitas", label: "Utilitas", count: 2 },
 ];
 
 export function PersonalLifePage({ isEmbedded = false }: { isEmbedded?: boolean } = {}) {

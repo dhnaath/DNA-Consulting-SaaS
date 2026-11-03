@@ -175,7 +175,7 @@ export const MODE_CONFIGS: Record<string, ModeDefinition> = {
       },
       {
         id: "wishlist",
-        name: "Wishlist & Tabungan Impian",
+        name: "Goals and Savings",
         shortDesc: "Daftar impian terencana, refleksi mindful spending, celengan akumulasi dana & prioritas.",
         icon: Gift,
         to: "/life/wishlist",
@@ -187,7 +187,7 @@ export const MODE_CONFIGS: Record<string, ModeDefinition> = {
       },
       {
         id: "life-planner",
-        name: "Life Planner Hub",
+        name: "Life Planner",
         shortDesc: "Dasbor terpadu perencanaan hidup: sasaran jangka panjang, tugas prioritas & metrik bulanan.",
         icon: Sparkles,
         to: "/life/life-planner",

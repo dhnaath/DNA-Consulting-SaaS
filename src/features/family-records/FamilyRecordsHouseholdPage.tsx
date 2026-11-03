@@ -50,12 +50,12 @@ export interface FamilyAppItem {
 export const FAMILY_HOUSEHOLD_APPS: FamilyAppItem[] = [
   // 1. Keluarga (3)
   {
-    id: "family-records-ancestry",
-    name: "Family Heritage & Records",
+    id: "family-heritage",
+    name: "Family Heritage",
     category: "keluarga",
     categoryLabel: "Keluarga",
     shortDesc:
-      "Pusat silsilah garis keturunan keluarga, repositori arsip foto & dokumen bersejarah, kesepakatan tata tertib house rules, dan resep kuliner warisan leluhur.",
+      "Pusat silsilah garis keturunan keluarga, repositori arsip foto & dokumen bersejarah, kesepakatan tata tertib house rules, serta tradisi leluhur.",
     to: "/peh/family-tree",
     icon: GitFork,
     badge: "Keluarga",
@@ -65,14 +65,13 @@ export const FAMILY_HOUSEHOLD_APPS: FamilyAppItem[] = [
     badgeText: "Keluarga",
     subMenus: [
       { id: "family-tree", label: "Family Tree", to: "/peh/family-tree" },
-      { id: "resep-warisan", label: "Resep Warisan Keluarga", to: "/peh/family-recipes" },
-      { id: "house-rules", label: "House Rules", to: "/lainnya?app=family-rules" },
-      { id: "tradisi-keluarga", label: "Tradisi & Sejarah", to: "/peh/traditions" },
+      { id: "house-rules", label: "Household Rules", to: "/lainnya?app=family-rules" },
+      { id: "tradisi-keluarga", label: "Family History", to: "/peh/traditions" },
     ],
   },
   {
-    id: "family-safety-health",
-    name: "Family Safety & Health",
+    id: "family-safety",
+    name: "Family Safety",
     category: "keluarga",
     categoryLabel: "Keluarga",
     shortDesc:
@@ -86,13 +85,13 @@ export const FAMILY_HOUSEHOLD_APPS: FamilyAppItem[] = [
     badgeText: "Keluarga",
     subMenus: [
       { id: "emergency-contacts", label: "Emergency Contacts", to: "/lainnya?app=emergency-hub" },
-      { id: "family-health", label: "Profil Medis Keluarga", to: "/peh/family-health" },
-      { id: "disaster-prep", label: "Disaster Preparedness", to: "/lainnya?app=disaster-prep" },
+      { id: "family-health", label: "Family Health Records", to: "/peh/family-health" },
+      { id: "disaster-prep", label: "Emergency Preparedness", to: "/lainnya?app=disaster-prep" },
     ],
   },
   {
-    id: "family-budget-life",
-    name: "Family Finance",
+    id: "household-finance",
+    name: "Household Finance",
     category: "keluarga",
     categoryLabel: "Keluarga",
     shortDesc:
@@ -105,20 +104,19 @@ export const FAMILY_HOUSEHOLD_APPS: FamilyAppItem[] = [
     badgeBg: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30",
     badgeText: "Keluarga",
     subMenus: [
-      { id: "family-budget", label: "Anggaran Keluarga", to: "/peh/family-budget" },
-      { id: "monthly-expenses", label: "Pengeluaran Bulanan", to: "/peh/budget" },
-      { id: "pet-care", label: "Perawatan Hewan Peliharaan", to: "/peh/pet-care" },
+      { id: "family-budget", label: "Family Budget", to: "/peh/family-budget" },
+      { id: "monthly-expenses", label: "Expense Tracker", to: "/peh/budget" },
     ],
   },
 
   // 2. Rumah Tangga (2)
   {
-    id: "household-care-chores",
-    name: "Home Care",
+    id: "household-management",
+    name: "Household Management",
     category: "rumah-tangga",
     categoryLabel: "Rumah Tangga",
     shortDesc:
-      "Jadwal rutin kebersihan hunian, pembagian tugas harian keluarga, dan log pemeliharaan fisik bangunan serta peralatan elektronik rumah.",
+      "Jadwal rutin kebersihan hunian, pembagian tugas harian keluarga, perawatan tanaman/kebun, pemeliharaan fisik bangunan, dan perawatan hewan peliharaan.",
     to: "/peh/chores",
     icon: CheckSquare,
     badge: "Rumah Tangga",
@@ -127,18 +125,19 @@ export const FAMILY_HOUSEHOLD_APPS: FamilyAppItem[] = [
     badgeBg: "bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/30",
     badgeText: "Rumah Tangga",
     subMenus: [
-      { id: "chores-list", label: "Tugas Kebersihan", to: "/peh/chores" },
-      { id: "home-maintenance", label: "Perawatan Rumah", to: "/peh/maintenance" },
-      { id: "plants-garden", label: "Tanaman & Kebun", to: "/peh/plants" },
+      { id: "chores-list", label: "Household Chores", to: "/peh/chores" },
+      { id: "home-maintenance", label: "Home Maintenance Log", to: "/peh/maintenance" },
+      { id: "plants-garden", label: "Garden Management", to: "/peh/plants" },
+      { id: "pet-care", label: "Pet Care", to: "/peh/pet-care" },
     ],
   },
   {
-    id: "kitchen-pantry-management",
-    name: "Kitchen & Pantry",
+    id: "kitchen-management",
+    name: "Kitchen Management",
     category: "rumah-tangga",
     categoryLabel: "Rumah Tangga",
     shortDesc:
-      "Inventarisasi stok bahan makanan dapur, panduan resep masakan harian, serta daftar belanja kebutuhan pokok supermarket otomatis.",
+      "Inventarisasi stok bahan makanan dapur, panduan resep masakan harian, resep kuliner warisan keluarga, serta daftar belanja kebutuhan pokok supermarket otomatis.",
     to: "/peh/pantry",
     icon: Utensils,
     badge: "Rumah Tangga",
@@ -148,15 +147,16 @@ export const FAMILY_HOUSEHOLD_APPS: FamilyAppItem[] = [
     badgeText: "Rumah Tangga",
     subMenus: [
       { id: "pantry-inventory", label: "Pantry Inventory", to: "/peh/pantry" },
-      { id: "recipes-catalog", label: "Katalog Resep Masakan", to: "/recipes" },
-      { id: "grocery-list", label: "Daftar Belanja Dapur", to: "/shopping" },
+      { id: "recipes-catalog", label: "Recipe Collection", to: "/recipes" },
+      { id: "grocery-list", label: "Grocery List", to: "/shopping" },
+      { id: "family-recipes", label: "Family Recipes", to: "/peh/family-recipes" },
     ],
   },
 
   // 3. Kendaraan (1)
   {
-    id: "vehicle-records-care",
-    name: "Vehicle Management",
+    id: "vehicle-records",
+    name: "Vehicle Records",
     category: "kendaraan",
     categoryLabel: "Kendaraan",
     shortDesc:
@@ -169,9 +169,9 @@ export const FAMILY_HOUSEHOLD_APPS: FamilyAppItem[] = [
     badgeBg: "bg-blue-500/15 text-blue-600 dark:text-blue-400 border-blue-500/30",
     badgeText: "Kendaraan",
     subMenus: [
-      { id: "vehicle-identity", label: "Identitas Kendaraan", to: "/peh/vehicles" },
-      { id: "mileage-fuel", label: "Kilometer & BBM", to: "/lainnya?app=mileage-fuel" },
-      { id: "service-schedule", label: "Jadwal Servis Berkala", to: "/lainnya?app=service-maintenance" },
+      { id: "vehicle-identity", label: "Vehicle Registry", to: "/peh/vehicles" },
+      { id: "mileage-fuel", label: "Mileage and Fuel Log", to: "/lainnya?app=mileage-fuel" },
+      { id: "service-schedule", label: "Vehicle Maintenance Schedule", to: "/lainnya?app=service-maintenance" },
     ],
   },
 ];

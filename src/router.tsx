@@ -1188,7 +1188,7 @@ function PersonalLifeView() {
   return (
     <AppShell
       title="Personal Life Management"
-      subtitle="Semua (5) · Pengembangan (1) · Refleksi (1) · Kesehatan (2) · Utilitas (1)"
+      subtitle="Semua (6) · Pengembangan (1) · Refleksi (1) · Kesehatan (2) · Utilitas (2)"
     >
       <PersonalLifePage />
     </AppShell>
@@ -1382,7 +1382,7 @@ const familyRecordsRoute = createRoute({
 function PublicRelationsPolicyAffairsView() {
   return (
     <AppShell
-      title="Public Relations and Policy Affairs"
+      title="Public Affairs and Relations"
       subtitle="Semua (6) · Civic (3) · Policy (2) · Media (1)"
     >
       <PublicRelationsPolicyAffairsPage />

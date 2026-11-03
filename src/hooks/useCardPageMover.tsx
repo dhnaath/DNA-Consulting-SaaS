@@ -120,8 +120,8 @@ export const LAUNCHER_PAGE_OPTIONS: LauncherPageOption[] = [
   {
     id: "mode_public_affairs",
     pageNumber: 11,
-    label: "Public Relations and Policy Affairs",
-    shortLabel: "Public & Policy Affairs",
+    label: "Public Affairs and Relations",
+    shortLabel: "Public Affairs & Relations",
     badge: "Publik & Kebijakan",
     icon: Landmark,
   },

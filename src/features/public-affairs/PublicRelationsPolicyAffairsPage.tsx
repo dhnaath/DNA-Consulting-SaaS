@@ -63,14 +63,14 @@ export const PUBLIC_AFFAIRS_APPS: PublicAffairsAppItem[] = [
     badgeBg: "bg-blue-500/15 text-blue-600 dark:text-blue-400 border-blue-500/30",
     badgeText: "Community",
     subMenus: [
-      { id: "warga-directory", label: "Direktori Warga", to: "/komunitas-warga" },
-      { id: "iuran-kas", label: "Transparansi Iuran Kas", to: "/komunitas-warga" },
-      { id: "surat-pengantar", label: "Layanan Surat Pengantar", to: "/komunitas-warga" },
+      { id: "warga-directory", label: "Resident Directory", to: "/komunitas-warga" },
+      { id: "iuran-kas", label: "Community Fund", to: "/komunitas-warga" },
+      { id: "surat-pengantar", label: "Civic Letters", to: "/komunitas-warga" },
     ],
   },
   {
     id: "civic-services-guide",
-    name: "Public Services Guide",
+    name: "Public Services",
     category: "public-services",
     categoryLabel: "Public Services",
     shortDesc:
@@ -83,14 +83,14 @@ export const PUBLIC_AFFAIRS_APPS: PublicAffairsAppItem[] = [
     badgeBg: "bg-teal-500/15 text-teal-600 dark:text-teal-400 border-teal-500/30",
     badgeText: "Public Services",
     subMenus: [
-      { id: "panduan-layanan", label: "Panduan Administrasi", to: "/lainnya?app=public-services-guide" },
-      { id: "syarat-berkas", label: "Persyaratan Berkas", to: "/documents" },
-      { id: "kontak-instansi", label: "Direktori Kantor Dinas", to: "/contacts" },
+      { id: "panduan-layanan", label: "Civic Services Guide", to: "/lainnya?app=public-services-guide" },
+      { id: "syarat-berkas", label: "Document Requirements", to: "/documents" },
+      { id: "kontak-instansi", label: "Public Office Directory", to: "/contacts" },
     ],
   },
   {
     id: "civic-calendar-agenda",
-    name: "Community Events & Meetings",
+    name: "Community Events",
     category: "community",
     categoryLabel: "Community",
     shortDesc:
@@ -103,9 +103,9 @@ export const PUBLIC_AFFAIRS_APPS: PublicAffairsAppItem[] = [
     badgeBg: "bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/30",
     badgeText: "Community",
     subMenus: [
-      { id: "kalender-warga", label: "Kalender Warga", to: "/lainnya?app=civic-calendar" },
-      { id: "jadwal-musyawarah", label: "Jadwal Musyawarah", to: "/calendar" },
-      { id: "notulen-pertemuan", label: "Notulen Acara", to: "/meeting-manager" },
+      { id: "kalender-warga", label: "Community Calendar", to: "/lainnya?app=civic-calendar" },
+      { id: "jadwal-musyawarah", label: "Meeting Schedule", to: "/calendar" },
+      { id: "notulen-pertemuan", label: "Meeting Minutes", to: "/meeting-manager" },
     ],
   },
   {
@@ -123,9 +123,9 @@ export const PUBLIC_AFFAIRS_APPS: PublicAffairsAppItem[] = [
     badgeBg: "bg-purple-500/15 text-purple-600 dark:text-purple-400 border-purple-500/30",
     badgeText: "Policy",
     subMenus: [
-      { id: "compliance-tracker", label: "Kepatuhan Regulasi", to: "/peh/compliance" },
-      { id: "audit-hukum", label: "Audit Kepatuhan Hukum", to: "/surety?tab=cat_kepatuhan" },
-      { id: "daftar-regulasi", label: "Daftar Peraturan", to: "/documents" },
+      { id: "compliance-tracker", label: "Compliance Tracker", to: "/peh/compliance" },
+      { id: "audit-hukum", label: "Legal Compliance Audit", to: "/surety?tab=cat_kepatuhan" },
+      { id: "daftar-regulasi", label: "Regulatory Library", to: "/documents" },
     ],
   },
   {
@@ -143,14 +143,14 @@ export const PUBLIC_AFFAIRS_APPS: PublicAffairsAppItem[] = [
     badgeBg: "bg-rose-500/15 text-rose-600 dark:text-rose-400 border-rose-500/30",
     badgeText: "Policy",
     subMenus: [
-      { id: "aspirasi-publik", label: "Kotak Aspirasi Publik", to: "/peh/advocacy" },
-      { id: "risalah-kebijakan", label: "Risalah Usulan Kebijakan", to: "/notes" },
-      { id: "survei-warga", label: "Survei Suara Warga", to: "/forms" },
+      { id: "aspirasi-publik", label: "Public Feedback", to: "/peh/advocacy" },
+      { id: "risalah-kebijakan", label: "Policy Proposals", to: "/notes" },
+      { id: "survei-warga", label: "Public Opinion Survey", to: "/forms" },
     ],
   },
   {
     id: "public-relations-media",
-    name: "Public Relations & Media",
+    name: "Public Relations",
     category: "media",
     categoryLabel: "Media",
     shortDesc:
@@ -163,9 +163,9 @@ export const PUBLIC_AFFAIRS_APPS: PublicAffairsAppItem[] = [
     badgeBg: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30",
     badgeText: "Media",
     subMenus: [
-      { id: "siaran-pers", label: "Draf Siaran Pers", to: "/peh/global-overview" },
-      { id: "stakeholder-news", label: "Update Stakeholder", to: "/notification-center" },
-      { id: "media-clipping", label: "Kliping Media Publik", to: "/web-clipper" },
+      { id: "siaran-pers", label: "Press Releases", to: "/peh/global-overview" },
+      { id: "stakeholder-news", label: "Stakeholder Updates", to: "/notification-center" },
+      { id: "media-clipping", label: "Media Monitoring", to: "/web-clipper" },
     ],
   },
 ];
@@ -224,7 +224,7 @@ export function PublicRelationsPolicyAffairsPage({
         <div className="text-center mb-4">
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground/90 tracking-tight flex items-center justify-center gap-2.5">
             <Landmark className="size-7 text-primary" />
-            <span>Public Relations and Policy Affairs</span>
+            <span>Public Affairs and Relations</span>
           </h1>
         </div>
 

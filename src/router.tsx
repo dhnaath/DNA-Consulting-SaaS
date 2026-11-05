@@ -1418,7 +1418,7 @@ function FinancialPlanningWealthView() {
   return (
     <AppShell
       title="Financial Planning and Wealth Management"
-      subtitle="5 Tahap Wealth, Arsitektur Wealth Spectrum & Kategori Khusus Sharia Principles"
+      subtitle="Semua (25) · Surety (5) · Flow (5) · Build (5) · Grow (5) · Legacy (5)"
     >
       <div className="w-full max-w-[1500px] mx-auto px-4 py-2">
         <FinancialWealthSection

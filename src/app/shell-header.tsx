@@ -84,6 +84,9 @@ export function HeaderNavPills<T extends string | number = string>({
   const pillBg =
     "bg-primary shadow-[0_1px_4px_hsl(var(--primary)/0.35)] dark:shadow-[0_1px_5px_hsl(var(--primary)/0.45)]";
 
+  const hasActiveItem = items.some((item) => String(item.id) === String(activeId));
+  const effectiveActiveId = hasActiveItem ? activeId : (items[0]?.id ?? activeId);
+
   // Auto-minimize: setelah 10 detik idle tanpa interaksi kursor, ciutkan menjadi hanya kategori terpilih
   const IDLE_TIMEOUT_MS = 10000;
   const [isMinimized, setIsMinimized] = useState(false);
@@ -117,10 +120,39 @@ export function HeaderNavPills<T extends string | number = string>({
     };
   }, [resetIdleTimer]);
 
-  // Saat kategori aktif berubah, reset timer
+  // Saat kategori aktif berubah, reset timer dan sinkronkan dengan sidebar
   useEffect(() => {
     resetIdleTimer();
-  }, [activeId, resetIdleTimer]);
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(
+        new CustomEvent("aio_header_category_changed", { detail: String(effectiveActiveId) })
+      );
+    }
+  }, [activeId, effectiveActiveId, resetIdleTimer]);
+
+  // Dukungan sinkronisasi jika kategori dipilih dari sidebar
+  useEffect(() => {
+    const handleSelectCategory = (e: any) => {
+      const targetId = e.detail;
+      if (targetId) {
+        const found = items.find(
+          (it) =>
+            String(it.id).toLowerCase() === String(targetId).toLowerCase() ||
+            it.label.toLowerCase() === String(targetId).toLowerCase()
+        );
+        if (found) {
+          onSelect(found.id);
+        } else if (String(targetId).toLowerCase() === "all" || String(targetId).toLowerCase() === "semua") {
+          const allItem = items.find(
+            (it) => String(it.id).toLowerCase() === "all" || it.label.toLowerCase() === "semua"
+          );
+          if (allItem) onSelect(allItem.id);
+        }
+      }
+    };
+    window.addEventListener("aio_select_header_category", handleSelectCategory);
+    return () => window.removeEventListener("aio_select_header_category", handleSelectCategory);
+  }, [items, onSelect]);
 
   // Saat kursor masuk ke area kategori bar, segera expand kembali
   const handleMouseEnter = () => {
@@ -138,9 +170,6 @@ export function HeaderNavPills<T extends string | number = string>({
     setHoveredNav(null);
     resetIdleTimer();
   };
-
-  const hasActiveItem = items.some((item) => String(item.id) === String(activeId));
-  const effectiveActiveId = hasActiveItem ? activeId : (items[0]?.id ?? activeId);
 
   // Fisika pegas identik dengan animasi dock yang super mulus
   const springTransition = {
@@ -225,6 +254,11 @@ export function HeaderNavPills<T extends string | number = string>({
                     resetIdleTimer();
                   } else {
                     onSelect(item.id);
+                    if (typeof window !== "undefined") {
+                      window.dispatchEvent(
+                        new CustomEvent("aio_header_category_changed", { detail: String(item.id) })
+                      );
+                    }
                     resetIdleTimer();
                   }
                 }}

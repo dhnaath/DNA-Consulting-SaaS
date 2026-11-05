@@ -153,8 +153,8 @@ export const APP_MODES: ModeItem[] = [
   {
     id: "financial",
     label: "Financial Planning and Wealth Management",
-    badge: "5 Tahapan",
-    desc: "Perencanaan Finansial, Wealth Spectrum, Valuasi & Suksesi",
+    badge: "25 Modul",
+    desc: "Semua (25) · Surety (5) · Flow (5) · Build (5) · Grow (5) · Legacy (5)",
     icon: Coins,
     badgeClass: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20",
     links: [
@@ -806,7 +806,7 @@ export function AppShell({
         className={`fixed inset-y-0 left-0 z-50 flex ${
           isLeftSidebar75
             ? "w-[75px] bg-primary border-r border-white/20 shadow-xl"
-            : "w-[350px] liquid-glass-sidebar-left"
+            : "w-[400px] liquid-glass-sidebar-left"
         } max-w-[85vw] shrink-0 flex-col transition-all duration-300 ease-in-out ${isLeftOpen ? "translate-x-0" : "-translate-x-full"}`}
       >
         {/* Spacer atas: Tombol close / toggle kiri yang sejajar dengan header + 3 dots traffic controls & 3 dots action */}
@@ -841,14 +841,14 @@ export function AppShell({
               </button>
             </>
           ) : (
-            /* Mode Ringkas 75px: Hanya 3 Dots untuk mengembalikan ke 350px (tombol kedua dihapus) */
+            /* Mode Ringkas 75px: Hanya 3 Dots untuk mengembalikan ke 400px (tombol kedua dihapus) */
             <div className="w-full flex items-center justify-center">
               <button
                 type="button"
                 onClick={toggleLeftSidebar75}
                 className="size-9 rounded-full aspect-square text-white/80 hover:text-white hover:bg-white/20 active:scale-95 transition-all cursor-pointer flex items-center justify-center shrink-0"
-                title="Perluas ke Lebar Penuh (350px)"
-                aria-label="Perluas ke 350px"
+                title="Perluas ke Lebar Penuh (400px)"
+                aria-label="Perluas ke 400px"
               >
                 <MoreHorizontal size={20} className="shrink-0" />
               </button>
@@ -1002,6 +1002,7 @@ export function AppShell({
           ) : (
             <SidebarPillarsMenu
               isCompact={isLeftSidebar75}
+              activeMode={currentMode}
               onNavigate={() => {
                 if (!isLeftSidebar75 && typeof window !== "undefined" && window.innerWidth < 1024) {
                   setIsLeftOpen(false);
@@ -1023,7 +1024,7 @@ export function AppShell({
         </div>
       </aside>
 
-      <aside id="sidenavRight" className={`fixed inset-y-0 right-0 z-50 flex w-[350px] max-w-[85vw] flex-col liquid-glass-sidebar-right transition-transform duration-300 ease-in-out ${isRightOpen ? "translate-x-0" : "translate-x-full"}`}>
+      <aside id="sidenavRight" className={`fixed inset-y-0 right-0 z-50 flex w-[400px] max-w-[85vw] flex-col liquid-glass-sidebar-right transition-transform duration-300 ease-in-out ${isRightOpen ? "translate-x-0" : "translate-x-full"}`}>
         {/* Right Sidebar Spacer: Tombol close / toggle kanan yang sejajar dengan header */}
         <div className="w-full h-[60px] sidebar-top-glass shrink-0 flex items-center justify-end px-3 border-b border-white/20 dark:border-white/10">
           <button

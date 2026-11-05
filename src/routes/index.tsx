@@ -65,7 +65,7 @@ export function getGradient(title: string): string {
 
 export const LAUNCHER_TABS = [
   // 10 Laman Workspace Terintegrasi (Applied Value & Market Price Monitor kini mandiri via Dock)
-  { id: "financial", modeId: "financial", label: "Financial Planning and Wealth Management", icon: Coins, badge: "5 Tahapan", desc: "Perencanaan Finansial, Wealth Spectrum, Valuasi & Suksesi" },
+  { id: "financial", modeId: "financial", label: "Financial Planning and Wealth Management", icon: Coins, badge: "25 Modul", desc: "Semua (25) · Surety (5) · Flow (5) · Build (5) · Grow (5) · Legacy (5)" },
   { id: "mode_business", modeId: "business", label: "Business Administration and Operations Management", icon: Store, badge: BIZ_OPS_TOTAL_BADGE, desc: BIZ_OPS_SUMMARY_DESC },
   { id: "mode_employment", modeId: "employment", label: "Productivity Workspace and Workflow Systems", icon: Briefcase, badge: "9 Modul", desc: "Semua (9) · Planning (1) · Workflow (2) · Resources (2) · Coordination (1) · Governance (2) · Ownership (1)" },
   { id: "mode_creative", modeId: "creative", label: "Creative Workspace and Media Production", icon: Palette, badge: "6 Modul", desc: "Semua (6) · Studio (2) · Publishing (1) · Media (2) · Interactive (1)" },
@@ -192,6 +192,10 @@ export function Launcher() {
           window.dispatchEvent(
             new CustomEvent("aio_launcher_mode_changed", { detail: modeId })
           );
+          window.dispatchEvent(
+            new CustomEvent("aio_launcher_page_changed", { detail: currentTab.id })
+          );
+          window.dispatchEvent(new Event("aio_mode_changed"));
         } catch {}
       }
     };
@@ -293,6 +297,12 @@ export function Launcher() {
         const modeId = (currentTab as any).modeId;
         setRaw("aio_active_mode", modeId);
         setRaw("client_os_active_mode", modeId);
+        window.dispatchEvent(
+          new CustomEvent("aio_launcher_mode_changed", { detail: modeId })
+        );
+        window.dispatchEvent(
+          new CustomEvent("aio_launcher_page_changed", { detail: currentTab.id })
+        );
         window.dispatchEvent(new Event("aio_mode_changed"));
       } catch {}
     }

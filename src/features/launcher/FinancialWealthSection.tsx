@@ -465,262 +465,6 @@ export const STANDALONE_FINANCIAL_APPS: StandaloneFinancialAppDef[] = [
       { title: "Perencanaan Suksesi", to: "/legacy?tab=cat_transfer&sub=suksesi", icon: Gift },
     ],
   },
-
-  // ==========================================
-  // KATEGORI KHUSUS: SHARIA PRINCIPLES
-  // ==========================================
-  {
-    id: "akad-tabarru",
-    to: "/syariah/akad?app=tabarru",
-    title: "Tabarru'",
-    subtitle: "Akad kebajikan dan tolong-menolong tanpa motif komersial untuk proteksi risiko musibah, santunan, dan donasi sosial.",
-    category: "sharia",
-    categoryLabel: "Sharia Principles",
-    icon: HeartHandshake,
-    badge: "Standalone",
-    features: [
-      { title: "Kalkulator Dana Tabarru'", to: "/syariah/akad?app=tabarru", icon: Calculator },
-      { title: "Sharia Principles and DSN Fatwas", to: "/syariah/akad?app=tabarru", icon: BookOpen },
-    ],
-  },
-  {
-    id: "akad-mudharabah",
-    to: "/syariah/akad?app=mudharabah",
-    title: "Mudharabah",
-    subtitle: "Akad kemitraan usaha bagi hasil antara shahibul maal (penyedia modal 100%) dan mudharib (pengelola keahlian usaha).",
-    category: "sharia",
-    categoryLabel: "Sharia Principles",
-    icon: Scale,
-    badge: "Standalone",
-    features: [
-      { title: "Simulasi Nisbah Bagi Hasil", to: "/syariah/akad?app=mudharabah", icon: Calculator },
-      { title: "Capital and Profit Structure", to: "/syariah/akad?app=mudharabah", icon: TrendingUp },
-    ],
-  },
-  {
-    id: "akad-wakalah",
-    to: "/syariah/akad?app=wakalah",
-    title: "Wakalah",
-    subtitle: "Pelimpahan kuasa perwakilan dari satu pihak kepada pihak lain untuk mengelola urusan finansial atau investasi dengan ujrah.",
-    category: "sharia",
-    categoryLabel: "Sharia Principles",
-    icon: Handshake,
-    badge: "Standalone",
-    features: [
-      { title: "Kalkulator Fee Ujrah", to: "/syariah/akad?app=wakalah", icon: Calculator },
-      { title: "Mandat Kuasa Kelola", to: "/syariah/akad?app=wakalah", icon: CheckCircle2 },
-    ],
-  },
-  {
-    id: "akad-wadiah",
-    to: "/syariah/akad?app=wadiah",
-    title: "Wadiah",
-    subtitle: "Akad penitipan murni dana atau aset (amanah) atau titipan dengan hak guna kelola dan jaminan penarikan penuh (dhamanah).",
-    category: "sharia",
-    categoryLabel: "Sharia Principles",
-    icon: Archive,
-    badge: "Standalone",
-    features: [
-      { title: "Audit Titipan Amanah", to: "/syariah/akad?app=wadiah", icon: ShieldCheck },
-      { title: "Simulasi Bonus Sukarela", to: "/syariah/akad?app=wadiah", icon: Coins },
-    ],
-  },
-  {
-    id: "akad-musyarakah",
-    to: "/syariah/akad?app=musyarakah",
-    title: "Musyarakah",
-    subtitle: "Akad kerja sama permodalan bersama (joint venture) dengan porsi modal bersama dan pembagian laba rugi proporsional.",
-    category: "sharia",
-    categoryLabel: "Sharia Principles",
-    icon: Users,
-    badge: "Standalone",
-    features: [
-      { title: "Kalkulator Porsi Ekuitas", to: "/syariah/akad?app=musyarakah", icon: Calculator },
-      { title: "Bagi Hasil Syirkah", to: "/syariah/akad?app=musyarakah", icon: TrendingUp },
-    ],
-  },
-  {
-    id: "akad-murabahah",
-    to: "/syariah/akad?app=murabahah",
-    title: "Murabahah",
-    subtitle: "Akad jual beli barang dengan pengungkapan transparan harga pokok perolehan dan margin keuntungan (mark-up) yang disepakati.",
-    category: "sharia",
-    categoryLabel: "Sharia Principles",
-    icon: Tag,
-    badge: "Standalone",
-    features: [
-      { title: "Kalkulator Angsuran Tetap", to: "/syariah/akad?app=murabahah", icon: Calculator },
-      { title: "Rincian Margin Pokok", to: "/syariah/akad?app=murabahah", icon: Receipt },
-    ],
-  },
-  {
-    id: "akad-tamin",
-    to: "/syariah/akad?app=tamin",
-    title: "Ta'min",
-    subtitle: "Sistem perlindungan finansial mutual dan penjaminan risiko bersama antar pihak berbasis kepastian akad syariah.",
-    category: "sharia",
-    categoryLabel: "Sharia Principles",
-    icon: Shield,
-    badge: "Standalone",
-    features: [
-      { title: "Audit Proteksi Risiko", to: "/syariah/akad?app=tamin", icon: ShieldCheck },
-      { title: "Klaim Mutual Syariah", to: "/syariah/akad?app=tamin", icon: HeartHandshake },
-    ],
-  },
-  {
-    id: "akad-takaful",
-    to: "/syariah/akad?app=takaful",
-    title: "Takaful",
-    subtitle: "Asuransi syariah berlandaskan gotong royong saling memikul beban risiko kerugian antar peserta melalui kumpulan dana kebajikan.",
-    category: "sharia",
-    categoryLabel: "Sharia Principles",
-    icon: Users,
-    badge: "Standalone",
-    features: [
-      { title: "Simulasi Polis Takaful", to: "/syariah/akad?app=takaful", icon: Calculator },
-      { title: "Pengelolaan Surplus", to: "/syariah/akad?app=takaful", icon: Coins },
-    ],
-  },
-  {
-    id: "akad-tadhamun",
-    to: "/syariah/akad?app=tadhamun",
-    title: "Tadhamun",
-    subtitle: "Prinsip solidaritas komprehensif, jaminan kolektif, dan tanggung renteng dalam muamalah finansial kemasyarakatan.",
-    category: "sharia",
-    categoryLabel: "Sharia Principles",
-    icon: Heart,
-    badge: "Standalone",
-    features: [
-      { title: "Manajemen Tanggung Renteng", to: "/syariah/akad?app=tadhamun", icon: Users },
-      { title: "Dana Tanggap Darurat", to: "/syariah/akad?app=tadhamun", icon: HeartHandshake },
-    ],
-  },
-  {
-    id: "akad-ijarah",
-    to: "/syariah/akad?app=ijarah",
-    title: "Ijarah",
-    subtitle: "Akad sewa menyewa atas pemanfaatan hak guna (manfaat) aset atau jasa tanpa pemindahan kepemilikan pokok (opsi IMBT).",
-    category: "sharia",
-    categoryLabel: "Sharia Principles",
-    icon: Building,
-    badge: "Standalone",
-    features: [
-      { title: "Simulasi Ujrah Sewa", to: "/syariah/akad?app=ijarah", icon: Calculator },
-      { title: "Skema IMBT (Sewa Beli)", to: "/syariah/akad?app=ijarah", icon: Home },
-    ],
-  },
-  {
-    id: "akad-qardh",
-    to: "/syariah/akad?app=qardh",
-    title: "Qardh al-Hasan",
-    subtitle: "Pinjaman dana kebajikan syariah murni 100% bebas bunga dan denda ribawi untuk membantu kebutuhan darurat.",
-    category: "sharia",
-    categoryLabel: "Sharia Principles",
-    icon: Coins,
-    badge: "Standalone",
-    features: [
-      { title: "Kalkulator Cicilan Pokok 0%", to: "/syariah/akad?app=qardh", icon: Calculator },
-      { title: "Audit Pinjaman Halal", to: "/syariah/akad?app=qardh", icon: ShieldCheck },
-    ],
-  },
-  {
-    id: "zakat-penghasilan",
-    to: "/zakat?app=penghasilan",
-    title: "Zakat Penghasilan",
-    subtitle: "Kalkulator kewajiban zakat profesi atas gaji, bonus, dan honorarium rutin bulanan setelah mencapai nishab 85g emas.",
-    category: "sharia",
-    categoryLabel: "Sharia Principles",
-    icon: Briefcase,
-    badge: "Standalone",
-    features: [
-      { title: "Kalkulator 2.5% Profesi", to: "/zakat?app=penghasilan", icon: Calculator },
-      { title: "Fatwa & Nisab Emas", to: "/zakat?app=penghasilan", icon: BookOpen },
-    ],
-  },
-  {
-    id: "zakat-maal",
-    to: "/zakat?app=maal",
-    title: "Zakat Maal",
-    subtitle: "Penghitungan zakat simpanan tabungan, deposito, emas batangan, perak, dan aset investasi yang telah mencapai haul 1 tahun.",
-    category: "sharia",
-    categoryLabel: "Sharia Principles",
-    icon: Coins,
-    badge: "Standalone",
-    features: [
-      { title: "Kalkulator Haul 1 Tahun", to: "/zakat?app=maal", icon: Calculator },
-      { title: "Nisab Tabungan & Emas", to: "/zakat?app=maal", icon: Scale },
-    ],
-  },
-  {
-    id: "zakat-fitrah",
-    to: "/zakat?app=fitrah",
-    title: "Zakat Fitrah",
-    subtitle: "Kewajiban pensucian jiwa menjelang Idul Fitri bagi setiap anggota keluarga (setara 2.5 kg atau 3.5 liter beras per jiwa).",
-    category: "sharia",
-    categoryLabel: "Sharia Principles",
-    icon: Users,
-    badge: "Standalone",
-    features: [
-      { title: "Kalkulator Jiwa Keluarga", to: "/zakat?app=fitrah", icon: Calculator },
-      { title: "Konversi Beras / Rupiah", to: "/zakat?app=fitrah", icon: Coins },
-    ],
-  },
-  {
-    id: "zakat-hub",
-    to: "/zakat",
-    title: "Zakat & Sedekah Hub",
-    subtitle: "Pusat integrasi penunaian zakat, infaq kemanusiaan, sedekah produktif, dan audit distribusi 8 asnaf mustahik.",
-    category: "sharia",
-    categoryLabel: "Sharia Principles",
-    icon: HeartHandshake,
-    badge: "Standalone",
-    features: [
-      { title: "Kalkulator Multiaset", to: "/zakat", icon: Calculator },
-      { title: "8 Asnaf Mustahik", to: "/zakat", icon: Users },
-    ],
-  },
-  {
-    id: "audit-riba",
-    to: "/syariah/terlarang?app=riba",
-    title: "Audit Riba",
-    subtitle: "Pemeriksaan dan diagnosis transaksi keuangan untuk memastikan bebas dari unsur bunga, denda berlipat, dan riba nasi'ah.",
-    category: "sharia",
-    categoryLabel: "Sharia Principles",
-    icon: AlertOctagon,
-    badge: "Standalone",
-    features: [
-      { title: "Checklist Riba Qardh & Jual Beli", to: "/syariah/terlarang?app=riba", icon: ShieldAlert },
-      { title: "Fatwa Bunga Bank", to: "/syariah/terlarang?app=riba", icon: BookOpen },
-    ],
-  },
-  {
-    id: "audit-gharar",
-    to: "/syariah/terlarang?app=gharar",
-    title: "Audit Gharar",
-    subtitle: "Audit kejelasan dan kepastian objek akad, kuantitas, harga, serta kesanggupan serah terima untuk menghindari sengketa.",
-    category: "sharia",
-    categoryLabel: "Sharia Principles",
-    icon: ShieldAlert,
-    badge: "Standalone",
-    features: [
-      { title: "Audit Ketidakpastian Akad", to: "/syariah/terlarang?app=gharar", icon: CheckCircle2 },
-      { title: "Standar Kejelasan Objek", to: "/syariah/terlarang?app=gharar", icon: BookOpen },
-    ],
-  },
-  {
-    id: "audit-maysir",
-    to: "/syariah/terlarang?app=maysir",
-    title: "Audit Maysir",
-    subtitle: "Evaluasi instrumen spekulasi zero-sum game, untung-untungan tanpa underlying riil, dan transaksi berunsur perjudian.",
-    category: "sharia",
-    categoryLabel: "Sharia Principles",
-    icon: Dice5,
-    badge: "Standalone",
-    features: [
-      { title: "Uji Spekulasi vs Investasi", to: "/syariah/terlarang?app=maysir", icon: Calculator },
-      { title: "Kaidah Underlying Riil", to: "/syariah/terlarang?app=maysir", icon: Scale },
-    ],
-  },
 ];
 
 interface FinancialWealthSectionProps {
@@ -1124,62 +868,6 @@ export const WEALTH_STAGE_MAIN_BOXES: WealthStageMainBoxDef[] = [
   },
 ];
 
-export const SHARIA_MAIN_BOXES = [
-  {
-    id: "akad-muamalah",
-    title: "11 Akad Muamalah Syariah",
-    subtitle: "Rukun & Fatwa DSN-MUI: Kemitraan, Jual Beli, Penjaminan & Sewa",
-    icon: Handshake,
-    badgeBg: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/25",
-    borderClass: "border-emerald-500/30 hover:border-emerald-500/50",
-    gradientBg: "from-emerald-500/15 via-emerald-500/5 to-transparent",
-    description:
-      "Arsitektur akad transaksi syariah berlandaskan keadilan, transparansi harga pokok, penjaminan kebajikan bersama (ta'min/takaful), serta bagi hasil usaha produktif.",
-    features: [
-      { title: "Mudharabah", subtitle: "Bagi hasil modal & keahlian usaha", to: "/syariah/akad?app=mudharabah", icon: Handshake },
-      { title: "Musyarakah", subtitle: "Kemitraan penyertaan porsi modal bersama", to: "/syariah/akad?app=musyarakah", icon: Users },
-      { title: "Murabahah", subtitle: "Jual beli transparan margin keuntungan", to: "/syariah/akad?app=murabahah", icon: Tag },
-      { title: "Ta'min & Tabarru", subtitle: "Proteksi mutual kebajikan bersama", to: "/syariah/akad?app=tamin", icon: Shield },
-      { title: "Takaful", subtitle: "Asuransi gotong royong risiko kolektif", to: "/syariah/akad?app=takaful", icon: Users },
-      { title: "Ijarah", subtitle: "Sewa manfaat aset & skema IMBT", to: "/syariah/akad?app=ijarah", icon: Building },
-      { title: "Qardh al-Hasan", subtitle: "Pinjaman kebajikan 0% riba & denda", to: "/syariah/akad?app=qardh", icon: Coins },
-    ],
-  },
-  {
-    id: "zakat-filantropi",
-    title: "4 Modul Zakat & Filantropi",
-    subtitle: "Pensucian Harta & Distribusi Kesejahteraan 8 Asnaf Mustahik",
-    icon: HeartHandshake,
-    badgeBg: "bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/25",
-    borderClass: "border-amber-500/30 hover:border-amber-500/50",
-    gradientBg: "from-amber-500/15 via-amber-500/5 to-transparent",
-    description:
-      "Penghitungan presisi kewajiban zakat profesi bulanan, zakat simpanan emas dan tabungan haul 1 tahun, zakat fitrah jiwa, serta portal integrasi infaq sedekah.",
-    features: [
-      { title: "Zakat Penghasilan", subtitle: "Kalkulator 2.5% gaji, bonus & profesi", to: "/zakat?app=penghasilan", icon: Briefcase },
-      { title: "Zakat Maal", subtitle: "Zakat tabungan, deposito & emas haul 1 th", to: "/zakat?app=maal", icon: Coins },
-      { title: "Zakat Fitrah", subtitle: "Pensucian jiwa Ramadan per anggota keluarga", to: "/zakat?app=fitrah", icon: Users },
-      { title: "Zakat & Sedekah Hub", subtitle: "Pusat penunaian & distribusi 8 asnaf", to: "/zakat", icon: HeartHandshake },
-    ],
-  },
-  {
-    id: "audit-terlarang",
-    title: "3 Audit Syariah Anti-Terlarang",
-    subtitle: "Diagnosis Pembebasan Transaksi dari Riba, Gharar & Maysir",
-    icon: ShieldAlert,
-    badgeBg: "bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/25",
-    borderClass: "border-rose-500/30 hover:border-rose-500/50",
-    gradientBg: "from-rose-500/15 via-rose-500/5 to-transparent",
-    description:
-      "Sistem verifikasi kepatuhan syariah untuk mendeteksi potensi riba pada akad utang dan bunga perbankan, klausul ketidakpastian objek gharar, serta spekulasi judi maysir.",
-    features: [
-      { title: "Audit Riba", subtitle: "Diagnosis bebas bunga, denda & riba", to: "/syariah/terlarang?app=riba", icon: AlertOctagon },
-      { title: "Audit Gharar", subtitle: "Kepastian objek transaksi & spesifikasi harga", to: "/syariah/terlarang?app=gharar", icon: ShieldAlert },
-      { title: "Audit Maysir", subtitle: "Evaluasi spekulasi vs investasi riil", to: "/syariah/terlarang?app=maysir", icon: Dice5 },
-    ],
-  },
-];
-
 const StageMainBox = ({
   stage,
   isFav,
@@ -1376,88 +1064,6 @@ const StageMainBox = ({
     </div>
   );
 };
-
-const ShariaMainBox = ({
-  box,
-}: {
-  box: (typeof SHARIA_MAIN_BOXES)[0];
-}) => {
-  const Icon = box.icon;
-
-  return (
-    <div
-      className={`w-full rounded-3xl border ${box.borderClass} bg-card/90 backdrop-blur-xs shadow-xs hover:shadow-md transition-all p-5 sm:p-7 flex flex-col justify-between gap-5 relative overflow-hidden group`}
-    >
-      <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${box.gradientBg}`} />
-
-      <div>
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-border/60">
-          <div className="flex items-center gap-3.5">
-            <div
-              className={`size-12 sm:size-14 rounded-2xl flex items-center justify-center shrink-0 border ${box.badgeBg} shadow-xs group-hover:scale-105 transition-transform`}
-            >
-              <Icon className="size-6 sm:size-7 drop-shadow-xs" />
-            </div>
-            <div>
-              <span className={`text-[11px] font-bold font-mono px-2 py-0.5 rounded-full border ${box.badgeBg}`}>
-                Sharia Principles
-              </span>
-              <h3 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight mt-1">
-                {box.title}
-              </h3>
-              <p className="text-xs sm:text-sm font-medium text-muted-foreground italic">
-                {box.subtitle}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-4 bg-muted/40 rounded-2xl p-4 border border-border/50">
-          <p className="text-xs sm:text-sm text-foreground/90 leading-relaxed font-normal">
-            {box.description}
-          </p>
-        </div>
-
-        <div className="mt-5">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-            {box.features.map((feat, idx) => {
-              const FeatIcon = feat.icon;
-              const featPath = feat.to.split("?")[0];
-              const featSearch = feat.to.includes("?")
-                ? Object.fromEntries(new URLSearchParams(feat.to.split("?")[1]))
-                : undefined;
-
-              return (
-                <Link
-                  key={idx}
-                  to={featPath}
-                  search={featSearch as any}
-                  className="rounded-2xl border border-border/70 bg-card p-3.5 hover:border-primary/50 hover:shadow-xs transition-all flex flex-col justify-between group/scard"
-                >
-                  <div>
-                    <div className="flex items-center justify-between gap-2 mb-2">
-                      <div className="p-1.5 rounded-lg bg-primary/10 text-primary">
-                        <FeatIcon className="size-4" />
-                      </div>
-                      <ArrowRight className="size-3.5 text-muted-foreground opacity-60 group-hover/scard:opacity-100 group-hover/scard:text-primary transition-all" />
-                    </div>
-                    <h5 className="font-bold text-xs sm:text-sm text-foreground group-hover/scard:text-primary transition-colors">
-                      {feat.title}
-                    </h5>
-                    <p className="text-[11px] text-muted-foreground mt-1 line-clamp-2 leading-relaxed">
-                      {feat.subtitle}
-                    </p>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 
 export const WEALTH_STAGE_PRINCIPLES_I18N: Record<
   string,
@@ -1708,6 +1314,7 @@ interface CategorySectionViewProps {
   favorites: string[];
   toggleFavorite: (to: string) => void;
   getGradient?: (title: string) => string;
+  showDescription?: boolean;
 }
 
 function CategorySectionView({
@@ -1716,6 +1323,7 @@ function CategorySectionView({
   favorites,
   toggleFavorite,
   getGradient,
+  showDescription = true,
 }: CategorySectionViewProps) {
   const Icon = stage.icon;
   const lang = useLanguage();
@@ -1735,61 +1343,63 @@ function CategorySectionView({
       : `Tahap #${stage.step}`;
 
   return (
-    <section id={`category-${stage.id}`} className="w-full space-y-4 sm:space-y-4.5">
-      {/* Kotak Utama: Khusus 5 Deskripsi (Tanpa Bagian Lain) */}
-      <div
-        className={`w-full rounded-2xl sm:rounded-3xl border ${stage.borderClass} bg-card/85 backdrop-blur-md shadow-xs hover:shadow-md transition-all p-4.5 sm:p-5 relative overflow-hidden`}
-      >
-        {/* Accent top gradient line */}
-        <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${stage.gradientBg}`} />
+    <section id={`category-${stage.id}`} className={`w-full ${showDescription ? "space-y-4 sm:space-y-4.5" : ""}`}>
+      {showDescription && (
+        /* Kotak Utama: Khusus 5 Deskripsi (Hanya di Bilah Masing-Masing) */
+        <div
+          className={`w-full rounded-2xl sm:rounded-3xl border ${stage.borderClass} bg-card/85 backdrop-blur-md shadow-xs hover:shadow-md transition-all p-4.5 sm:p-5 relative overflow-hidden`}
+        >
+          {/* Accent top gradient line */}
+          <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${stage.gradientBg}`} />
 
-        {/* Header Kategori Ringkas */}
-        <div className="flex items-center gap-2.5 mb-3.5 px-0.5">
-          <div className={`p-1.5 rounded-lg border ${stage.badgeBg}`}>
-            <Icon className="size-4" />
+          {/* Header Kategori Ringkas */}
+          <div className="flex items-center gap-2.5 mb-3.5 px-0.5">
+            <div className={`p-1.5 rounded-lg border ${stage.badgeBg}`}>
+              <Icon className="size-4" />
+            </div>
+            <span className={`text-[11px] font-bold font-mono px-2 py-0.5 rounded-full border ${stage.badgeBg}`}>
+              {stagePrefix}
+            </span>
+            <h3 className="text-sm sm:text-base font-bold text-foreground">
+              {stage.name}
+            </h3>
+            <span className="text-xs text-muted-foreground font-medium hidden sm:inline">
+              — {stageI18n.subtitle}
+            </span>
           </div>
-          <span className={`text-[11px] font-bold font-mono px-2 py-0.5 rounded-full border ${stage.badgeBg}`}>
-            {stagePrefix}
-          </span>
-          <h3 className="text-sm sm:text-base font-bold text-foreground">
-            {stage.name}
-          </h3>
-          <span className="text-xs text-muted-foreground font-medium hidden sm:inline">
-            — {stageI18n.subtitle}
-          </span>
-        </div>
 
-        {/* Khusus 5 Deskripsi dalam Kotak Utama */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-3.5">
-          {stageI18n.principles.map((p) => {
-            const pointLabel =
-              lang === "en"
-                ? `Principle ${p.num}`
-                : lang === "zh"
-                ? `原则 ${p.num}`
-                : `Prinsip ${p.num}`;
+          {/* Khusus 5 Deskripsi dalam Kotak Utama */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-3.5">
+            {stageI18n.principles.map((p) => {
+              const pointLabel =
+                lang === "en"
+                  ? `Principle ${p.num}`
+                  : lang === "zh"
+                  ? `原则 ${p.num}`
+                  : `Prinsip ${p.num}`;
 
-            return (
-              <div
-                key={p.num}
-                className="p-3.5 rounded-xl sm:rounded-2xl bg-muted/25 border border-border/60 hover:border-primary/40 hover:bg-muted/40 transition-all flex flex-col justify-start gap-2 shadow-2xs group/card"
-              >
-                <div className="flex items-center gap-2">
-                  <span className="size-5.5 rounded-md bg-primary/10 text-primary text-[11px] font-bold font-mono flex items-center justify-center shrink-0 group-hover/card:bg-primary group-hover/card:text-primary-foreground transition-colors">
-                    {p.num}
-                  </span>
-                  <span className="text-xs font-bold text-foreground tracking-tight leading-snug">
-                    {pointLabel}
-                  </span>
+              return (
+                <div
+                  key={p.num}
+                  className="p-3.5 rounded-xl sm:rounded-2xl bg-muted/25 border border-border/60 hover:border-primary/40 hover:bg-muted/40 transition-all flex flex-col justify-start gap-2 shadow-2xs group/card"
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="size-5.5 rounded-md bg-primary/10 text-primary text-[11px] font-bold font-mono flex items-center justify-center shrink-0 group-hover/card:bg-primary group-hover/card:text-primary-foreground transition-colors">
+                      {p.num}
+                    </span>
+                    <span className="text-xs font-bold text-foreground tracking-tight leading-snug">
+                      {pointLabel}
+                    </span>
+                  </div>
+                  <p className="text-[11.5px] text-foreground/80 leading-relaxed font-normal">
+                    {p.text}
+                  </p>
                 </div>
-                <p className="text-[11.5px] text-foreground/80 leading-relaxed font-normal">
-                  {p.text}
-                </p>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* 2. Grid Kotak-Kotak Modul (Gaya Seperti di Page Lain dengan MBACard) */}
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4.5 sm:gap-5">
@@ -1833,34 +1443,7 @@ export function FinancialWealthSection({
     return WEALTH_STAGE_MAIN_BOXES.filter((s) => s.id === selectedTab);
   }, [selectedTab]);
 
-  const activeStage = useMemo(() => {
-    if (selectedTab === "all" || selectedTab === "spectrum") return null;
-    return WEALTH_STAGE_MAIN_BOXES.find((s) => s.id === selectedTab) || null;
-  }, [selectedTab]);
-
   const allLabel = lang === "en" ? "All" : lang === "zh" ? "全部" : "Semua";
-
-  const pageSubtitles: Record<Language, string> = {
-    id: "5 Tahap Wealth & Arsitektur Manajemen Kekayaan Terpadu (5 Pilar × 5 Modul Aplikasi)",
-    en: "5 Wealth Stages & Comprehensive Wealth Management Architecture (5 Pillars × 5 Application Modules)",
-    ms: "5 Tahap Kekayaan & Seni Bina Pengurusan Kekayaan Bersepadu (5 Tiang × 5 Modul Aplikasi)",
-    zh: "五大财富阶段与综合财富管理架构（5大支柱 × 5大应用模块）",
-  };
-
-  const statusAllText: Record<Language, string> = {
-    id: "Menampilkan seluruh 25 Modul (Surety, Flow, Build, Grow, Legacy)",
-    en: "Displaying all 25 Modules (Surety, Flow, Build, Grow, Legacy)",
-    ms: "Menampilkan semua 25 Modul (Surety, Flow, Build, Grow, Legacy)",
-    zh: "展示全部25个模块（Surety、Flow、Build、Grow、Legacy）",
-  };
-
-  const activeStageText = activeStage
-    ? lang === "en"
-      ? `Stage ${activeStage.step}: ${activeStage.name} (5 Application Modules)`
-      : lang === "zh"
-      ? `阶段 ${activeStage.step}: ${activeStage.name} (5个应用模块)`
-      : `Tahap ${activeStage.step}: ${activeStage.name} (5 Modul Aplikasi)`
-    : "";
 
   return (
     <LauncherPageProvider pageId={pageId}>
@@ -1884,63 +1467,59 @@ export function FinancialWealthSection({
         />
       </ShellHeader>
 
-      {/* Title & Description */}
-      <div className="text-center mb-3 sm:mb-4">
+      {/* Title */}
+      <div className="text-center mb-4 sm:mb-6">
         <h3 className="text-2xl sm:text-3xl font-bold text-foreground/90 tracking-tight flex items-center justify-center gap-2">
           <span>Financial Planning and Wealth Management</span>
         </h3>
-        <p className="text-xs sm:text-sm text-muted-foreground mt-1.5 max-w-2xl mx-auto">
-          {pageSubtitles[lang] || pageSubtitles.id}
-        </p>
-      </div>
-
-      {/* Minimal Status Strip / Filter Active Indicator */}
-      <div className="flex items-center justify-center gap-2 w-full mb-6">
-        {selectedTab === "all" ? (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium text-muted-foreground bg-muted/40 border border-border/40">
-            <Layers className="size-3.5 text-primary" />
-            <span>{statusAllText[lang] || statusAllText.id}</span>
-          </span>
-        ) : (
-          activeStage && (
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
-              <activeStage.icon className="size-3.5" />
-              <span>{activeStageText}</span>
-              <button
-                type="button"
-                onClick={() => setSelectedTab("all")}
-                className="hover:opacity-80 p-0.5 rounded-full cursor-pointer ml-1"
-                title={lang === "en" ? "Show all categories" : "Tampilkan semua kategori"}
-              >
-                <X className="size-3" />
-              </button>
-            </span>
-          )
-        )}
       </div>
 
       {selectedTab === "all" && (
         <MovedCardsSection pageId={pageId} className="mb-8" />
       )}
 
-      {/* Konten Kategori dengan Deskripsi Dilebur di Atas Masing-Masing Kategori */}
-      <div className="w-full space-y-10 sm:space-y-12">
-        {displayedStages.map((stage) => {
-          const stageApps = STANDALONE_FINANCIAL_APPS.filter(
-            (app) => app.category === stage.id
-          );
-          return (
-            <CategorySectionView
-              key={stage.id}
-              stage={stage}
-              apps={stageApps}
-              favorites={favorites}
+      {/* Konten Kategori: Menyatukan Semua Modul dalam 1 Grid 3-Kolom Bersih Tanpa Pembeda */}
+      {selectedTab === "all" ? (
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4.5 sm:gap-5">
+          {STANDALONE_FINANCIAL_APPS.map((app) => (
+            <MBACard
+              key={app.id}
+              title={app.title}
+              to={app.to}
+              icon={app.icon}
+              badge={app.categoryLabel}
+              shortDesc={app.subtitle}
+              gradient={getGradient ? getGradient(app.title) : undefined}
+              features={app.features?.map((f) => ({
+                title: f.title,
+                to: f.to,
+                icon: f.icon,
+              }))}
+              isFav={favorites.includes(app.to)}
               toggleFavorite={toggleFavorite}
-              getGradient={getGradient}
             />
-          );
-        })}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <div className="w-full space-y-10 sm:space-y-12">
+          {displayedStages.map((stage) => {
+            const stageApps = STANDALONE_FINANCIAL_APPS.filter(
+              (app) => app.category === stage.id
+            );
+            return (
+              <CategorySectionView
+                key={stage.id}
+                stage={stage}
+                apps={stageApps}
+                favorites={favorites}
+                toggleFavorite={toggleFavorite}
+                getGradient={getGradient}
+                showDescription={true}
+              />
+            );
+          })}
+        </div>
+      )}
     </div>
     </LauncherPageProvider>
   );

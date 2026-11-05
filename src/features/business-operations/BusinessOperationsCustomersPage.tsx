@@ -544,15 +544,12 @@ export function BusinessOperationsCustomersPage({
 
         {/* Main Page Container */}
         <div className="w-full mx-auto pt-3 sm:pt-4 space-y-4">
-          {/* Title & Subtitle */}
+          {/* Title */}
           <div className="text-center mb-4">
             <h1 className="text-2xl sm:text-3xl font-bold text-foreground/90 tracking-tight flex items-center justify-center gap-2.5">
               <Store className="size-7 text-primary" />
               <span>Business Administration and Operations Management</span>
             </h1>
-            <p className="text-xs sm:text-sm text-muted-foreground mt-1.5 max-w-3xl mx-auto">
-              {CATEGORY_SUBTITLES[activeCategory]}
-            </p>
           </div>
 
           {/* Applications Grid: 12 Business Operational Boxes + 21 MBA Tools Boxes */}

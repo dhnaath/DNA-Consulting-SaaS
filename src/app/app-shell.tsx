@@ -936,95 +936,149 @@ export function AppShell({
 
           {sidebarView === "navigation" ? (
             <div className="flex flex-col gap-3">
-              {/* Workspace Selector: Pemilih 10 Workspace Terpadu di Sidebar */}
               {!isLeftSidebar75 ? (
-                <div className="px-1 mb-1">
-                  <div className="flex items-center justify-between gap-1 mb-1.5">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
-                      Pilih Workspace
+                <div className="flex flex-col gap-3">
+                  {/* 1. Self-Shaping */}
+                  <div className="rounded-xl border border-white/15 dark:border-white/10 bg-white/10 dark:bg-white/5 p-2 flex flex-col gap-1">
+                    <span className="text-[10px] font-bold uppercase text-indigo-600 dark:text-indigo-400 px-1 mb-0.5 flex items-center gap-1">
+                      <ShieldCheck className="size-3" /> 1. Self-Shaping (Fase Diri)
                     </span>
-                    <span className="text-[10px] font-semibold text-primary">
-                      10 Workspace
-                    </span>
+                    <div className="grid grid-cols-2 gap-1">
+                      {[
+                        { to: "/reliance", label: "Reliance", icon: ShieldCheck },
+                        { to: "/sufficient", label: "Sufficient", icon: CheckCircle2 },
+                        { to: "/improvement", label: "Improvement", icon: TrendingUp },
+                        { to: "/development", label: "Development", icon: Sparkles },
+                      ].map((item) => {
+                        const isActive = pathname === item.to;
+                        const Icon = item.icon;
+                        return (
+                          <Link
+                            key={item.to}
+                            to={item.to}
+                            onClick={() => {
+                              if (window.innerWidth < 1024) setIsLeftOpen(false);
+                            }}
+                            className={`flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-[11px] transition-all border ${
+                              isActive
+                                ? "bg-primary text-white font-semibold border-primary shadow-xs"
+                                : "hover:bg-white/15 dark:hover:bg-white/10 border-transparent text-foreground"
+                            }`}
+                          >
+                            <Icon className="size-3 shrink-0" />
+                            <span className="truncate">{item.label}</span>
+                          </Link>
+                        );
+                      })}
+                    </div>
                   </div>
-                  <div className="relative">
-                    <select
-                      value={currentMode}
-                      onChange={(e) => {
-                        const newMode = e.target.value as AppModeId;
-                        setCurrentMode(newMode);
-                        try {
-                          setRaw("aio_active_mode", newMode);
-                        } catch {}
-                      }}
-                      className="w-full h-8 pl-2.5 pr-7 text-xs font-semibold bg-white/15 dark:bg-white/10 hover:bg-white/20 border border-white/20 dark:border-white/10 rounded-xl focus:outline-none focus:ring-1 focus:ring-primary text-foreground cursor-pointer appearance-none truncate"
-                    >
-                      {APP_MODES.map((m) => (
-                        <option key={m.id} value={m.id} className="bg-popover text-popover-foreground">
-                          {m.label} ({m.badge})
-                        </option>
-                      ))}
-                    </select>
-                    <ChevronDown size={13} className="text-muted-foreground pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2" />
+
+                  {/* 2. Mutual-Mapping */}
+                  <div className="rounded-xl border border-white/15 dark:border-white/10 bg-white/10 dark:bg-white/5 p-2 flex flex-col gap-1">
+                    <span className="text-[10px] font-bold uppercase text-indigo-600 dark:text-indigo-400 px-1 mb-0.5 flex items-center gap-1">
+                      <Workflow className="size-3" /> 2. Mutual-Mapping (Fase Timbal Balik)
+                    </span>
+                    <div className="grid grid-cols-2 gap-1">
+                      {[
+                        { to: "/interact", label: "Interact", icon: MessagesSquare },
+                        { to: "/interest", label: "Interest", icon: Heart },
+                        { to: "/intersect", label: "Intersect", icon: Layers },
+                        { to: "/interdependence", label: "Interdependence", icon: Workflow },
+                      ].map((item) => {
+                        const isActive = pathname === item.to;
+                        const Icon = item.icon;
+                        return (
+                          <Link
+                            key={item.to}
+                            to={item.to}
+                            onClick={() => {
+                              if (window.innerWidth < 1024) setIsLeftOpen(false);
+                            }}
+                            className={`flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-[11px] transition-all border ${
+                              isActive
+                                ? "bg-primary text-white font-semibold border-primary shadow-xs"
+                                : "hover:bg-white/15 dark:hover:bg-white/10 border-transparent text-foreground"
+                            }`}
+                          >
+                            <Icon className="size-3 shrink-0" />
+                            <span className="truncate">{item.label}</span>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* 3. Organization-Optimizing */}
+                  <div className="rounded-xl border border-white/15 dark:border-white/10 bg-white/10 dark:bg-white/5 p-2 flex flex-col gap-1">
+                    <span className="text-[10px] font-bold uppercase text-indigo-600 dark:text-indigo-400 px-1 mb-0.5 flex items-center gap-1">
+                      <Eye className="size-3" /> 3. Organization-Optimizing (Fase Organisasi)
+                    </span>
+                    <div className="grid grid-cols-2 gap-1">
+                      {[
+                        { to: "/insider", label: "Insider", icon: Eye },
+                        { to: "/insight", label: "Insight", icon: Lightbulb },
+                        { to: "/outward", label: "Outward", icon: Compass },
+                        { to: "/outlook", label: "Outlook", icon: TrendingUp },
+                      ].map((item) => {
+                        const isActive = pathname === item.to;
+                        const Icon = item.icon;
+                        return (
+                          <Link
+                            key={item.to}
+                            to={item.to}
+                            onClick={() => {
+                              if (window.innerWidth < 1024) setIsLeftOpen(false);
+                            }}
+                            className={`flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-[11px] transition-all border ${
+                              isActive
+                                ? "bg-primary text-white font-semibold border-primary shadow-xs"
+                                : "hover:bg-white/15 dark:hover:bg-white/10 border-transparent text-foreground"
+                            }`}
+                          >
+                            <Icon className="size-3 shrink-0" />
+                            <span className="truncate">{item.label}</span>
+                          </Link>
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
               ) : (
-                /* Mode Ringkas 75px: Icon workspace aktif */
-                <div className="flex justify-center pb-2 border-b border-white/20">
-                  <div className="p-2 rounded-xl bg-white/15 text-white" title={activeModeConfig.label}>
-                    <activeModeConfig.icon className="size-5 text-primary" />
-                  </div>
+                /* Mode Ringkas 75px: 12 ikon modul Phase */
+                <div className="flex flex-col gap-1.5 items-center">
+                  {[
+                    { to: "/reliance", label: "Reliance", icon: ShieldCheck },
+                    { to: "/sufficient", label: "Sufficient", icon: CheckCircle2 },
+                    { to: "/improvement", label: "Improvement", icon: TrendingUp },
+                    { to: "/development", label: "Development", icon: Sparkles },
+                    { to: "/interact", label: "Interact", icon: MessagesSquare },
+                    { to: "/interest", label: "Interest", icon: Heart },
+                    { to: "/intersect", label: "Intersect", icon: Layers },
+                    { to: "/interdependence", label: "Interdependence", icon: Workflow },
+                    { to: "/insider", label: "Insider", icon: Eye },
+                    { to: "/insight", label: "Insight", icon: Lightbulb },
+                    { to: "/outward", label: "Outward", icon: Compass },
+                    { to: "/outlook", label: "Outlook", icon: TrendingUp },
+                  ].map((item) => {
+                    const isActive = pathname === item.to;
+                    const Icon = item.icon;
+                    return (
+                      <Link
+                        key={item.to}
+                        to={item.to}
+                        title={item.label}
+                        className={`p-2 rounded-xl border transition-all hover:scale-105 active:scale-95 ${
+                          isActive
+                            ? "bg-white text-primary border-white font-bold shadow-md ring-2 ring-white/40"
+                            : "bg-white/10 hover:bg-white/20 border-white/20 text-white/90 hover:text-white"
+                        }`}
+                      >
+                        <Icon className="size-4 shrink-0" />
+                      </Link>
+                    );
+                  })}
                 </div>
               )}
-
-              {/* Navigation items for current mode */}
-              <div className="flex flex-col gap-1.5">
-                {!isLeftSidebar75 && (
-                  <p className="px-1 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                    Modul & Fitur ({activeModeConfig.label})
-                  </p>
-                )}
-                {activeModeConfig.links.map((link) => {
-                  const isActive = pathname === link.to;
-                  const Icon = link.icon;
-                  return (
-                    <Link
-                      key={link.to}
-                      to={link.to}
-                      onClick={() => {
-                        if (!isLeftSidebar75) {
-                          setIsLeftOpen(false);
-                        }
-                      }}
-                      title={link.label}
-                      className={`flex items-center ${
-                        isLeftSidebar75
-                          ? `justify-center p-2.5 rounded-xl border transition-all hover:scale-105 active:scale-95 ${
-                              isActive
-                                ? "bg-white text-primary border-white font-bold shadow-md ring-2 ring-white/40"
-                                : "bg-white/10 hover:bg-white/20 border-white/20 text-white/90 hover:text-white"
-                            }`
-                          : `gap-2.5 px-3 py-2 rounded-xl text-xs transition-all border ${
-                              isActive
-                                ? "bg-primary/15 border-primary/40 text-primary font-semibold shadow-2xs"
-                                : "bg-white/10 dark:bg-white/5 border-white/15 dark:border-white/10 text-foreground hover:bg-white/20 dark:hover:bg-white/10"
-                            }`
-                      }`}
-                    >
-                      <Icon
-                        className={`size-4 shrink-0 ${
-                          isLeftSidebar75
-                            ? isActive
-                              ? "text-primary"
-                              : "text-white"
-                            : "text-primary"
-                        }`}
-                      />
-                      {!isLeftSidebar75 && <span className="truncate">{link.label}</span>}
-                    </Link>
-                  );
-                })}
-              </div>
             </div>
           ) : (
             <SidebarPillarsMenu

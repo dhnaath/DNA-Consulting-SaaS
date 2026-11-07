@@ -1853,10 +1853,22 @@ const insiderSocietyRoute = createRoute({
   component: () => <SocietyView type="insider" />,
 });
 
+const insightSocietyRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/insight",
+  component: () => <SocietyView type="insight" />,
+});
+
 const outwardSocietyRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/outward",
   component: () => <SocietyView type="outward" />,
+});
+
+const outlookSocietyRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/outlook",
+  component: () => <SocietyView type="outlook" />,
 });
 
 // Client & Notes & Custom Workspace
@@ -2113,7 +2125,9 @@ function DynamicAppView() {
   if (pathname === "/interest") return <SocietyView type="interest" />;
   if (pathname === "/intersect") return <SocietyView type="intersect" />;
   if (pathname === "/insider") return <SocietyView type="insider" />;
+  if (pathname === "/insight") return <SocietyView type="insight" />;
   if (pathname === "/outward") return <SocietyView type="outward" />;
+  if (pathname === "/outlook") return <SocietyView type="outlook" />;
 
   // 6. Framework Views
   const frameworkMap: Record<string, string> = {
@@ -2414,7 +2428,9 @@ const routeTree = rootRoute.addChildren([
   interestSocietyRoute,
   intersectSocietyRoute,
   insiderSocietyRoute,
+  insightSocietyRoute,
   outwardSocietyRoute,
+  outlookSocietyRoute,
   klienPageRoute,
   catatanPageRoute,
   lainnyaPageRoute,

@@ -73,6 +73,8 @@ import {
   ScrollText,
   Calculator,
   Sparkles,
+  Workflow,
+  Eye,
   type LucideIcon,
 } from "lucide-react";
 import { getRaw, setRaw } from "@/core/rawStorage";
@@ -1037,6 +1039,58 @@ export const WORKSPACE_PAGES: WorkspacePageDef[] = [
       },
     ],
   },
+  {
+    id: "mode_phase_side",
+    modeId: "phase_side",
+    label: "Phase: Mutual-Self-Organization",
+    badge: "12 Modul • 3 Fase",
+    desc: "Self-Shaping (4) · Mutual-Mapping (4) · Organization-Optimizing (4)",
+    icon: Compass,
+    modules: [
+      {
+        id: "phase-self-shaping",
+        title: "Self-Shaping (Fase Diri)",
+        to: "/reliance",
+        icon: ShieldCheck,
+        categoryLabel: "Self-Shaping",
+        desc: "Kemandirian, pemenuhan kecukupan, perbaikan berkelanjutan, dan pengembangan evolusi",
+        features: [
+          { title: "Reliance (Kemandirian)", to: "/reliance", icon: ShieldCheck },
+          { title: "Sufficient (Kecukupan)", to: "/sufficient", icon: CheckCircle2 },
+          { title: "Improvement (Perbaikan)", to: "/improvement", icon: TrendingUp },
+          { title: "Development (Pengembangan)", to: "/development", icon: Sparkles },
+        ],
+      },
+      {
+        id: "phase-mutual-mapping",
+        title: "Mutual-Mapping (Fase Timbal Balik)",
+        to: "/interact",
+        icon: Workflow,
+        categoryLabel: "Mutual-Mapping",
+        desc: "Interaksi sosial, kepentingan bersama, titik temu multidisiplin, dan simbiosis mutualisme",
+        features: [
+          { title: "Interact (Interaksi Sosial)", to: "/interact", icon: MessagesSquare },
+          { title: "Interest (Kepentingan Bersama)", to: "/interest", icon: Heart },
+          { title: "Intersect (Titik Temu)", to: "/intersect", icon: Layers },
+          { title: "Interdependence (Simbiosis)", to: "/interdependence", icon: Workflow },
+        ],
+      },
+      {
+        id: "phase-organization-optimizing",
+        title: "Organization-Optimizing (Fase Organisasi)",
+        to: "/insider",
+        icon: Eye,
+        categoryLabel: "Organization-Optimizing",
+        desc: "Tata kelola dan intelijen internal, wawasan strategis, pemantauan dinamika eksternal, dan prospek",
+        features: [
+          { title: "Insider (Tata Kelola Internal)", to: "/insider", icon: Eye },
+          { title: "Insight (Wawasan Strategis)", to: "/insight", icon: Lightbulb },
+          { title: "Outward (Dinamika Eksternal)", to: "/outward", icon: Compass },
+          { title: "Outlook (Prospek Masa Depan)", to: "/outlook", icon: TrendingUp },
+        ],
+      },
+    ],
+  },
 ];
 
 // Helper icon fallback
@@ -1123,6 +1177,13 @@ const WORKSPACE_THEMES: Record<
     border: "border-violet-500/30",
     glow: "hover:border-violet-500/50",
     badge: "bg-violet-500/10 text-violet-600 dark:text-violet-400 border-violet-500/20",
+  },
+  mode_phase_side: {
+    bg: "bg-indigo-500/15 dark:bg-indigo-500/25",
+    text: "text-indigo-600 dark:text-indigo-400",
+    border: "border-indigo-500/30",
+    glow: "hover:border-indigo-500/50",
+    badge: "bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border-indigo-500/20",
   },
 };
 
@@ -1345,6 +1406,22 @@ function findWorkspaceForRoute(pathname: string): WorkspacePageDef | undefined {
     p.includes("relation")
   ) {
     return WORKSPACE_PAGES.find((w) => w.id === "mode_networks");
+  }
+  if (
+    p.includes("reliance") ||
+    p.includes("sufficient") ||
+    p.includes("improvement") ||
+    p.includes("development") ||
+    p.includes("interact") ||
+    p.includes("interest") ||
+    p.includes("intersect") ||
+    p.includes("interdependence") ||
+    p.includes("insider") ||
+    p.includes("insight") ||
+    p.includes("outward") ||
+    p.includes("outlook")
+  ) {
+    return WORKSPACE_PAGES.find((w) => w.id === "mode_phase_side");
   }
 
   return undefined;

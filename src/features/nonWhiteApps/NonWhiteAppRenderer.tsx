@@ -461,9 +461,19 @@ export function SocietyView({ type }: { type: string }) {
       subtitle: "Pandangan tata kelola, audit, dan kepatuhan dari dalam",
       component: <InsiderView />,
     },
+    insight: {
+      title: "Wawasan Strategis (Insight)",
+      subtitle: "Intelijen bisnis, analisis data, dan sintesis tren mendalam",
+      component: <InsiderView />,
+    },
     outward: {
       title: "Perspektif Eksternal (Outward)",
       subtitle: "Dampak sosial, reputasi publik, dan hubungan luar",
+      component: <OutwardView />,
+    },
+    outlook: {
+      title: "Prospek Masa Depan (Outlook)",
+      subtitle: "Proyeksi jangka panjang, skenario masa depan, dan peramalan strategis",
       component: <OutwardView />,
     },
   };

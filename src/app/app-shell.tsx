@@ -95,6 +95,10 @@ import {
   Landmark,
   ChevronDown,
   Camera,
+  Layers,
+  Workflow,
+  Sparkles,
+  Eye,
   type LucideIcon,
 } from "lucide-react";
 import type { ReactNode } from "react";
@@ -137,7 +141,8 @@ export type AppModeId =
   | "personal"
   | "family"
   | "public_affairs"
-  | "networks";
+  | "networks"
+  | "phase_side";
 
 export interface ModeItem {
   id: AppModeId;
@@ -329,6 +334,28 @@ export const APP_MODES: ModeItem[] = [
       { to: "/peh/circle-groups", label: "Groups and Communities", icon: Users },
       { to: "/peh/mentorship", label: "Professional Networking", icon: Compass },
       { to: "/peh/gifts", label: "Celebrations and Gifts", icon: Star },
+    ],
+  },
+  {
+    id: "phase_side",
+    label: "Phase: Mutual-Self-Organization",
+    badge: "12 Modul",
+    desc: "Self-Shaping (4) · Mutual-Mapping (4) · Organization-Optimizing (4)",
+    icon: Compass,
+    badgeClass: "bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border-indigo-500/20",
+    links: [
+      { to: "/reliance", label: "Reliance (Kemandirian)", icon: ShieldCheck },
+      { to: "/sufficient", label: "Sufficient (Kecukupan)", icon: CheckCircle2 },
+      { to: "/improvement", label: "Improvement (Perbaikan)", icon: TrendingUp },
+      { to: "/development", label: "Development (Pengembangan)", icon: Sparkles },
+      { to: "/interact", label: "Interact (Interaksi Sosial)", icon: MessagesSquare },
+      { to: "/interest", label: "Interest (Kepentingan Bersama)", icon: Heart },
+      { to: "/intersect", label: "Intersect (Titik Temu)", icon: Layers },
+      { to: "/interdependence", label: "Interdependence (Simbiosis)", icon: Workflow },
+      { to: "/insider", label: "Insider (Tata Kelola Internal)", icon: Eye },
+      { to: "/insight", label: "Insight (Wawasan Strategis)", icon: Lightbulb },
+      { to: "/outward", label: "Outward (Dinamika Eksternal)", icon: Compass },
+      { to: "/outlook", label: "Outlook (Prospek Masa Depan)", icon: TrendingUp },
     ],
   },
 ];
